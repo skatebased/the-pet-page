@@ -235,7 +235,83 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--mars);outline-of
 #postcard .pcf{display:flex;align-items:center;gap:.7rem}
 #postcard .pcf small{font-family:var(--ui);font-size:.58rem;line-height:1.4;color:var(--soft)}
 
-/* ---------- VIDEO ---------- */
+/* ================================================================
+   VIDEO — comic storyboard.
+   Left: the photograph the paper uploaded (the real animal).
+   Right: the story turned into panels. Early panels are drawn,
+   because nobody filmed the animal's life before the rescue;
+   later panels are the real footage.
+   ================================================================ */
+#video{display:none}
+#video.on{display:block}
+#video .board{
+  width:min(1080px,100%);background:#fff;padding:1.4rem;
+  display:grid;grid-template-columns:300px 1fr;gap:1.4rem;align-items:start;
+}
+.sb-src{position:sticky;top:0}
+.sb-src h4,.sb-panels h4{
+  font-family:var(--ui);font-size:.62rem;font-weight:700;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--mars);margin:0 0 .55rem}
+.sb-photo{
+  width:100%;aspect-ratio:3/4;background:#cfc7b4 center/cover no-repeat;border-radius:4px;
+  display:grid;place-items:center;font-family:var(--ui);font-size:.7rem;color:#6b6350;text-align:center;padding:1rem}
+.sb-ref{
+  font-family:var(--ui);font-size:.68rem;line-height:1.5;color:var(--soft);
+  background:var(--warm);border-radius:5px;padding:.6rem .7rem;margin-top:.6rem}
+.sb-ref b{color:var(--ink)}
+.sb-legend{display:flex;gap:.4rem;margin-top:.7rem;font-family:var(--ui);font-size:.6rem;font-weight:700}
+.sb-legend span{padding:.2rem .5rem;border-radius:20px;letter-spacing:.08em;text-transform:uppercase}
+.sb-legend .d{background:#efe8fb;color:#6b4ea8}
+.sb-legend .r{background:#e3f0e8;color:var(--go)}
+
+.sb-panels{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+.sb-panel{border:1px solid var(--rule2);border-radius:5px;overflow:hidden;background:#fff;display:flex;flex-direction:column}
+.sb-panel .art{
+  aspect-ratio:9/16;background:#cfc7b4 center/cover no-repeat;position:relative;overflow:hidden;
+}
+.sb-panel.drawn .art{filter:url(#comic) saturate(1.35) contrast(1.15)}
+.sb-panel .art::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(circle at 1px 1px, rgba(0,0,0,.22) .7px, transparent .8px) 0 0/3px 3px;
+  opacity:0;mix-blend-mode:multiply;
+}
+.sb-panel.drawn .art::after{opacity:1}
+.sb-panel .art .empty{
+  position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:.6rem;
+  font-family:var(--ui);font-size:.6rem;color:#6b6350;line-height:1.4}
+.sb-panel .n{
+  position:absolute;top:.35rem;left:.35rem;z-index:3;
+  font-family:var(--ui);font-size:.55rem;font-weight:800;letter-spacing:.06em;
+  background:rgba(0,0,0,.72);color:#fff;padding:.12rem .38rem;border-radius:3px}
+.sb-panel .mode{
+  position:absolute;top:.35rem;right:.35rem;z-index:3;
+  font-family:var(--ui);font-size:.5rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+  padding:.12rem .36rem;border-radius:3px}
+.sb-panel.drawn .mode{background:#6b4ea8;color:#fff}
+.sb-panel.real  .mode{background:var(--go);color:#fff}
+.sb-panel .cap{
+  padding:.5rem .6rem;font-family:var(--textFace),Georgia,serif;font-size:.74rem;line-height:1.35;
+  color:var(--ink);border-top:1px solid var(--rule);flex:1}
+.sb-panel .t{font-family:var(--ui);font-size:.55rem;font-weight:700;color:var(--soft);
+  padding:0 .6rem .3rem;letter-spacing:.06em}
+.sb-panel .prompt{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.56rem;line-height:1.42;
+  background:#16150f;color:#c8e6d3;padding:.45rem .55rem;white-space:pre-wrap;word-break:break-word}
+.sb-actions{grid-column:1/-1;display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;
+  border-top:1px solid var(--rule);padding-top:.9rem;margin-top:.3rem}
+.sb-actions .note{font-family:var(--ui);font-size:.68rem;color:var(--soft);font-style:italic;flex:1;min-width:200px}
+.sb-btn{appearance:none;border:1px solid var(--rule2);background:#fff;border-radius:6px;
+  font-family:var(--ui);font-size:.72rem;font-weight:700;padding:.42rem .8rem;cursor:pointer;color:var(--mars)}
+.sb-btn:hover{background:#f2f6fd;border-color:var(--mars)}
+.sb-btn.solid{background:var(--go);border-color:var(--go);color:#fff}
+.sb-btn.solid:hover{background:#268554}
+@media (max-width:900px){
+  #video .board{grid-template-columns:1fr}
+  .sb-panels{grid-template-columns:repeat(2,1fr)}
+  .sb-src{position:static}
+}
+
+/* ---------- VIDEO (legacy single-frame preview, kept for the 9:16 check) ---------- */
 #video .pg{width:360px;height:640px;position:relative;overflow:hidden;border-radius:6px;
   background:linear-gradient(170deg,#1c2b4a,#0a1626 60%,#060d18);color:#fff;
   display:flex;flex-direction:column;justify-content:flex-end;padding:0 22px 118px}
@@ -510,12 +586,53 @@ The cats, for their part, worked it out in under a week, which is roughly six da
       </div>
     </div></div>
 
-    <!-- VIDEO -->
-    <div class="face" id="video"><div class="pg">
-      <div class="vs" id="o_vscene"></div>
-      <p class="vc" id="o_vcap"></p>
-      <div class="vm">1080 × 1920 · burned-in captions · <span id="o_vhandle"></span></div>
-    </div></div>
+    <!-- VIDEO — comic storyboard -->
+    <div class="face" id="video">
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+        <filter id="comic">
+          <!-- posterise to flat comic tones -->
+          <feComponentTransfer>
+            <feFuncR type="discrete" tableValues="0 .18 .36 .55 .74 .92 1"/>
+            <feFuncG type="discrete" tableValues="0 .18 .36 .55 .74 .92 1"/>
+            <feFuncB type="discrete" tableValues="0 .2  .4  .6  .78 .94 1"/>
+          </feComponentTransfer>
+          <!-- soften the banding just enough to read as ink, not artefact -->
+          <feGaussianBlur stdDeviation=".4" result="flat"/>
+          <feComposite in="flat" in2="SourceGraphic" operator="over"/>
+        </filter>
+      </defs></svg>
+
+      <div class="board">
+        <div class="sb-src">
+          <h4>The photograph you uploaded</h4>
+          <div class="sb-photo" id="sb_photo">Drop the animal's photograph in the panel on the left — it becomes the character reference for every drawn panel</div>
+          <div class="sb-ref">
+            <b>Character reference.</b> Generate one clean still from this photograph first, then drive every drawn panel from it. Skip that step and the animal changes breed between shots — it is the commonest failure in the whole workflow.
+          </div>
+          <div class="sb-legend"><span class="d">Drawn — the past</span><span class="r">Real — the present</span></div>
+          <div class="sb-ref" style="margin-top:.6rem">
+            <b>Why split it.</b> Nobody filmed this animal before the rescue. Animation fills a real gap in the record rather than decorating footage that is already true — and because the two registers look different, nothing drawn can be mistaken for documentary.
+          </div>
+        </div>
+
+        <div>
+          <h4>The story, as panels</h4>
+          <div class="sb-panels" id="sb_panels"></div>
+          <div class="sb-actions">
+            <span class="note">Panels and prompts are generated from your story text. Paste the prompts into Magic Hour or Runway for the drawn panels; shoot the real ones on a phone, vertical.</span>
+            <button class="sb-btn" id="sb_copyPrompts">Copy all prompts</button>
+            <button class="sb-btn" id="sb_copyScript">Copy narration script</button>
+            <button class="sb-btn solid" id="sb_show916">Check 9:16 framing</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pg" id="v_frame" hidden>
+        <div class="vs" id="o_vscene"></div>
+        <p class="vc" id="o_vcap"></p>
+        <div class="vm">1080 × 1920 · burned-in captions · <span id="o_vhandle"></span></div>
+      </div>
+    </div>
 
   </div>
 </div>
@@ -682,11 +799,138 @@ function render(){
   setText('o_vcap',   v('vcap'));
   setText('o_vhandle',v('vhandle'));
 
+  buildStoryboard(P, v);
+
   /* kerning last — after all display text is final */
   document.querySelectorAll('.disp, .vc, .pp-mast h1').forEach(el => applyKerning(el, strength));
 
   fit();
 }
+
+/* ============================================================
+   STORYBOARD — the story text becomes six comic panels.
+   First half drawn (the past nobody filmed), second half real.
+   ============================================================ */
+const BEATS = [
+  {t:'0–3s',   label:'Hook',        mode:'drawn'},
+  {t:'3–13s',  label:'The past',    mode:'drawn'},
+  {t:'13–18s', label:'The turn',    mode:'drawn'},
+  {t:'18–26s', label:'The present', mode:'real'},
+  {t:'26–34s', label:'Home',        mode:'real'},
+  {t:'34–42s', label:'The ask',     mode:'real'},
+];
+
+let LAST_PROMPTS = [], LAST_SCRIPT = '';
+
+/* Split the story into exactly six captions, preferring sentence
+   boundaries so a panel never opens mid-clause. */
+function sixCaptions(paras){
+  let units = [];
+  paras.forEach(p => {
+    const sents = p.match(/[^.!?]+[.!?]+["”’)]?\s*/g) || [p];
+    sents.forEach(s => { const t = s.trim(); if(t) units.push(t); });
+  });
+  if(!units.length) return Array(6).fill('');
+  if(units.length <= 6){
+    while(units.length < 6) units.push('');
+    return units.slice(0,6);
+  }
+  // distribute evenly, take the first sentence of each chunk as the caption
+  const out = [], per = units.length / 6;
+  for(let i = 0; i < 6; i++) out.push(units[Math.floor(i * per)]);
+  return out;
+}
+
+function shorten(s, n){
+  if(!s) return '';
+  if(s.length <= n) return s;
+  return s.slice(0, n).replace(/\s+\S*$/, '') + '…';
+}
+
+function buildStoryboard(paras, v){
+  const wrap = document.getElementById('sb_panels');
+  if(!wrap) return;
+  const caps    = sixCaptions(paras);
+  const animal  = (v('hed') || '').split(/[,;:]/)[0].trim() || 'the animal';
+  const shelter = v('shelter') || 'the shelter';
+  const url     = v('url') || '';
+
+  LAST_PROMPTS = [];
+  const scriptLines = [];
+
+  wrap.innerHTML = BEATS.map((b, i) => {
+    let cap = caps[i] || '';
+    if(i === 5) cap = 'Fourteen animals are still waiting at ' + shelter + '. ' + url;
+    const short = shorten(cap, 120);
+
+    const prompt = b.mode === 'drawn'
+      ? 'ILLUSTRATED · panel ' + (i+1) + ' — ' + b.label + '\n' +
+        'Children\'s-book illustration, warm muted palette, soft ink outline, 9:16 vertical.\n' +
+        'Subject: ' + animal + ', matching the character reference image exactly.\n' +
+        'Scene: ' + shorten(cap, 140) + '\n' +
+        'No text, no watermark, no lettering in frame.'
+      : 'LIVE FOOTAGE · panel ' + (i+1) + ' — ' + b.label + '\n' +
+        'Shoot vertical 1080×1920, handheld, natural light. Do not stabilise.\n' +
+        'Scene: ' + shorten(cap, 140) + '\n' +
+        'Keep the subject clear of the top 250px and bottom 420px.';
+
+    LAST_PROMPTS.push(prompt);
+    scriptLines.push('[' + b.t + '] ' + b.label.toUpperCase() + (b.mode === 'drawn' ? ' (animated)' : ' (live)') + '\n' + cap);
+
+    const art = photoURL
+      ? '<div class="art" style="background-image:url(\'' + photoURL + '\')">'
+      : '<div class="art"><span class="empty">Upload the photograph and this panel fills</span>';
+
+    return '<div class="sb-panel ' + b.mode + '">' +
+      art +
+        '<span class="n">' + (i+1) + '</span>' +
+        '<span class="mode">' + (b.mode === 'drawn' ? 'Drawn' : 'Real') + '</span>' +
+      '</div>' +
+      '<div class="t">' + b.t + ' · ' + b.label + '</div>' +
+      '<div class="cap">' + short + '</div>' +
+      '<div class="prompt">' + prompt.replace(/</g,'&lt;') + '</div>' +
+    '</div>';
+  }).join('');
+
+  const p = document.getElementById('sb_photo');
+  if(p){
+    p.style.backgroundImage = photoURL ? "url('" + photoURL + "')" : '';
+    if(photoURL) p.textContent = '';
+  }
+
+  LAST_SCRIPT =
+    'RESCUE REEL — ' + (v('paper') || '') + '\n' +
+    (v('hed') || '') + '\n' +
+    'Target 35–45s · 1080×1920 · captions burned in\n' +
+    'Drawn past / real present: panels 1–3 animated, 4–6 live footage\n\n' +
+    scriptLines.join('\n\n') +
+    '\n\n[end card] ' + shelter + ' · ' + url + ' · supported by Mars Petcare';
+}
+
+function copy(text, btn){
+  const done = () => { const o = btn.textContent; btn.textContent = 'Copied ✓';
+                       setTimeout(() => btn.textContent = o, 1400); };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done).catch(() => fallback());
+  } else fallback();
+  function fallback(){
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); done(); }catch(e){ alert('Copy failed — select the text manually.'); }
+    document.body.removeChild(ta);
+  }
+}
+
+document.getElementById('sb_copyPrompts').addEventListener('click', e =>
+  copy(LAST_PROMPTS.join('\n\n———\n\n'), e.target));
+document.getElementById('sb_copyScript').addEventListener('click', e =>
+  copy(LAST_SCRIPT, e.target));
+document.getElementById('sb_show916').addEventListener('click', e => {
+  const f = document.getElementById('v_frame');
+  f.hidden = !f.hidden;
+  e.target.textContent = f.hidden ? 'Check 9:16 framing' : 'Hide 9:16 frame';
+});
 
 /* ---- scale the print page to fit the stage ---- */
 function fit(){
