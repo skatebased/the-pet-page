@@ -4,35 +4,39 @@
       "Tier": 1,
       "Mars Site": "Middleburg / The Plains",
       "State": "VA",
-      "Mars Segment": "\u2014",
+      "Mars Segment": "—",
       "Site Type": "Home base",
-      "What Mars Makes / Does There": "The Middleburg Page \u2014 the pilot. Jacquie Mars lives locally.",
+      "What Mars Makes / Does There": "The Middleburg Page — the pilot. Jacquie Mars lives locally.",
       "Target Newspaper": "Fauquier Times",
       "Frequency": "Weekly",
       "Owner": "Piedmont Journalism Foundation (nonprofit)",
       "Independent?": "Nonprofit",
       "Website": "https://www.fauquier.com",
       "Local Shelter": "Middleburg Humane Foundation",
-      "Editor / Publisher Contact": "Kelly Tremaine \u2014 ktremaine@fauquier.com",
+      "Editor / Publisher Contact": "Kelly Tremaine — ktremaine@fauquier.com",
       "Outreach Status": "RUNNING",
-      "Notes": "Pilot site. Page also runs in The Georgetowner."
+      "Notes": "Pilot site. Page also runs in The Georgetowner.",
+      "Lat": 38.969,
+      "Lng": -77.735
     },
     {
       "Tier": 1,
       "Mars Site": "Middleburg / The Plains",
       "State": "VA",
-      "Mars Segment": "\u2014",
+      "Mars Segment": "—",
       "Site Type": "Home base",
-      "What Mars Makes / Does There": "Second outlet for the pilot page \u2014 DC audience.",
+      "What Mars Makes / Does There": "Second outlet for the pilot page — DC audience.",
       "Target Newspaper": "The Georgetowner",
       "Frequency": "Twice monthly",
       "Owner": "Independent",
       "Independent?": "Independent",
       "Website": "https://georgetowner.com",
       "Local Shelter": "Middleburg Humane Foundation",
-      "Editor / Publisher Contact": "Sonya Bernhardt \u2014 sonya@georgetowner.com",
+      "Editor / Publisher Contact": "Sonya Bernhardt — sonya@georgetowner.com",
       "Outreach Status": "RUNNING",
-      "Notes": "Already carrying the page."
+      "Notes": "Already carrying the page.",
+      "Lat": 38.969,
+      "Lng": -77.735
     },
     {
       "Tier": 1,
@@ -49,7 +53,9 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Not started",
-      "Notes": "Mars HQ is in this paper's coverage area. Highest symbolic value \u2014 'Mars is closer than you think' printed in Mars' own hometown paper."
+      "Notes": "Mars HQ is in this paper's coverage area. Highest symbolic value — 'Mars is closer than you think' printed in Mars' own hometown paper.",
+      "Lat": 38.934,
+      "Lng": -77.177
     },
     {
       "Tier": 1,
@@ -57,7 +63,7 @@
       "State": "VA",
       "Mars Segment": "Corporate",
       "Site Type": "GLOBAL HEADQUARTERS",
-      "What Mars Makes / Does There": "Same market \u2014 sister editions cover Vienna, Oakton, Great Falls.",
+      "What Mars Makes / Does There": "Same market — sister editions cover Vienna, Oakton, Great Falls.",
       "Target Newspaper": "Great Falls Connection / Vienna-Oakton Connection",
       "Frequency": "Weekly",
       "Owner": "Connection Newspapers",
@@ -66,7 +72,9 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Not started",
-      "Notes": "Same publisher as McLean Connection \u2014 one conversation covers several editions."
+      "Notes": "Same publisher as McLean Connection — one conversation covers several editions.",
+      "Lat": 38.934,
+      "Lng": -77.177
     },
     {
       "Tier": 1,
@@ -83,15 +91,17 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Not started",
-      "Notes": "Backup / additional NoVa reach."
+      "Notes": "Backup / additional NoVa reach.",
+      "Lat": 38.887,
+      "Lng": -77.095
     },
     {
       "Tier": 1,
       "Mars Site": "Loudoun County",
       "State": "VA",
-      "Mars Segment": "\u2014",
+      "Mars Segment": "—",
       "Site Type": "Adjacent home market",
-      "What Mars Makes / Does There": "Immediately adjacent to Middleburg \u2014 natural first expansion, same Hunt Country network.",
+      "What Mars Makes / Does There": "Immediately adjacent to Middleburg — natural first expansion, same Hunt Country network.",
       "Target Newspaper": "Loudoun Times-Mirror",
       "Frequency": "Weekly",
       "Owner": "Independent",
@@ -100,15 +110,17 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Not started",
-      "Notes": "One of Virginia's oldest papers. Middleburg sits in Loudoun County."
+      "Notes": "One of Virginia's oldest papers. Middleburg sits in Loudoun County.",
+      "Lat": 39.115,
+      "Lng": -77.564
     },
     {
       "Tier": 1,
       "Mars Site": "Loudoun County",
       "State": "VA",
-      "Mars Segment": "\u2014",
+      "Mars Segment": "—",
       "Site Type": "Adjacent home market",
-      "What Mars Makes / Does There": "Second Loudoun outlet \u2014 digital-first, strong local following.",
+      "What Mars Makes / Does There": "Second Loudoun outlet — digital-first, strong local following.",
       "Target Newspaper": "Loudoun Now",
       "Frequency": "Weekly",
       "Owner": "Independent",
@@ -117,13 +129,15 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Not started",
-      "Notes": "Independent and locally owned."
+      "Notes": "Independent and locally owned.",
+      "Lat": 39.115,
+      "Lng": -77.564
     },
     {
       "Tier": 1,
       "Mars Site": "Purcellville",
       "State": "VA",
-      "Mars Segment": "\u2014",
+      "Mars Segment": "—",
       "Site Type": "Adjacent home market",
       "What Mars Makes / Does There": "Western Loudoun weekly, small and independent.",
       "Target Newspaper": "Purcellville Gazette",
@@ -134,7 +148,9 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Not started",
-      "Notes": "Very small \u2014 good proof that the model works at the smallest scale."
+      "Notes": "Very small — good proof that the model works at the smallest scale.",
+      "Lat": 39.136,
+      "Lng": -77.715
     },
     {
       "Tier": 1,
@@ -152,7 +168,9 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Not started",
-      "Notes": "STRATEGIC: Mars Petcare's own US HQ town. If any market should say yes, it's this one \u2014 and Ben Anders and Lindsay Kordik likely work here."
+      "Notes": "STRATEGIC: Mars Petcare's own US HQ town. If any market should say yes, it's this one — and Ben Anders and Lindsay Kordik likely work here.",
+      "Lat": 35.925,
+      "Lng": -86.869
     },
     {
       "Tier": 1,
@@ -170,7 +188,9 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Not started",
-      "Notes": "Same paper as Franklin. This site is also the best source of 'how Mars makes pet food' story material anywhere in the country."
+      "Notes": "Same paper as Franklin. This site is also the best source of 'how Mars makes pet food' story material anywhere in the country.",
+      "Lat": 35.803,
+      "Lng": -86.911
     },
     {
       "Tier": 2,
@@ -188,7 +208,9 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Not started",
-      "Notes": "BEST-FIT PROFILE: small town, independent weekly, major local employer. Closest analogue to the Middleburg situation."
+      "Notes": "BEST-FIT PROFILE: small town, independent weekly, major local employer. Closest analogue to the Middleburg situation.",
+      "Lat": 40.867,
+      "Lng": -98.004
     },
     {
       "Tier": 2,
@@ -205,7 +227,9 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Not started",
-      "Notes": "Small independent weekly, recent big Mars investment in town \u2014 strong local news hook."
+      "Notes": "Small independent weekly, recent big Mars investment in town — strong local news hook.",
+      "Lat": 42.527,
+      "Lng": -96.485
     },
     {
       "Tier": 2,
@@ -223,7 +247,9 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Not started",
-      "Notes": "Newest and biggest Mars pet food plant on earth, in a Preble County town of ~1,800. Enormous story-to-town ratio."
+      "Notes": "Newest and biggest Mars pet food plant on earth, in a Preble County town of ~1,800. Enormous story-to-town ratio.",
+      "Lat": 39.846,
+      "Lng": -84.539
     },
     {
       "Tier": 2,
@@ -231,7 +257,7 @@
       "State": "KY",
       "Mars Segment": "Petcare",
       "Site Type": "Manufacturing plant (Champion Petfoods)",
-      "What Mars Makes / Does There": "'DogStar Kitchen' \u2014 371,000 sq ft on 85 acres. Orijen and Acana kibble, freeze-dried, treats.",
+      "What Mars Makes / Does There": "'DogStar Kitchen' — 371,000 sq ft on 85 acres. Orijen and Acana kibble, freeze-dried, treats.",
       "Target Newspaper": "News-Democrat & Leader (Russellville)",
       "Frequency": "Weekly",
       "Owner": "Paxton Media Group",
@@ -240,7 +266,9 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Not started",
-      "Notes": "Logan County weekly. Champion joined Mars in Feb 2023."
+      "Notes": "Logan County weekly. Champion joined Mars in Feb 2023.",
+      "Lat": 36.864,
+      "Lng": -86.71
     },
     {
       "Tier": 2,
@@ -257,7 +285,9 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Not started",
-      "Notes": "Lowest-profile Mars site found \u2014 almost no press coverage, which also means an untold story."
+      "Notes": "Lowest-profile Mars site found — almost no press coverage, which also means an untold story.",
+      "Lat": 43.975,
+      "Lng": -90.504
     },
     {
       "Tier": 2,
@@ -275,7 +305,9 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Not started",
-      "Notes": "Covers Mattoon and Charleston, Coles County. Long Mars history in the community \u2014 40th anniversary was covered by Mars itself."
+      "Notes": "Covers Mattoon and Charleston, Coles County. Long Mars history in the community — 40th anniversary was covered by Mars itself.",
+      "Lat": 39.483,
+      "Lng": -88.373
     },
     {
       "Tier": 2,
@@ -292,7 +324,9 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Not started",
-      "Notes": "Dodge County. Pairs naturally with Aurora NE \u2014 one state, two Mars plants, one press association."
+      "Notes": "Dodge County. Pairs naturally with Aurora NE — one state, two Mars plants, one press association.",
+      "Lat": 41.433,
+      "Lng": -96.498
     },
     {
       "Tier": 2,
@@ -309,7 +343,9 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Not started",
-      "Notes": "Independent family-owned daily \u2014 decision-maker is reachable, no corporate ad-policy gatekeeping."
+      "Notes": "Independent family-owned daily — decision-maker is reachable, no corporate ad-policy gatekeeping.",
+      "Lat": 31.098,
+      "Lng": -97.343
     },
     {
       "Tier": 2,
@@ -326,7 +362,9 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Not started",
-      "Notes": "Third Tennessee Mars site \u2014 TN alone supports a state-level cluster pitch to the Tennessee Press Association."
+      "Notes": "Third Tennessee Mars site — TN alone supports a state-level cluster pitch to the Tennessee Press Association.",
+      "Lat": 36.208,
+      "Lng": -86.291
     },
     {
       "Tier": 2,
@@ -334,7 +372,7 @@
       "State": "PA",
       "Mars Segment": "Snacking",
       "Site Type": "Manufacturing plant",
-      "What Mars Makes / Does There": "Mars Wrigley chocolate \u2014 Dove bulk chocolate, M&M's, Snickers, Twix.",
+      "What Mars Makes / Does There": "Mars Wrigley chocolate — Dove bulk chocolate, M&M's, Snickers, Twix.",
       "Target Newspaper": "The Elizabethtown Advocate",
       "Frequency": "Weekly",
       "Owner": "LNP Media Group",
@@ -343,7 +381,9 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Not started",
-      "Notes": "Genuine small-town weekly in Lancaster County."
+      "Notes": "Genuine small-town weekly in Lancaster County.",
+      "Lat": 40.153,
+      "Lng": -76.603
     },
     {
       "Tier": 2,
@@ -361,7 +401,9 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Not started",
-      "Notes": "Published continuously since 1864. Shaw Media owns several nearby weeklies \u2014 one yes could open a cluster."
+      "Notes": "Published continuously since 1864. Shaw Media owns several nearby weeklies — one yes could open a cluster.",
+      "Lat": 41.641,
+      "Lng": -88.447
     },
     {
       "Tier": 2,
@@ -379,7 +421,9 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Not started",
-      "Notes": "Hall County. Large Mars workforce relative to town size."
+      "Notes": "Hall County. Large Mars workforce relative to town size.",
+      "Lat": 34.185,
+      "Lng": -83.925
     },
     {
       "Tier": 2,
@@ -397,7 +441,9 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Not started",
-      "Notes": "Site downsized in 2023 when peanut roasting moved to Waco \u2014 check current sentiment before pitching."
+      "Notes": "Site downsized in 2023 when peanut roasting moved to Waco — check current sentiment before pitching.",
+      "Lat": 31.578,
+      "Lng": -84.156
     },
     {
       "Tier": 2,
@@ -415,7 +461,9 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Not started",
-      "Notes": "Not a pet food site, but a flagship Mars community. Good candidate if the series ever widens past Petcare."
+      "Notes": "Not a pet food site, but a flagship Mars community. Good candidate if the series ever widens past Petcare.",
+      "Lat": 33.41,
+      "Lng": -91.062
     },
     {
       "Tier": 2,
@@ -432,7 +480,9 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Not started",
-      "Notes": "Bradley County."
+      "Notes": "Bradley County.",
+      "Lat": 35.16,
+      "Lng": -84.877
     },
     {
       "Tier": 2,
@@ -440,7 +490,7 @@
       "State": "NV",
       "Mars Segment": "Snacking",
       "Site Type": "Manufacturing plant",
-      "What Mars Makes / Does There": "Nature's Bakery bars \u2014 the brand's original home.",
+      "What Mars Makes / Does There": "Nature's Bakery bars — the brand's original home.",
       "Target Newspaper": "Nevada Appeal",
       "Frequency": "Daily",
       "Owner": "Swift Communications / Ogden",
@@ -449,14 +499,16 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Not started",
-      "Notes": "State capital but small-market feel."
+      "Notes": "State capital but small-market feel.",
+      "Lat": 39.164,
+      "Lng": -119.767
     },
     {
       "Tier": 2,
       "Mars Site": "Loveland",
       "State": "CO",
       "Mars Segment": "Petcare",
-      "Site Type": "R&D lab \u2014 Antech North America hub",
+      "Site Type": "R&D lab — Antech North America hub",
       "What Mars Makes / Does There": "$15.5M veterinary diagnostics R&D hub (former Heska site). In-house diagnostics, Allercept allergy business.",
       "Target Newspaper": "Loveland Reporter-Herald",
       "Frequency": "Daily",
@@ -466,7 +518,9 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Not started",
-      "Notes": "Veterinary science angle \u2014 different story material from the food plants, good for variety in the series."
+      "Notes": "Veterinary science angle — different story material from the food plants, good for variety in the series.",
+      "Lat": 40.398,
+      "Lng": -105.075
     },
     {
       "Tier": 2,
@@ -474,7 +528,7 @@
       "State": "CA",
       "Mars Segment": "Petcare",
       "Site Type": "Manufacturing plant",
-      "What Mars Makes / Does There": "Nutro dry pet food, 30-acre site. NOTE: current operating status unconfirmed \u2014 verify before pitching.",
+      "What Mars Makes / Does There": "Nutro dry pet food, 30-acre site. NOTE: current operating status unconfirmed — verify before pitching.",
       "Target Newspaper": "Victorville Daily Press",
       "Frequency": "Daily",
       "Owner": "Gannett",
@@ -483,7 +537,9 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Hold",
-      "Notes": "VERIFY THE PLANT IS STILL RUNNING before any outreach."
+      "Notes": "VERIFY THE PLANT IS STILL RUNNING before any outreach.",
+      "Lat": 34.536,
+      "Lng": -117.291
     },
     {
       "Tier": 2,
@@ -491,7 +547,7 @@
       "State": "WA",
       "Mars Segment": "Petcare",
       "Site Type": "Banfield Pet Hospital HQ",
-      "What Mars Makes / Does There": "Headquarters of Banfield \u2014 1,000+ veterinary clinics, mostly inside PetSmart. Mars-owned since 2007.",
+      "What Mars Makes / Does There": "Headquarters of Banfield — 1,000+ veterinary clinics, mostly inside PetSmart. Mars-owned since 2007.",
       "Target Newspaper": "The Columbian",
       "Frequency": "Daily",
       "Owner": "Independent (family-owned)",
@@ -500,7 +556,9 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Not started",
-      "Notes": "Independent family-owned daily. Banfield gives a strong veterinary-expertise story angle."
+      "Notes": "Independent family-owned daily. Banfield gives a strong veterinary-expertise story angle.",
+      "Lat": 45.639,
+      "Lng": -122.66
     },
     {
       "Tier": 2,
@@ -518,7 +576,9 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Not started",
-      "Notes": "Big workforce. Gannett ownership means ad decisions may sit outside the newsroom."
+      "Notes": "Big workforce. Gannett ownership means ad decisions may sit outside the newsroom.",
+      "Lat": 35.386,
+      "Lng": -94.398
     },
     {
       "Tier": 2,
@@ -534,7 +594,9 @@
       "Website": "https://www.cjonline.com",
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
-      "Outreach Status": "Not started"
+      "Outreach Status": "Not started",
+      "Lat": 39.048,
+      "Lng": -95.678
     },
     {
       "Tier": 2,
@@ -552,7 +614,9 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Not started",
-      "Notes": "Pairs with Temple TX \u2014 two Mars sites ~35 miles apart, one Texas Press Association pitch."
+      "Notes": "Pairs with Temple TX — two Mars sites ~35 miles apart, one Texas Press Association pitch.",
+      "Lat": 31.549,
+      "Lng": -97.147
     },
     {
       "Tier": 2,
@@ -562,15 +626,17 @@
       "Site Type": "Manufacturing plant (treats)",
       "What Mars Makes / Does There": "Greenies, Greenies Pill Pockets, dog supplements, Royal Canin Pill Assist. $82M expansion, +95 jobs.",
       "Approx. Staff": "260+",
-      "Target Newspaper": "TO VERIFY \u2014 seek KC community weekly",
-      "Frequency": "\u2014",
+      "Target Newspaper": "TO VERIFY — seek KC community weekly",
+      "Frequency": "—",
       "Owner": "TO VERIFY",
       "Independent?": "TO VERIFY",
       "Website": "TO VERIFY",
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Not started",
-      "Notes": "Metro market \u2014 find a neighbourhood or suburban weekly rather than the Kansas City Star."
+      "Notes": "Metro market — find a neighbourhood or suburban weekly rather than the Kansas City Star.",
+      "Lat": 39.1,
+      "Lng": -94.578
     },
     {
       "Tier": 2,
@@ -579,15 +645,17 @@
       "Mars Segment": "Petcare",
       "Site Type": "Royal Canin USA HQ office",
       "What Mars Makes / Does There": "Royal Canin USA headquarters, 4 City Place Drive.",
-      "Target Newspaper": "TO VERIFY \u2014 seek St. Charles County weekly",
-      "Frequency": "\u2014",
+      "Target Newspaper": "TO VERIFY — seek St. Charles County weekly",
+      "Frequency": "—",
       "Owner": "TO VERIFY",
       "Independent?": "TO VERIFY",
       "Website": "TO VERIFY",
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Not started",
-      "Notes": "Royal Canin's US corporate home \u2014 worth a dedicated look for a suburban weekly."
+      "Notes": "Royal Canin's US corporate home — worth a dedicated look for a suburban weekly.",
+      "Lat": 38.784,
+      "Lng": -90.481
     },
     {
       "Tier": 3,
@@ -605,7 +673,9 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Low priority",
-      "Notes": "Metro daily \u2014 the community-paper pitch fits poorly. Consider a suburban weekly instead."
+      "Notes": "Metro daily — the community-paper pitch fits poorly. Consider a suburban weekly instead.",
+      "Lat": 35.046,
+      "Lng": -85.31
     },
     {
       "Tier": 3,
@@ -613,7 +683,7 @@
       "State": "NV",
       "Mars Segment": "Snacking",
       "Site Type": "Manufacturing plant + visitor centre",
-      "What Mars Makes / Does There": "Ethel M Chocolates \u2014 sole global production site, with a public factory tour and cactus garden.",
+      "What Mars Makes / Does There": "Ethel M Chocolates — sole global production site, with a public factory tour and cactus garden.",
       "Target Newspaper": "Boulder City Review / Las Vegas Review-Journal",
       "Frequency": "Weekly / Daily",
       "Owner": "TO VERIFY",
@@ -622,7 +692,9 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Low priority",
-      "Notes": "The visitor centre is an unusually good story asset if a local weekly can be found."
+      "Notes": "The visitor centre is an unusually good story asset if a local weekly can be found.",
+      "Lat": 36.04,
+      "Lng": -114.982
     },
     {
       "Tier": 3,
@@ -630,17 +702,19 @@
       "State": "UT",
       "Mars Segment": "Snacking",
       "Site Type": "Manufacturing plant",
-      "What Mars Makes / Does There": "Nature's Bakery \u2014 $240M, 339,000 sq ft, ~1 billion bars/yr. Opened July 2025.",
+      "What Mars Makes / Does There": "Nature's Bakery — $240M, 339,000 sq ft, ~1 billion bars/yr. Opened July 2025.",
       "Approx. Staff": "230+",
-      "Target Newspaper": "TO VERIFY \u2014 seek suburban weekly",
-      "Frequency": "\u2014",
+      "Target Newspaper": "TO VERIFY — seek suburban weekly",
+      "Frequency": "—",
       "Owner": "TO VERIFY",
       "Independent?": "TO VERIFY",
       "Website": "TO VERIFY",
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Low priority",
-      "Notes": "Metro market."
+      "Notes": "Metro market.",
+      "Lat": 40.761,
+      "Lng": -111.891
     },
     {
       "Tier": 3,
@@ -648,16 +722,18 @@
       "State": "IL",
       "Mars Segment": "Snacking",
       "Site Type": "Manufacturing plant (ice cream)",
-      "What Mars Makes / Does There": "Makes all Mars ice cream sold in the US \u2014 Snickers, Dove, Twix, M&M's, Milky Way, KIND frozen.",
-      "Target Newspaper": "TO VERIFY \u2014 seek DuPage County weekly",
-      "Frequency": "\u2014",
+      "What Mars Makes / Does There": "Makes all Mars ice cream sold in the US — Snickers, Dove, Twix, M&M's, Milky Way, KIND frozen.",
+      "Target Newspaper": "TO VERIFY — seek DuPage County weekly",
+      "Frequency": "—",
       "Owner": "TO VERIFY",
       "Independent?": "TO VERIFY",
       "Website": "TO VERIFY",
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Low priority",
-      "Notes": "Chicago suburb \u2014 several strong independent weeklies in the area, worth a look."
+      "Notes": "Chicago suburb — several strong independent weeklies in the area, worth a look.",
+      "Lat": 41.749,
+      "Lng": -87.918
     },
     {
       "Tier": 3,
@@ -675,7 +751,9 @@
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Low priority",
-      "Notes": "Print weekly coverage has thinned \u2014 TAPinto is digital-only, so the printed-page model needs adapting here. Huge Mars heritage though: M&M's have been made in this town for 68 years."
+      "Notes": "Print weekly coverage has thinned — TAPinto is digital-only, so the printed-page model needs adapting here. Huge Mars heritage though: M&M's have been made in this town for 68 years.",
+      "Lat": 40.854,
+      "Lng": -74.829
     },
     {
       "Tier": 3,
@@ -684,15 +762,17 @@
       "Mars Segment": "Petcare",
       "Site Type": "BluePearl veterinary HQ",
       "What Mars Makes / Does There": "BluePearl Specialty & Emergency Pet Hospital headquarters; network spans 29 states.",
-      "Target Newspaper": "TO VERIFY \u2014 seek Tampa-area community weekly",
-      "Frequency": "\u2014",
+      "Target Newspaper": "TO VERIFY — seek Tampa-area community weekly",
+      "Frequency": "—",
       "Owner": "TO VERIFY",
       "Independent?": "TO VERIFY",
       "Website": "TO VERIFY",
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Low priority",
-      "Notes": "Metro market, but emergency-vet stories are strong rescue-adjacent material."
+      "Notes": "Metro market, but emergency-vet stories are strong rescue-adjacent material.",
+      "Lat": 27.951,
+      "Lng": -82.457
     },
     {
       "Tier": 3,
@@ -702,15 +782,17 @@
       "Site Type": "Mars Snacking GLOBAL HQ + R&D + Mars Food NA HQ",
       "What Mars Makes / Does There": "Goose Island campus: global HQ, $42M R&D hub (300 associates), Mars Food North America HQ. New Fulton Market office, 602 new jobs.",
       "Approx. Staff": "4,000+",
-      "Target Newspaper": "TO VERIFY \u2014 seek Chicago neighbourhood weekly",
-      "Frequency": "\u2014",
+      "Target Newspaper": "TO VERIFY — seek Chicago neighbourhood weekly",
+      "Frequency": "—",
       "Owner": "TO VERIFY",
       "Independent?": "TO VERIFY",
       "Website": "TO VERIFY",
       "Local Shelter": "TO VERIFY",
       "Editor / Publisher Contact": "TO VERIFY",
       "Outreach Status": "Low priority",
-      "Notes": "Major Mars centre but a hard community-paper market. Note the corporate contacts likely sit here."
+      "Notes": "Major Mars centre but a hard community-paper market. Note the corporate contacts likely sit here.",
+      "Lat": 41.884,
+      "Lng": -87.632
     }
   ],
   "doNotContact": [
@@ -718,71 +800,91 @@
       "Former Mars Site": "Rolla",
       "State": "MO",
       "Site Type": "Royal Canin plant",
-      "Status": "CLOSED \u2014 production ended 18 Apr 2025, decommissioned 31 Dec 2025; 105 jobs lost.",
-      "Why It Matters": "Do not pitch. Mars left town \u2014 the story would be negative."
+      "Status": "CLOSED — production ended 18 Apr 2025, decommissioned 31 Dec 2025; 105 jobs lost.",
+      "Why It Matters": "Do not pitch. Mars left town — the story would be negative.",
+      "Lat": 37.951,
+      "Lng": -91.771
     },
     {
       "Former Mars Site": "Henderson",
       "State": "NC",
       "Site Type": "Mars Petcare plant",
-      "Status": "CLOSING \u2014 production ceased mid-June 2026, site closes July 2026; ~150 employees.",
-      "Why It Matters": "Do not pitch. Closing right now."
+      "Status": "CLOSING — production ceased mid-June 2026, site closes July 2026; ~150 employees.",
+      "Why It Matters": "Do not pitch. Closing right now.",
+      "Lat": 36.33,
+      "Lng": -78.399
     },
     {
       "Former Mars Site": "Hazelwood",
       "State": "MO",
       "Site Type": "Nature's Bakery plant",
-      "Status": "CLOSING \u2014 layoffs Sept 2026 and Feb 2027, full closure Sept 2027; 345 jobs eliminated.",
-      "Why It Matters": "Do not pitch."
+      "Status": "CLOSING — layoffs Sept 2026 and Feb 2027, full closure Sept 2027; 345 jobs eliminated.",
+      "Why It Matters": "Do not pitch.",
+      "Lat": 38.771,
+      "Lng": -90.371
     },
     {
       "Former Mars Site": "Chicago (Galewood)",
       "State": "IL",
       "Site Type": "Mars Wrigley chocolate plant",
-      "Status": "CLOSED 2024 \u2014 historic 1929 plant, 280 jobs eliminated, site being redeveloped.",
-      "Why It Matters": "Do not pitch."
+      "Status": "CLOSED 2024 — historic 1929 plant, 280 jobs eliminated, site being redeveloped.",
+      "Why It Matters": "Do not pitch.",
+      "Lat": 41.921,
+      "Lng": -87.788
     },
     {
       "Former Mars Site": "Newark",
       "State": "NJ",
       "Site Type": "Mars Wrigley US market hub office",
-      "Status": "CLOSING \u2014 307 positions eliminated, hub sunsets Dec 2027; functions moving to Chicago.",
-      "Why It Matters": "Do not pitch."
+      "Status": "CLOSING — 307 positions eliminated, hub sunsets Dec 2027; functions moving to Chicago.",
+      "Why It Matters": "Do not pitch.",
+      "Lat": 40.735,
+      "Lng": -74.172
     },
     {
       "Former Mars Site": "Clinton",
       "State": "OK",
       "Site Type": "Former Mars Petcare plant",
       "Status": "DIVESTED Dec 2018 to Red Collar Pet Foods.",
-      "Why It Matters": "NOT a Mars site. Appears on stale lists \u2014 do not pitch as Mars."
+      "Why It Matters": "NOT a Mars site. Appears on stale lists — do not pitch as Mars.",
+      "Lat": 35.516,
+      "Lng": -98.967
     },
     {
       "Former Mars Site": "Miami",
       "State": "OK",
       "Site Type": "Former Mars Petcare plant",
       "Status": "DIVESTED Dec 2018 to Red Collar Pet Foods.",
-      "Why It Matters": "NOT a Mars site."
+      "Why It Matters": "NOT a Mars site.",
+      "Lat": 36.874,
+      "Lng": -94.877
     },
     {
       "Former Mars Site": "Orangeburg",
       "State": "SC",
       "Site Type": "Former Mars Petcare plant",
       "Status": "DIVESTED Dec 2018 to Red Collar Pet Foods.",
-      "Why It Matters": "NOT a Mars site."
+      "Why It Matters": "NOT a Mars site.",
+      "Lat": 33.492,
+      "Lng": -80.856
     },
     {
       "Former Mars Site": "Washington Court House",
       "State": "OH",
       "Site Type": "Former Mars Petcare plant",
       "Status": "DIVESTED Dec 2018 to Red Collar Pet Foods.",
-      "Why It Matters": "NOT a Mars site."
+      "Why It Matters": "NOT a Mars site.",
+      "Lat": 39.536,
+      "Lng": -83.439
     },
     {
       "Former Mars Site": "San Bernardino",
       "State": "CA",
       "Site Type": "Former Mars Petcare plant",
       "Status": "DIVESTED Dec 2018 to Red Collar Pet Foods.",
-      "Why It Matters": "NOT a Mars site."
+      "Why It Matters": "NOT a Mars site.",
+      "Lat": 34.108,
+      "Lng": -117.29
     }
   ],
   "note": "Community newspapers near Mars, Incorporated US sites. Qualifying filter: a community newspaper, a local animal shelter, and a local pet food store."
