@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Pet Page Composer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ================================================================
+   THE PET PAGE COMPOSER
+   A partner paper uploads its half. The system sets all five outputs.
+   Print specifications are per-paper and drive the print render.
+   ================================================================ */
+
+:root{
+  --ink:#16150f; --soft:#4f4a3d; --paper:#fbfaf6; --warm:#f4f1e8;
+  --rule:#ddd7c8; --rule2:#b3aa95; --mars:#0a2a66; --adopt:#9c2b1f; --go:#1f6b45;
+  --ui:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+
+  /* --- print specification (overwritten live by the spec panel) --- */
+  --pgW:9.5in; --pgH:10.5in;
+  --mT:.3in; --mR:.34in; --mB:.24in; --mL:.34in;
+  --cols:2; --gutter:.15in;
+  --stripH:1.25in;
+
+  /* --- typography (overwritten live) --- */
+  --textFace:'Newsreader'; --displayFace:'Newsreader';
+  --bodySize:7.9pt; --leading:1.32; --headSize:19pt;
+  --kern:1;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;background:#e8e6df;color:var(--ink);font-family:var(--ui);
+  font-size:14px;display:flex;flex-direction:column;overflow:hidden;
+}
+
+/* ---------- top bar ---------- */
+.top{
+  background:#16150f;color:#f4f1e8;padding:.55rem .9rem;display:flex;align-items:center;
+  gap:.6rem;flex-wrap:wrap;box-shadow:0 1px 14px rgba(0,0,0,.3);z-index:20;flex:0 0 auto;
+}
+.top .brand{font-weight:700;font-size:.85rem;letter-spacing:.02em;margin-right:.5rem}
+.top .brand span{opacity:.45;font-weight:400}
+.seg{display:flex;border:1px solid #45412f;border-radius:7px;overflow:hidden}
+.seg button{appearance:none;border:0;background:transparent;color:#cfc9b6;font:inherit;
+  font-weight:600;font-size:.78rem;padding:.4rem .78rem;cursor:pointer;border-right:1px solid #45412f}
+.seg button:last-child{border-right:0}
+.seg button:hover{background:#26241a;color:#fff}
+.seg button[aria-pressed="true"]{background:#f4f1e8;color:#16150f}
+.top .sp{flex:1}
+.btn{appearance:none;border:1px solid #57523d;background:#26241a;color:#e8e4d5;font:inherit;
+  font-weight:600;font-size:.78rem;padding:.4rem .8rem;border-radius:7px;cursor:pointer;white-space:nowrap}
+.btn:hover{background:#332f22;color:#fff}
+.btn.go{background:var(--go);border-color:var(--go);color:#fff}
+.btn.go:hover{background:#268554}
+
+/* ---------- layout ---------- */
+.main{flex:1;display:flex;min-height:0}
+.panel{
+  width:392px;flex:0 0 392px;background:#fdfcf9;border-right:1px solid var(--rule2);
+  overflow-y:auto;padding:0 0 4rem;
+}
+.stage{flex:1;overflow:auto;display:flex;justify-content:center;align-items:flex-start;padding:1.6rem}
+
+/* ---------- panel controls ---------- */
+.group{border-bottom:1px solid var(--rule)}
+.group > summary{
+  list-style:none;cursor:pointer;padding:.7rem .95rem;font-weight:700;font-size:.72rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--mars);display:flex;align-items:center;gap:.4rem;
+  background:var(--warm);user-select:none;
+}
+.group > summary::-webkit-details-marker{display:none}
+.group > summary::before{content:'▸';font-size:.7rem;transition:transform .15s;opacity:.6}
+.group[open] > summary::before{transform:rotate(90deg)}
+.gbody{padding:.85rem .95rem 1.1rem}
+label.f{display:block;margin-bottom:.7rem}
+label.f > span{display:block;font-size:.72rem;font-weight:600;color:var(--soft);margin-bottom:.22rem}
+label.f > span em{font-style:normal;font-weight:400;opacity:.7}
+input[type=text],input[type=number],input[type=date],textarea,select{
+  width:100%;font-family:var(--ui);font-size:.82rem;padding:.42rem .55rem;
+  border:1px solid var(--rule2);border-radius:5px;background:#fff;color:var(--ink);
+}
+textarea{resize:vertical;min-height:110px;line-height:1.5;font-family:Georgia,serif;font-size:.84rem}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--mars);outline-offset:-1px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem}
+.row4{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem}
+.hint{font-size:.7rem;color:var(--soft);font-style:italic;line-height:1.45;margin:.1rem 0 .7rem}
+.drop{
+  border:1.5px dashed var(--rule2);border-radius:6px;padding:.9rem;text-align:center;
+  font-size:.76rem;color:var(--soft);cursor:pointer;background:#fff;transition:.15s;
+}
+.drop:hover,.drop.over{border-color:var(--mars);background:#f2f6fd;color:var(--mars)}
+.drop img{max-width:100%;max-height:110px;border-radius:3px;display:block;margin:0 auto .4rem}
+.slider{display:flex;align-items:center;gap:.5rem}
+.slider input[type=range]{flex:1}
+.slider output{font-size:.74rem;font-weight:700;font-variant-numeric:tabular-nums;min-width:2.6rem;text-align:right}
+.chk{display:flex;align-items:center;gap:.45rem;font-size:.78rem;margin-bottom:.5rem;cursor:pointer}
+.chk input{width:auto}
+.preset{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:.6rem}
+.preset button{
+  appearance:none;border:1px solid var(--rule2);background:#fff;border-radius:20px;
+  font:inherit;font-size:.7rem;font-weight:600;padding:.25rem .6rem;cursor:pointer;color:var(--soft)
+}
+.preset button:hover{border-color:var(--mars);color:var(--mars);background:#f2f6fd}
+.warn{font-size:.72rem;color:var(--adopt);background:#fdf3f1;border-left:2px solid var(--adopt);
+  padding:.45rem .6rem;border-radius:0 3px 3px 0;line-height:1.45;margin-top:.5rem}
+
+/* ================================================================
+   THE SHEET — shared typographic core
+   ================================================================ */
+.sheet{
+  background:#fff;box-shadow:0 8px 44px rgba(0,0,0,.22);position:relative;overflow:hidden;
+  font-family:var(--textFace),Georgia,serif;color:#000;
+  font-kerning:normal;
+  font-optical-sizing:auto;
+  font-variant-ligatures:common-ligatures contextual;
+  font-feature-settings:"kern" 1,"liga" 1,"clig" 1,"calt" 1;
+  text-rendering:optimizeLegibility;
+}
+.face{display:none}
+.face.on{display:block}
+
+/* justified body copy — every lever the browser actually gives you */
+.copy{
+  font-size:var(--bodySize);line-height:var(--leading);
+  text-align:justify;
+  hyphens:auto;-webkit-hyphens:auto;
+  hyphenate-limit-chars:6 3 3;      /* min word / before / after */
+  text-wrap:pretty;                  /* paragraph-level breaking where supported */
+  hanging-punctuation:first last;    /* optical margins where supported */
+  orphans:2;widows:2;
+  font-variant-numeric:oldstyle-nums proportional-nums;
+}
+.copy.ragged{text-align:left;hyphens:none}
+.copy p{margin:0 0 .05in}
+.copy p.dcap::first-letter{
+  float:left;font-size:calc(var(--bodySize) * 2.9);line-height:.78;
+  padding:.02em .05em 0 0;font-family:var(--displayFace),Georgia,serif;font-weight:700;
+}
+
+/* display type — lining figures, tight tracking, balanced breaks */
+.disp{
+  font-family:var(--displayFace),Georgia,serif;font-weight:700;
+  line-height:1.03;letter-spacing:-.012em;
+  text-wrap:balance;
+  font-variant-numeric:lining-nums;
+  font-feature-settings:"kern" 1,"liga" 1,"clig" 1;
+  margin:0 0 .05in;
+}
+/* kern-pass wrapper — MUST stay inline. inline-block would make every
+   kerned glyph its own line-break opportunity and split words mid-syllable. */
+.disp .k{display:inline;white-space:pre-wrap}
+.disp.hang{text-indent:-.06em}          /* optical hang for a leading quote */
+
+/* ================================================================
+   PRINT PAGE
+   ================================================================ */
+#printpage .pg{
+  width:var(--pgW);height:var(--pgH);
+  padding:var(--mT) var(--mR) var(--mB) var(--mL);
+  display:flex;flex-direction:column;overflow:hidden;
+  transform:scale(var(--scale,.72));transform-origin:top center;
+}
+.pp-mast{text-align:center;border-bottom:1.5pt solid #000;padding-bottom:.05in;margin-bottom:.1in;flex:0 0 auto}
+.pp-mast h1{font-family:var(--displayFace),Georgia,serif;font-weight:400;font-size:34pt;
+  line-height:.95;margin:0 0 .03in;letter-spacing:-.02em;font-variant-numeric:lining-nums}
+.pp-mast .dl{font-family:var(--ui);font-size:7.5pt;color:#333}
+.pp-disc{font-family:var(--ui);font-size:5.8pt;letter-spacing:.06em;text-transform:uppercase;
+  text-align:center;color:#444;border-bottom:.5pt solid #bbb;padding-bottom:.05in;margin-bottom:.1in;flex:0 0 auto}
+.pp-body{display:grid;grid-template-columns:1.92fr 1fr;gap:.2in;flex:1 1 auto;min-height:0;overflow:hidden}
+.pp-l{display:flex;flex-direction:column;min-width:0;overflow:hidden}
+.pp-r{border-left:.5pt solid #999;padding-left:.18in;min-width:0;display:flex;flex-direction:column;overflow:hidden}
+.pp-top{display:grid;grid-template-columns:1fr 1.06fr;gap:.15in;margin-bottom:.08in;flex:0 0 auto}
+.pp-photo{background:#cfc7b4 center/cover no-repeat;height:2.45in;display:grid;place-items:center;
+  text-align:center;font-family:var(--ui);font-size:6pt;letter-spacing:.09em;text-transform:uppercase;
+  color:#4a4335;padding:.1in}
+.pp-cap{font-family:var(--ui);font-size:6.2pt;font-style:italic;color:#444;margin-top:.03in;line-height:1.3}
+.pp-by{font-family:var(--ui);font-size:7.5pt;font-weight:700;margin:0 0 .07in;color:#111}
+.pp-by em{display:block;font-weight:400;font-style:italic;font-size:6.8pt;color:#555;margin-top:.02in}
+.pp-flow{column-count:var(--cols);column-gap:var(--gutter);column-rule:.5pt solid #ccc;
+  flex:1 1 auto;min-height:0;overflow:hidden}
+.pp-r .copy{font-size:calc(var(--bodySize) - .75pt);line-height:1.3;flex:1 1 auto;min-height:0;overflow:hidden}
+.pp-r .disp{font-size:calc(var(--headSize) * .82)}
+.pp-l .disp{font-size:var(--headSize)}
+.pp-note{font-family:var(--textFace),Georgia,serif;font-style:italic;font-size:6.8pt;line-height:1.32;
+  border-top:.5pt solid #999;border-bottom:.5pt solid #999;padding:.045in 0;margin:.1in 0 .08in;flex:0 0 auto}
+.pp-note b{font-family:var(--ui);font-style:normal;font-weight:700;font-size:6.2pt;letter-spacing:.1em;text-transform:uppercase}
+.pp-pets{display:grid;grid-template-columns:repeat(8,1fr);gap:.06in;margin-bottom:.09in;flex:0 0 auto}
+.pp-pet .av{height:.78in;background:#c6bda8 center/cover no-repeat;display:grid;place-items:center;font-size:15pt}
+.pp-pet span{display:block;text-align:center;font-family:var(--ui);font-size:5.4pt;font-weight:700;
+  letter-spacing:.06em;color:#333;margin-top:.02in}
+.pp-strip{height:var(--stripH);min-height:var(--stripH);display:grid;
+  grid-template-columns:1.35fr 1fr 1fr 1fr;gap:.05in;flex:0 0 auto}
+.pp-strip .c{display:grid;place-items:center;font-family:var(--ui);font-size:6pt;
+  letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.85);overflow:hidden}
+.pp-strip .c1{background:var(--mars);place-items:start;align-content:center;padding:.12in .14in;color:#fff}
+.pp-strip .c1 b{font-family:var(--ui);font-weight:800;font-size:11pt;line-height:1.12;text-transform:none}
+.pp-strip .c1 small{display:block;font-size:6pt;letter-spacing:.14em;opacity:.75;margin-top:.04in}
+.pp-strip .c2{background:#6b7a4c}.pp-strip .c3{background:#b8933f}.pp-strip .c4{background:#a4643f}
+.pp-foot{font-family:var(--ui);font-size:5.8pt;color:#666;text-align:center;padding-top:.06in;flex:0 0 auto}
+.pp-res{margin-top:.1in;border:.5pt dashed #c4b9a2;padding:.4in .1in;text-align:center;
+  font-family:var(--ui);font-size:5.8pt;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#a89a7d}
+
+/* ---------- PHONE ---------- */
+#phone .pg{width:390px;border-radius:30px;padding:.45rem;background:#16150f;box-shadow:0 14px 50px rgba(0,0,0,.4)}
+#phone .inner{background:#fff;border-radius:24px;overflow-y:auto;max-height:74vh;padding:1.2rem 1.15rem 2rem}
+#phone .disp{font-size:1.62rem}
+#phone .copy{font-size:1.02rem;line-height:1.62;text-align:left;hyphens:none;column-count:1}
+#phone .copy p{margin:0 0 .85rem}
+#phone .photo{width:100%;aspect-ratio:4/3;background:#cfc7b4 center/cover no-repeat;border-radius:3px;margin:1rem 0 .4rem}
+
+/* ---------- WEB ---------- */
+#web .pg{width:min(64rem,100%);background:#fff;padding:2.2rem 3rem 3rem}
+#web .disp{font-size:2.5rem}
+#web .copy{font-size:1.1rem;line-height:1.62;text-align:left;hyphens:none}
+#web .copy p{margin:0 0 1rem}
+#web .photo{width:100%;aspect-ratio:16/9;background:#cfc7b4 center/cover no-repeat;margin:1.2rem 0 .5rem}
+#web .cols{column-count:2;column-gap:2.4rem;column-rule:1px solid var(--rule)}
+@media (max-width:900px){#web .cols{column-count:1}}
+
+/* ---------- POSTCARD ---------- */
+#postcard .pg{width:600px;height:432px;position:relative;padding:30px 34px;
+  display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:center;background:#fbfaf6}
+#postcard .pg::before{content:"";position:absolute;inset:12px;outline:1px dashed rgba(156,43,31,.5);pointer-events:none}
+#postcard .pg::after{content:attr(data-trim);position:absolute;bottom:2px;right:6px;
+  font-family:var(--ui);font-size:8px;letter-spacing:.09em;color:rgba(156,43,31,.7)}
+#postcard .photo{height:100%;background:#cfc7b4 center/cover no-repeat;border-radius:3px}
+#postcard .disp{font-size:1.55rem;font-weight:400}
+#postcard .pcp{font-size:.8rem;line-height:1.45;margin:.4rem 0 .7rem}
+#postcard .qr{width:56px;height:56px;background:repeating-conic-gradient(#16150f 0 25%,transparent 0 50%) 0 0/13px 13px;outline:1px solid #16150f}
+#postcard .pcf{display:flex;align-items:center;gap:.7rem}
+#postcard .pcf small{font-family:var(--ui);font-size:.58rem;line-height:1.4;color:var(--soft)}
+
+/* ---------- VIDEO ---------- */
+#video .pg{width:360px;height:640px;position:relative;overflow:hidden;border-radius:6px;
+  background:linear-gradient(170deg,#1c2b4a,#0a1626 60%,#060d18);color:#fff;
+  display:flex;flex-direction:column;justify-content:flex-end;padding:0 22px 118px}
+#video .pg::before{content:"TOP SAFE ZONE";position:absolute;top:0;left:0;right:0;height:88px;
+  background:repeating-linear-gradient(45deg,rgba(255,80,80,.13) 0 8px,transparent 8px 16px);
+  border-bottom:1px dashed rgba(255,120,120,.45);font-family:var(--ui);font-size:8px;
+  letter-spacing:.12em;color:rgba(255,180,180,.85);display:grid;place-items:center}
+#video .pg::after{content:"BOTTOM SAFE ZONE — caption, handle, audio, buttons";position:absolute;
+  bottom:0;left:0;right:0;height:112px;background:repeating-linear-gradient(45deg,rgba(255,80,80,.13) 0 8px,transparent 8px 16px);
+  border-top:1px dashed rgba(255,120,120,.45);font-family:var(--ui);font-size:8px;
+  letter-spacing:.1em;color:rgba(255,180,180,.85);display:grid;place-items:center;text-align:center}
+#video .vs{font-family:var(--ui);font-size:.56rem;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:#7fb0ff;margin-bottom:.5rem}
+#video .vc{font-family:var(--displayFace),Georgia,serif;font-size:1.5rem;line-height:1.16;
+  font-weight:400;margin:0 0 .7rem;text-shadow:0 2px 14px rgba(0,0,0,.6);text-wrap:balance}
+#video .vm{font-family:var(--ui);font-size:.6rem;letter-spacing:.07em;opacity:.6;
+  border-top:1px solid rgba(255,255,255,.18);padding-top:.6rem}
+
+/* ---------- PRINT ---------- */
+@media print{
+  body{display:block;overflow:visible;background:#fff}
+  .top,.panel{display:none !important}
+  .stage{padding:0;display:block;overflow:visible}
+  .sheet{box-shadow:none}
+  #printpage .pg{transform:none !important;box-shadow:none}
+  #postcard .pg::before,#postcard .pg::after{display:none}
+  .pp-strip .c1,.pp-strip .c2,.pp-strip .c3,.pp-strip .c4,.pp-photo,.pp-pet .av,#postcard .photo{
+    -webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+<style id="pagerule">@page{size:9.5in 10.5in;margin:0}</style>
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<nav class="site-nav">
+<a class="site-brand" href="index.html">The Pet Page <span>· Middleburg</span></a>
+<a class="site-link" href="index.html">Home</a>
+<a class="site-link" href="about.html">About</a>
+<a class="site-link" href="issues/index.html">Issues</a>
+<a class="site-link" href="partners.html">For papers</a>
+<a class="site-link" href="playbook.html">Video</a>
+<span class="site-sp"></span>
+<a class="site-cta" href="composer.html">Open the Composer →</a>
+</nav>
+
+<div class="top">
+  <div class="brand">The Pet Page <span>Composer</span></div>
+  <div class="seg" id="tabs">
+    <button data-r="printpage" aria-pressed="true">Print page</button>
+    <button data-r="phone">Phone</button>
+    <button data-r="web">Web</button>
+    <button data-r="postcard">Postcard</button>
+    <button data-r="video">Video</button>
+  </div>
+  <span class="sp"></span>
+  <button class="btn" id="loadBtn">Load package</button>
+  <button class="btn" id="saveBtn">Save package</button>
+  <button class="btn go" id="printBtn">Print this render →</button>
+  <input type="file" id="loadFile" accept="application/json" hidden>
+</div>
+
+<div class="main">
+<!-- ================= CONTROL PANEL ================= -->
+<div class="panel">
+
+  <details class="group" open>
+    <summary>Your paper</summary>
+    <div class="gbody">
+      <label class="f"><span>Newspaper name</span><input type="text" id="paper" value="The Middleburg Page"></label>
+      <div class="row">
+        <label class="f"><span>Issue date</span><input type="text" id="date" value="September 4, 2026"></label>
+        <label class="f"><span>Issue no.</span><input type="text" id="issue" value="1 of 12"></label>
+      </div>
+      <label class="f"><span>Contact line</span><input type="text" id="contact" value="Reach out to us at Editor@TheMiddleburgPage.com"></label>
+      <label class="f"><span>Local shelter</span><input type="text" id="shelter" value="Middleburg Humane Foundation"></label>
+      <label class="f"><span>Story URL <em>— for the QR code</em></span><input type="text" id="url" value="themiddleburgpage.com/tanner"></label>
+    </div>
+  </details>
+
+  <details class="group" open>
+    <summary>Your rescue story</summary>
+    <div class="gbody">
+      <label class="f"><span>Headline</span><input type="text" id="hed" value="Blind husky gets rescued; goes home to husky, 5 cats"></label>
+      <div class="row">
+        <label class="f"><span>Byline</span><input type="text" id="byline" value="By Dana Priest"></label>
+        <label class="f"><span>Credit</span><input type="text" id="credit" value="Piedmont Journalism Foundation"></label>
+      </div>
+      <label class="f"><span>Story <em>— paste your copy</em></span>
+        <textarea id="body">The thing about a blind dog is that he does not know he is a blind dog. He knows the shape of a room, the sound of a bowl, the particular tread of the person who is coming to get him.
+
+Tanner learned all three in the eleven weeks he spent at the Middleburg Humane Foundation, and then he learned a new set, in a new house, with a sighted husky to follow and five cats to negotiate.
+
+He arrived on a Tuesday in a crate that was slightly too small, from a county two hours south, with a note attached that gave only his approximate age and the word "gentle." The note was correct on both counts.
+
+What the note did not say, because nobody knew it yet, was how he would handle a house. Blind dogs map rooms the way the rest of us map a dark hallway at night — by memory, by touch, and by an accumulating confidence that the furniture has not moved since yesterday.
+
+The cats, for their part, worked it out in under a week, which is roughly six days longer than they would like it recorded.</textarea>
+      </label>
+      <div class="drop" id="photoDrop">
+        <div id="photoPreview">Drop the animal's photograph here<br>or click to choose a file</div>
+      </div>
+      <input type="file" id="photoFile" accept="image/*" hidden>
+      <label class="f" style="margin-top:.6rem"><span>Photo caption</span>
+        <input type="text" id="caption" value="My name is &quot;Tanner&quot;. Take me home!"></label>
+    </div>
+  </details>
+
+  <details class="group">
+    <summary>Reader pets — the paid slots</summary>
+    <div class="gbody">
+      <p class="hint">Eight names, comma separated. These are the readers who funded this page.</p>
+      <label class="f"><span>Names</span>
+        <input type="text" id="pets" value="Pepper, Patch, Luke, Piper, Scout, Bandit, Ripley, Rocket"></label>
+      <label class="f"><span>Slot price</span><input type="number" id="slotPrice" value="375" step="25"></label>
+      <label class="f"><span>Editor's note</span>
+        <input type="text" id="ednote" value="These dogs each chipped in $375 to help cover adoption costs and the costs of distributing this page, supplementing support from Mars. Have your dogs help our dogs!"></label>
+    </div>
+  </details>
+
+  <details class="group">
+    <summary>Print specification</summary>
+    <div class="gbody">
+      <p class="hint">Defaults are the Middleburg page. If your paper's specs differ, set them here — the print render follows them exactly.</p>
+      <div class="preset">
+        <button data-preset="middleburg">Middleburg 9.5 × 10.5</button>
+        <button data-preset="broadsheet">Broadsheet 11 × 21</button>
+        <button data-preset="tabloid">Tabloid 10 × 12.5</button>
+        <button data-preset="letter">Letter 8.5 × 11</button>
+      </div>
+      <div class="row">
+        <label class="f"><span>Live width (in)</span><input type="number" id="pgW" value="9.5" step=".05"></label>
+        <label class="f"><span>Live height (in)</span><input type="number" id="pgH" value="10.5" step=".05"></label>
+      </div>
+      <div class="row4">
+        <label class="f"><span>Top</span><input type="number" id="mT" value=".3" step=".02"></label>
+        <label class="f"><span>Right</span><input type="number" id="mR" value=".34" step=".02"></label>
+        <label class="f"><span>Bottom</span><input type="number" id="mB" value=".24" step=".02"></label>
+        <label class="f"><span>Left</span><input type="number" id="mL" value=".34" step=".02"></label>
+      </div>
+      <div class="row3">
+        <label class="f"><span>Story cols</span><input type="number" id="cols" value="2" min="1" max="6"></label>
+        <label class="f"><span>Gutter (in)</span><input type="number" id="gutter" value=".15" step=".01"></label>
+        <label class="f"><span>Strip (in)</span><input type="number" id="stripH" value="1.25" step=".05"></label>
+      </div>
+      <div class="warn" id="specWarn" hidden></div>
+    </div>
+  </details>
+
+  <details class="group">
+    <summary>Typography</summary>
+    <div class="gbody">
+      <label class="f"><span>Text face</span>
+        <select id="textFace">
+          <option value="Newsreader">Newsreader — designed for news, optical sizes</option>
+          <option value="Source Serif 4">Source Serif 4 — optical sizes</option>
+          <option value="Georgia">Georgia — safe fallback</option>
+          <option value="__custom">Your licensed face…</option>
+        </select></label>
+      <label class="f" id="customFaceWrap" hidden><span>Font family name <em>— exactly as installed</em></span>
+        <input type="text" id="customFace" placeholder="e.g. Miller Daily, Publico Text"></label>
+
+      <div class="row">
+        <label class="f"><span>Body size (pt)</span><input type="number" id="bodySize" value="7.9" step=".1"></label>
+        <label class="f"><span>Leading</span><input type="number" id="leading" value="1.32" step=".01"></label>
+      </div>
+      <label class="f"><span>Headline size (pt)</span><input type="number" id="headSize" value="19" step=".5"></label>
+
+      <label class="f"><span>Optical kerning strength <em>— display type only</em></span>
+        <div class="slider"><input type="range" id="kern" min="0" max="2" step=".1" value="1"><output id="kernOut">1.0×</output></div>
+      </label>
+      <p class="hint">The font's own kern pairs are always on. This adds optical correction to the pairs browsers habitually set too loose at display sizes — Ta, Wa, Vo, Ye, LT, P. and their kin.</p>
+
+      <label class="chk"><input type="checkbox" id="justify" checked> Justify body copy</label>
+      <label class="chk"><input type="checkbox" id="hyphen" checked> Hyphenate</label>
+      <label class="chk"><input type="checkbox" id="oldstyle" checked> Old-style figures in text</label>
+      <label class="chk"><input type="checkbox" id="hang" checked> Hang opening quotes optically</label>
+      <label class="chk"><input type="checkbox" id="dropcap" checked> Drop cap on the opening paragraph</label>
+    </div>
+  </details>
+
+  <details class="group">
+    <summary>Video beat</summary>
+    <div class="gbody">
+      <label class="f"><span>Scene label</span><input type="text" id="vscene" value="Scene 4 of 6 · drawn past → real present"></label>
+      <label class="f"><span>On-screen caption</span>
+        <input type="text" id="vcap" value="Eleven weeks in a kennel. Then a door opened."></label>
+      <label class="f"><span>Handle</span><input type="text" id="vhandle" value="@themiddleburgpage"></label>
+    </div>
+  </details>
+</div>
+
+<!-- ================= STAGE ================= -->
+<div class="stage">
+  <div class="sheet">
+
+    <!-- PRINT PAGE -->
+    <div class="face on" id="printpage"><div class="pg">
+      <div class="pp-mast">
+        <h1 id="o_paper">The Middleburg Page</h1>
+        <div class="dl"><span id="o_date"></span> &nbsp;··&nbsp; <span id="o_contact"></span></div>
+      </div>
+      <div class="pp-disc">Sponsored series · Mars Petcare funds this page and reviews only its own company content · <span id="o_paper2"></span> retains full editorial control of all rescue reporting</div>
+      <div class="pp-body">
+        <div class="pp-l">
+          <div class="pp-top">
+            <div>
+              <h2 class="disp" id="o_hed"></h2>
+              <p class="pp-by"><span id="o_byline"></span><em id="o_credit"></em></p>
+              <div class="copy" id="o_lead"></div>
+            </div>
+            <div>
+              <div class="pp-photo" id="o_photo">Photograph</div>
+              <div class="pp-cap" id="o_caption"></div>
+            </div>
+          </div>
+          <div class="copy pp-flow" id="o_flow"></div>
+        </div>
+        <div class="pp-r">
+          <h2 class="disp hang">&ldquo;Mars Is Closer Than You Think&rdquo; Ad Campaign Launched Here</h2>
+          <p class="pp-by">By Leland Schwartz<em>Editor, The Middleburg Page</em></p>
+          <div class="copy">
+            <p>When we heard that the candy and pet food company — which makes Milky Ways and Mars bars for us, IAMS and Pedigree for our dogs and Temptations for our cats — wanted to make everyone aware of how local it was, we thought &lsquo;what better way than through the local press?&rsquo;</p>
+            <p>So we asked the company if it would run a year-long test to see if us local news editors could share their message wide enough to be a serious complement to their own social media efforts.</p>
+            <p>Can local news organizations help drive national brands and recapture a piece of what kept community newspapers alive for decades? That is the question. If this is the first you&rsquo;ve heard of the Mars <b><i>&ldquo;Closer Than You Think&rdquo;</i></b> campaign, then we&rsquo;re onto something.</p>
+            <p>What we&rsquo;re thinking is to bring you two sets of stories over the year juxtaposed to Mars&rsquo; own messages. The first about rescues; how they work and how you can help, through our colleagues at the <span id="o_shelter2"></span>. The second describing how Mars is a thought leader in responsible pet ownership and animal adoption as well as how it makes its petfood and the science behind it.</p>
+            <p class="pp-more"><b><i>Read more here</i></b></p>
+          </div>
+        </div>
+      </div>
+      <div class="pp-note"><b>Editor's note:</b> <span id="o_ednote"></span></div>
+      <div class="pp-pets" id="o_pets"></div>
+      <div class="pp-strip">
+        <div class="c c1"><div><b>Mars Invests in American Made Products and Communities</b><small>Mars Is Closer Than You Think</small></div></div>
+        <div class="c c2">Sourcing · American agriculture</div>
+        <div class="c c3">Manufacturing · 38 US factories</div>
+        <div class="c c4">Pet nutrition · IAMS · Pedigree</div>
+      </div>
+      <div class="pp-foot" id="o_foot"></div>
+    </div></div>
+
+    <!-- PHONE -->
+    <div class="face" id="phone"><div class="pg"><div class="inner">
+      <div style="font-family:var(--ui);font-size:.6rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--mars);margin-bottom:.5rem">Mars Petcare Series · <span id="o_issue3"></span></div>
+      <h2 class="disp" id="o_hed2" style="font-weight:400"></h2>
+      <p style="font-family:var(--ui);font-size:.72rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);margin:.3rem 0 .8rem"><span id="o_byline2"></span></p>
+      <div class="photo" id="o_photo2"></div>
+      <div style="font-family:var(--ui);font-size:.7rem;font-style:italic;color:var(--soft);margin-bottom:1rem" id="o_caption2"></div>
+      <div class="copy" id="o_body2"></div>
+    </div></div></div>
+
+    <!-- WEB -->
+    <div class="face" id="web"><div class="pg">
+      <div style="font-family:var(--ui);font-size:.64rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--mars);margin-bottom:.6rem">Mars Petcare Series · <span id="o_issue4"></span></div>
+      <h2 class="disp" id="o_hed3" style="font-weight:400"></h2>
+      <p style="font-family:var(--ui);font-size:.76rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);margin:.4rem 0 1rem"><span id="o_byline3"></span></p>
+      <div class="photo" id="o_photo3"></div>
+      <div style="font-family:var(--ui);font-size:.74rem;font-style:italic;color:var(--soft);margin-bottom:1.4rem" id="o_caption3"></div>
+      <div class="copy cols" id="o_body3"></div>
+    </div></div>
+
+    <!-- POSTCARD -->
+    <div class="face" id="postcard"><div class="pg" data-trim="TRIM 6 × 4.25 in · BLEED .125 · SAFE .25">
+      <div class="photo" id="o_photo4"></div>
+      <div>
+        <div style="font-family:var(--ui);font-size:.56rem;font-weight:700;letter-spacing:.17em;text-transform:uppercase;color:var(--mars);margin-bottom:.4rem"><span id="o_paper3"></span> · <span id="o_issue5"></span></div>
+        <h2 class="disp" id="o_hed4" style="font-weight:400"></h2>
+        <p class="pcp" id="o_pcp"></p>
+        <div class="pcf">
+          <div class="qr"></div>
+          <small><b id="o_url"></b><br><span id="o_shelter3"></span><br>Supported by Mars Petcare</small>
+        </div>
+      </div>
+    </div></div>
+
+    <!-- VIDEO -->
+    <div class="face" id="video"><div class="pg">
+      <div class="vs" id="o_vscene"></div>
+      <p class="vc" id="o_vcap"></p>
+      <div class="vm">1080 × 1920 · burned-in captions · <span id="o_vhandle"></span></div>
+    </div></div>
+
+  </div>
+</div>
+</div>
+
+<script>
+(function(){
+'use strict';
+
+const $ = id => document.getElementById(id);
+const root = document.documentElement;
+
+/* ============================================================
+   OPTICAL KERNING PASS
+   The font's own kern table is always active via font-kerning.
+   This corrects the pairs that browsers habitually leave loose
+   at display sizes. Values are in em, applied as letter-spacing
+   on the left glyph of each pair, scaled by the strength slider.
+   Applied ONLY to display type — never to body copy, where the
+   font's metric kerning is correct and interference causes harm.
+   ============================================================ */
+const KERN_PAIRS = {
+  'Ta':-.055,'Te':-.045,'To':-.045,'Tr':-.038,'Tu':-.038,'Tw':-.035,'Ty':-.038,'Ts':-.04,
+  'Ya':-.05,'Ye':-.042,'Yo':-.045,'Yu':-.035,'Ys':-.04,
+  'Va':-.045,'Ve':-.035,'Vo':-.038,'Vu':-.03,
+  'Wa':-.038,'We':-.028,'Wo':-.03,'Wu':-.025,
+  'Av':-.038,'Aw':-.035,'Ay':-.038,'AV':-.055,'AW':-.045,'AY':-.055,'AT':-.05,
+  'LT':-.055,'LV':-.055,'LW':-.045,'LY':-.055,'Ly':-.03,
+  'PA':-.045,'FA':-.045,'F,':-.075,'F.':-.075,'P,':-.07,'P.':-.07,
+  'T,':-.085,'T.':-.085,'V,':-.075,'V.':-.075,'W,':-.06,'W.':-.06,'Y,':-.085,'Y.':-.085,
+  'r,':-.04,'r.':-.04,'y,':-.035,'y.':-.035,'v,':-.035,'v.':-.035,'w,':-.03,'w.':-.03,
+  'f"':-.03,'r"':-.02,
+  '"A':-.04,'"J':-.03,'“A':-.045,'“J':-.03,'“T':-.02,
+  'oy':-.012,'ov':-.012,'ow':-.01,'ay':-.012,'av':-.012,'aw':-.01,
+  'ff':-.008,'fi':-.006,'fl':-.006
+};
+
+function applyKerning(el, strength){
+  const src = el.dataset.raw !== undefined ? el.dataset.raw : (el.dataset.raw = el.textContent);
+  if(strength <= 0){ el.textContent = src; return; }
+  const frag = document.createDocumentFragment();
+  for(let i = 0; i < src.length; i++){
+    const pair = src.substr(i, 2);
+    const adj  = KERN_PAIRS[pair];
+    if(adj){
+      const s = document.createElement('span');
+      s.className = 'k';
+      s.textContent = src[i];
+      s.style.letterSpacing = (adj * strength).toFixed(4) + 'em';
+      frag.appendChild(s);
+    } else {
+      frag.appendChild(document.createTextNode(src[i]));
+    }
+  }
+  el.textContent = '';
+  el.appendChild(frag);
+}
+
+/* ============================================================
+   CONTENT PLUMBING
+   ============================================================ */
+let photoURL = '';
+
+function paras(text){
+  return text.split(/\n\s*\n/).map(s => s.trim()).filter(Boolean);
+}
+
+function setHTML(id, html){ const e = $(id); if(e) e.innerHTML = html; }
+function setText(id, t){ const e = $(id); if(e) e.textContent = t; }
+
+function render(){
+  const v = id => ($(id) ? $(id).value : '');
+  const on = id => ($(id) ? $(id).checked : false);
+
+  /* ---- print spec ---- */
+  const W = parseFloat(v('pgW')) || 9.5, H = parseFloat(v('pgH')) || 10.5;
+  root.style.setProperty('--pgW', W + 'in');
+  root.style.setProperty('--pgH', H + 'in');
+  ['mT','mR','mB','mL'].forEach(k => root.style.setProperty('--' + k, (parseFloat(v(k)) || 0) + 'in'));
+  root.style.setProperty('--cols',    Math.max(1, parseInt(v('cols'), 10) || 1));
+  root.style.setProperty('--gutter', (parseFloat(v('gutter')) || .15) + 'in');
+  root.style.setProperty('--stripH', (parseFloat(v('stripH')) || 1.25) + 'in');
+  $('pagerule').textContent = '@page{size:' + W + 'in ' + H + 'in;margin:0}';
+
+  const usableH = H - (parseFloat(v('mT'))||0) - (parseFloat(v('mB'))||0) - (parseFloat(v('stripH'))||0);
+  const warn = $('specWarn');
+  if(usableH < 3){
+    warn.hidden = false;
+    warn.textContent = 'Only ' + usableH.toFixed(2) + ' in left for editorial after margins and the strip ad. Reduce the strip height or the margins.';
+  } else warn.hidden = true;
+
+  /* ---- typography ---- */
+  let face = v('textFace');
+  $('customFaceWrap').hidden = face !== '__custom';
+  if(face === '__custom') face = v('customFace') || 'Georgia';
+  root.style.setProperty('--textFace', "'" + face + "'");
+  root.style.setProperty('--displayFace', "'" + face + "'");
+  root.style.setProperty('--bodySize', (parseFloat(v('bodySize')) || 7.9) + 'pt');
+  root.style.setProperty('--leading',  parseFloat(v('leading')) || 1.32);
+  root.style.setProperty('--headSize', (parseFloat(v('headSize')) || 19) + 'pt');
+
+  const strength = parseFloat(v('kern')) || 0;
+  $('kernOut').textContent = strength.toFixed(1) + '×';
+
+  document.querySelectorAll('.copy').forEach(c => {
+    c.classList.toggle('ragged', !on('justify'));
+    c.style.hyphens = c.style.webkitHyphens = on('hyphen') ? 'auto' : 'manual';
+    c.style.fontVariantNumeric = on('oldstyle') ? 'oldstyle-nums proportional-nums' : 'lining-nums';
+  });
+  document.querySelectorAll('.disp').forEach(d => {
+    d.classList.toggle('hang', on('hang') && /^["“‘']/.test(d.dataset.raw || d.textContent));
+  });
+
+  /* ---- content ---- */
+  const P = paras(v('body'));
+  const lead = P[0] || '';
+  const rest = P.slice(1);
+
+  setText('o_paper',  v('paper'));
+  setText('o_paper2', v('paper'));
+  setText('o_paper3', v('paper'));
+  setText('o_date',   v('date'));
+  setText('o_contact',v('contact'));
+  setText('o_shelter2', v('shelter'));
+  setText('o_shelter3', v('shelter'));
+  setText('o_url',    v('url'));
+  ['o_issue3','o_issue4','o_issue5'].forEach(i => setText(i, 'No. ' + v('issue')));
+
+  ['o_hed','o_hed2','o_hed3','o_hed4'].forEach(i => { const e = $(i); if(e){ delete e.dataset.raw; e.textContent = v('hed'); } });
+  ['o_byline','o_byline2','o_byline3'].forEach(i => setText(i, v('byline')));
+  setText('o_credit', v('credit'));
+  ['o_caption','o_caption2','o_caption3'].forEach(i => setText(i, v('caption')));
+  setText('o_ednote', v('ednote'));
+
+  const dc = on('dropcap') ? ' class="dcap"' : '';
+  setHTML('o_lead', '<p' + dc + '>' + lead + '</p>');
+  setHTML('o_flow', rest.map(p => '<p>' + p + '</p>').join('') +
+    '<div class="pp-res">Continues online — ' + (v('url') || '') + '</div>');
+
+  const full = P.map((p, i) => '<p' + (i === 0 && on('dropcap') ? dc : '') + '>' + p + '</p>').join('');
+  setHTML('o_body2', full);
+  setHTML('o_body3', full);
+
+  setText('o_pcp', (lead.slice(0, 150).replace(/\s+\S*$/, '')) + '…');
+
+  /* photos */
+  const bg = photoURL ? "url('" + photoURL + "')" : '';
+  ['o_photo','o_photo2','o_photo3','o_photo4'].forEach(i => {
+    const e = $(i); if(!e) return;
+    e.style.backgroundImage = bg;
+    if(i === 'o_photo') e.textContent = photoURL ? '' : 'Photograph';
+  });
+
+  /* reader pets */
+  const names = v('pets').split(',').map(s => s.trim()).filter(Boolean);
+  $('o_pets').innerHTML = names.map(n =>
+    '<div class="pp-pet"><div class="av">\u{1F415}</div><span>‘' + n.toUpperCase() + '’</span></div>'
+  ).join('');
+
+  setText('o_foot', v('paper') + ' · Live space ' + W + ' × ' + H + ' in · Strip ad ' + W + ' × ' +
+    (parseFloat(v('stripH')) || 1.25) + ' in · ' + names.length + ' reader slots at $' + (v('slotPrice') || 0));
+
+  setText('o_vscene', v('vscene'));
+  setText('o_vcap',   v('vcap'));
+  setText('o_vhandle',v('vhandle'));
+
+  /* kerning last — after all display text is final */
+  document.querySelectorAll('.disp, .vc, .pp-mast h1').forEach(el => applyKerning(el, strength));
+
+  fit();
+}
+
+/* ---- scale the print page to fit the stage ---- */
+function fit(){
+  const pg = document.querySelector('#printpage .pg');
+  if(!pg || !$('printpage').classList.contains('on')) return;
+  const W = (parseFloat($('pgW').value) || 9.5) * 96;
+  const avail = document.querySelector('.stage').clientWidth - 64;
+  const s = Math.max(.25, Math.min(1, avail / W));
+  pg.style.setProperty('--scale', s.toFixed(3));
+  const H = (parseFloat($('pgH').value) || 10.5) * 96;
+  pg.style.marginBottom = (-H * (1 - s)) + 'px';
+}
+
+/* ---- render tabs ---- */
+document.querySelectorAll('#tabs button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#tabs button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+  document.querySelectorAll('.face').forEach(f => f.classList.toggle('on', f.id === b.dataset.r));
+  const r = b.dataset.r;
+  const W = parseFloat($('pgW').value) || 9.5, H = parseFloat($('pgH').value) || 10.5;
+  $('pagerule').textContent = r === 'printpage' ? '@page{size:' + W + 'in ' + H + 'in;margin:0}'
+                            : r === 'postcard'  ? '@page{size:6in 4.25in;margin:0}'
+                            : '@page{size:letter;margin:.5in}';
+  fit();
+}));
+
+/* ---- print spec presets ---- */
+const PRESETS = {
+  middleburg:{pgW:9.5,pgH:10.5,mT:.3,mR:.34,mB:.24,mL:.34,cols:2,gutter:.15,stripH:1.25},
+  broadsheet:{pgW:11,pgH:21,mT:.4,mR:.4,mB:.35,mL:.4,cols:3,gutter:.16,stripH:1.5},
+  tabloid:{pgW:10,pgH:12.5,mT:.35,mR:.35,mB:.3,mL:.35,cols:2,gutter:.15,stripH:1.25},
+  letter:{pgW:8.5,pgH:11,mT:.5,mR:.5,mB:.5,mL:.5,cols:2,gutter:.14,stripH:1}
+};
+document.querySelectorAll('[data-preset]').forEach(b => b.addEventListener('click', () => {
+  const p = PRESETS[b.dataset.preset];
+  Object.keys(p).forEach(k => { if($(k)) $(k).value = p[k]; });
+  render();
+}));
+
+/* ---- photo intake ---- */
+const drop = $('photoDrop'), file = $('photoFile');
+drop.addEventListener('click', () => file.click());
+drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('over'); });
+drop.addEventListener('dragleave', () => drop.classList.remove('over'));
+drop.addEventListener('drop', e => {
+  e.preventDefault(); drop.classList.remove('over');
+  if(e.dataTransfer.files[0]) readPhoto(e.dataTransfer.files[0]);
+});
+file.addEventListener('change', () => { if(file.files[0]) readPhoto(file.files[0]); });
+function readPhoto(f){
+  if(!/^image\//.test(f.type)) return;
+  const r = new FileReader();
+  r.onload = () => {
+    photoURL = r.result;
+    $('photoPreview').innerHTML = '<img src="' + photoURL + '" alt=""><small>' + f.name + ' — click to replace</small>';
+    render();
+  };
+  r.readAsDataURL(f);
+}
+
+/* ---- save / load the story package ---- */
+const FIELDS = ['paper','date','issue','contact','shelter','url','hed','byline','credit','body',
+  'caption','pets','slotPrice','ednote','pgW','pgH','mT','mR','mB','mL','cols','gutter','stripH',
+  'textFace','customFace','bodySize','leading','headSize','kern','vscene','vcap','vhandle'];
+const CHECKS = ['justify','hyphen','oldstyle','hang','dropcap'];
+
+$('saveBtn').addEventListener('click', () => {
+  const pkg = { _format:'pet-page-package', _version:1, photo:photoURL, fields:{}, checks:{} };
+  FIELDS.forEach(f => { if($(f)) pkg.fields[f] = $(f).value; });
+  CHECKS.forEach(c => { if($(c)) pkg.checks[c] = $(c).checked; });
+  const blob = new Blob([JSON.stringify(pkg, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = (pkg.fields.paper || 'pet-page').toLowerCase().replace(/[^a-z0-9]+/g,'-') + '-package.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+});
+
+$('loadBtn').addEventListener('click', () => $('loadFile').click());
+$('loadFile').addEventListener('change', () => {
+  const f = $('loadFile').files[0]; if(!f) return;
+  const r = new FileReader();
+  r.onload = () => {
+    try{
+      const pkg = JSON.parse(r.result);
+      Object.keys(pkg.fields || {}).forEach(k => { if($(k)) $(k).value = pkg.fields[k]; });
+      Object.keys(pkg.checks || {}).forEach(k => { if($(k)) $(k).checked = pkg.checks[k]; });
+      if(pkg.photo){
+        photoURL = pkg.photo;
+        $('photoPreview').innerHTML = '<img src="' + photoURL + '" alt=""><small>from package — click to replace</small>';
+      }
+      render();
+    }catch(err){ alert('That file is not a Pet Page package.'); }
+  };
+  r.readAsText(f);
+});
+
+$('printBtn').addEventListener('click', () => window.print());
+
+/* ---- wire everything ---- */
+FIELDS.concat(CHECKS).forEach(f => {
+  const e = $(f); if(!e) return;
+  e.addEventListener('input', render);
+  e.addEventListener('change', render);
+});
+window.addEventListener('resize', fit);
+
+render();
+})();
+</script>
+<footer class="site-foot">
+  <div class="in">
+    <div>
+      <h4>The Pet Page</h4>
+      Published by The Middleburg Page<br>
+      Leland Schwartz, Publisher<br>
+      7170 Beverly Lane, The Plains, Virginia 20198<br>
+      <a href="mailto:editor@themiddleburgpage.com">editor@themiddleburgpage.com</a> · 540 422 1376
+    </div>
+    <div>
+      <h4>Partners</h4>
+      <ul>
+        <li>Mars Petcare — national partner</li>
+        <li>Fauquier Times — print</li>
+        <li>The Georgetowner — print</li>
+        <li>Middleburg Humane Foundation</li>
+      </ul>
+    </div>
+    <div>
+      <h4>For newspapers</h4>
+      <ul>
+        <li><a href="partners.html">Partner kit &amp; rates</a></li>
+        <li><a href="composer.html">The Composer</a></li>
+        <li><a href="playbook.html">Video playbook</a></li>
+        <li><a href="about.html">About the partnership</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="legal">
+    <b>Sponsored series.</b> Mars Petcare funds this page and reviews only its own company content.
+    The Middleburg Page retains full editorial control of all rescue reporting.
+  </div>
+</footer>
+</body>
+</html>

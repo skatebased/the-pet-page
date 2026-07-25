@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rescue Reels — Production Playbook</title>
+<meta name="description" content="How to turn a monthly rescue story into a 9:16 Reel. Format, tool stack, costs, specs and the metrics that decide whether Mars renews.">
+<style>
+:root{
+  --ink:#16150f;--ink-soft:#4f4a3d;--paper:#fbfaf6;--warm:#f4f1e8;
+  --rule:#ddd7c8;--rule-2:#b3aa95;--mars:#0a2a66;--adopt:#9c2b1f;--go:#1f6b45;
+  --draw:#6b4ea8;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--warm);color:var(--ink);font-family:var(--serif);font-size:17px;line-height:1.62}
+.wrap{max-width:52rem;margin:0 auto;background:var(--paper);box-shadow:0 2px 40px rgba(0,0,0,.1)}
+.inner{padding:0 2.6rem 3rem}
+
+.hero{background:linear-gradient(160deg,#1c2b4a,#0a1626 65%,#060d18);color:#f2f0ea;padding:3rem 2.6rem 2.6rem}
+.hero .eyebrow{font-family:var(--sans);font-size:.66rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;opacity:.55;margin-bottom:1rem}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:2.85rem;line-height:1.06;letter-spacing:-.02em;margin:0 0 1rem}
+.hero p{font-size:1.1rem;line-height:1.55;opacity:.85;margin:0;max-width:33rem}
+
+h2{font-family:var(--serif);font-weight:400;font-size:1.95rem;line-height:1.14;letter-spacing:-.015em;margin:2.9rem 0 .9rem}
+h3{font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--mars);margin:2.1rem 0 .7rem}
+p{margin:0 0 1.1rem}
+.lead{font-size:1.1rem}
+hr.rule{border:0;border-top:1px solid var(--rule);margin:2.6rem 0}
+
+.callout{border-left:3px solid var(--adopt);background:#fff;padding:1.1rem 1.3rem;margin:1.6rem 0;border-radius:0 4px 4px 0}
+.callout b{font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--adopt);display:block;margin-bottom:.4rem}
+.callout p{margin:0;font-size:.96rem;line-height:1.55}
+.callout.blue{border-left-color:var(--mars)}
+.callout.blue b{color:var(--mars)}
+
+/* beat sheet */
+.beats{margin:1.5rem 0 2rem;border:1px solid var(--rule-2);border-radius:6px;overflow:hidden}
+.beat{display:grid;grid-template-columns:4.6rem 1fr;gap:0;border-bottom:1px solid var(--rule)}
+.beat:last-child{border-bottom:0}
+.beat .t{
+  background:var(--warm);padding:.9rem .6rem;text-align:center;
+  font-family:var(--sans);font-size:.74rem;font-weight:700;color:var(--ink-soft);
+  border-right:1px solid var(--rule);font-variant-numeric:tabular-nums;
+}
+.beat .c{padding:.9rem 1.2rem}
+.beat .c b{display:block;font-family:var(--sans);font-size:.92rem;margin-bottom:.25rem}
+.beat .c span{font-size:.9rem;line-height:1.5;color:var(--ink-soft)}
+.beat .c .mode{
+  display:inline-block;font-family:var(--sans);font-size:.58rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;padding:.14rem .45rem;border-radius:3px;margin-left:.4rem;vertical-align:.1em;
+}
+.mode.drawn{background:#efe8fb;color:var(--draw)}
+.mode.real{background:#e3f0e8;color:var(--go)}
+.mode.text{background:var(--warm);color:var(--ink-soft)}
+
+/* tools table */
+table{width:100%;border-collapse:collapse;margin:1.3rem 0 1.6rem;font-size:.9rem}
+th{
+  background:var(--mars);color:#fff;font-family:var(--sans);font-size:.66rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;padding:.65rem .7rem;text-align:left;
+}
+td{padding:.7rem;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.45}
+tr:nth-child(even) td{background:#fdfdfa}
+td.price{font-family:var(--sans);font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
+td b{font-family:var(--sans);font-size:.92rem}
+.pick{background:#e3f0e8 !important}
+.pick td{border-bottom-color:#bcd9c7}
+.tag-pick{
+  display:inline-block;background:var(--go);color:#fff;font-family:var(--sans);
+  font-size:.55rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;
+  padding:.12rem .4rem;border-radius:3px;margin-left:.4rem;vertical-align:.12em;
+}
+
+.total{
+  background:var(--warm);border:1px solid var(--rule-2);border-radius:6px;
+  padding:1.2rem 1.4rem;margin:1.4rem 0 1.8rem;
+}
+.total .row{display:flex;justify-content:space-between;font-family:var(--sans);font-size:.9rem;padding:.3rem 0}
+.total .row.big{border-top:1px solid var(--rule-2);margin-top:.5rem;padding-top:.7rem;font-weight:700;font-size:1rem}
+.total .row .v{font-variant-numeric:tabular-nums;font-weight:700}
+.total .row.big .v{color:var(--go);font-size:1.3rem}
+.total .foot{font-size:.8rem;font-style:italic;color:var(--ink-soft);margin-top:.9rem;line-height:1.5}
+
+/* spec grid */
+.specs{display:grid;grid-template-columns:repeat(2,1fr);gap:.9rem;margin:1.3rem 0 1.8rem}
+.spec{border:1px solid var(--rule);border-radius:5px;padding:.95rem 1.1rem;background:#fff}
+.spec b{display:block;font-family:var(--sans);font-size:.66rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--mars);margin-bottom:.35rem}
+.spec span{font-size:.85rem;line-height:1.5;color:var(--ink-soft)}
+
+ol.steps{counter-reset:s;list-style:none;padding:0;margin:1.3rem 0}
+ol.steps li{counter-increment:s;position:relative;padding-left:2.6rem;margin-bottom:1rem;font-size:.96rem;line-height:1.55}
+ol.steps li::before{
+  content:counter(s);position:absolute;left:0;top:-.05rem;width:1.75rem;height:1.75rem;
+  border-radius:50%;background:var(--mars);color:#fff;font-family:var(--sans);
+  font-size:.8rem;font-weight:700;display:grid;place-items:center;
+}
+ol.steps b{font-family:var(--sans);font-size:.9rem}
+
+ul.plain{padding-left:1.15rem;margin:1rem 0 1.4rem}
+ul.plain li{margin-bottom:.6rem;font-size:.96rem;line-height:1.55}
+
+.foot{background:var(--ink);color:#e8e4d5;padding:2.2rem 2.6rem;font-family:var(--sans);font-size:.84rem;line-height:1.7}
+.foot a{color:#9dc0ff}
+.foot .src{font-size:.74rem;opacity:.6;margin-top:1.2rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.15)}
+
+@media (max-width:640px){
+  .inner,.hero,.foot{padding-left:1.3rem;padding-right:1.3rem}
+  .hero h1{font-size:2.05rem}
+  .specs{grid-template-columns:1fr}
+  .beat{grid-template-columns:3.6rem 1fr}
+  table{font-size:.82rem}
+}
+@media print{body{background:#fff}.wrap{box-shadow:none;max-width:none}}
+</style>
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<nav class="site-nav">
+<a class="site-brand" href="index.html">The Pet Page <span>· Middleburg</span></a>
+<a class="site-link" href="index.html">Home</a>
+<a class="site-link" href="about.html">About</a>
+<a class="site-link" href="issues/index.html">Issues</a>
+<a class="site-link" href="partners.html">For papers</a>
+<a class="site-link" href="playbook.html" aria-current="page">Video</a>
+<span class="site-sp"></span>
+<a class="site-cta" href="composer.html">Open the Composer →</a>
+</nav>
+<div class="wrap">
+
+<div class="hero">
+  <div class="eyebrow">The Middleburg Page · Production playbook</div>
+  <h1>Animate the part nobody filmed.</h1>
+  <p>How one reported rescue story a month becomes a 9:16 Reel — the format, the tools, what it costs, and the numbers that decide whether Mars renews.</p>
+</div>
+
+<div class="inner">
+
+<h2>The format</h2>
+
+<p class="lead">There is an obvious way to make these videos and it is the wrong one. The obvious way is to take the footage you have — the dog at the shelter, the dog in the new house — run it through a filter that makes it look like a cartoon, and post it. Don't do that.</p>
+
+<p>Stylising footage you already have is decoration applied to a problem you have already solved. You have a real animal, real video, and real feeling. Making it look drawn subtracts credibility and adds nothing, and it makes a Pulitzer-bylined story look like content-farm output.</p>
+
+<p>The place animation genuinely earns its keep is the part you <em>cannot</em> film. Nobody has footage of Tanner as a stray. Nobody filmed the eleven weeks of waiting. That absence is the emotional centre of every rescue story ever told, and right now it gets filled with a still photograph and a line of narration.</p>
+
+<div class="callout blue">
+  <b>The rule</b>
+  <p><b>Drawn past, real present.</b> Everything before the rescue is animated. Everything from the rescue forward is real footage. The cut between them <em>is</em> the story — and because the two registers are visibly different, nobody can mistake the animated section for documentary. The format solves the authenticity problem instead of creating one.</p>
+</div>
+
+<h3>The six-beat structure — 35 to 45 seconds</h3>
+
+<div class="beats">
+  <div class="beat">
+    <div class="t">0–3s</div>
+    <div class="c"><b>The hook <span class="mode text">Text on black</span></b>
+    <span>One arresting sentence, burned in, readable in a thumb-scroll. "This husky is blind. He didn't know that was unusual." No logo, no masthead, no throat-clearing — you have three seconds.</span></div>
+  </div>
+  <div class="beat">
+    <div class="t">3–13s</div>
+    <div class="c"><b>The past <span class="mode drawn">Animated</span></b>
+    <span>The months before rescue. Stray on a roadside, a storm, a shape in a doorway. Nobody filmed this, which is exactly why it's drawn. Establish one character reference image first and reuse it for every shot, or the dog changes breed between cuts.</span></div>
+  </div>
+  <div class="beat">
+    <div class="t">13–18s</div>
+    <div class="c"><b>The turn <span class="mode drawn">Animated</span> <span class="mode real">→ Real</span></b>
+    <span>The hard cut. Animation resolves into the actual intake footage — hands, a leash, a kennel door. Hold the audio across the cut so the transition lands emotionally before it lands visually.</span></div>
+  </div>
+  <div class="beat">
+    <div class="t">18–30s</div>
+    <div class="c"><b>The present <span class="mode real">Real footage</span></b>
+    <span>Phone video from the shelter and the adopter's house. Unpolished is fine — better than fine. This is the payoff and it has to be unmistakably true.</span></div>
+  </div>
+  <div class="beat">
+    <div class="t">30–36s</div>
+    <div class="c"><b>The number <span class="mode real">Real</span> <span class="mode text">+ text</span></b>
+    <span>How many animals are still waiting at that shelter, today, as a figure on screen. This is what converts a nice story into an action.</span></div>
+  </div>
+  <div class="beat">
+    <div class="t">36–42s</div>
+    <div class="c"><b>The ask <span class="mode text">Card</span></b>
+    <span>Shelter name, the adoption weekend, the URL. One card, one instruction. Masthead and Mars credit go here, at the end, where they don't cost you the first three seconds.</span></div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<h2>The tool stack</h2>
+
+<p>Your instinct on ElevenLabs was right — they now ship an Image &amp; Video product that wraps Veo, Sora, Kling, Wan and Seedance for visuals and puts voice, music, sound effects and lip-sync on one timeline. But their video is mostly text-to-video and image-to-video generation. Turning <em>your</em> footage into animation is a different capability called video-to-video restyling, and for that the dedicated tools are better.</p>
+
+<table>
+  <thead><tr><th>Tool</th><th>What it's for here</th><th>Price</th></tr></thead>
+  <tbody>
+    <tr class="pick">
+      <td><b>ElevenLabs</b> <span class="tag-pick">Core</span></td>
+      <td>Narration, voice cloning, music bed, sound effects, and the single timeline where the whole thing gets assembled. Starter includes a commercial licence and instant voice cloning — enough to begin. Creator adds professional voice cloning.</td>
+      <td class="price">Starter $6/mo<br>Creator $22/mo</td>
+    </tr>
+    <tr class="pick">
+      <td><b>Magic Hour</b> <span class="tag-pick">Core</span></td>
+      <td>Video-to-video restyling — built specifically for consistent anime and comic looks with strong face and scene consistency. Best value for the drawn-past sequences. Creator tier gives 1.4 hours of generation a year, which is far more than twelve Reels need.</td>
+      <td class="price">Creator $10/mo<br><small>annual; $15 monthly</small></td>
+    </tr>
+    <tr>
+      <td><b>Runway</b></td>
+      <td>The upgrade path. Better compositional control and cinematic quality, stronger at preserving structure through a restyle. Move here if Magic Hour's consistency isn't holding across a sequence.</td>
+      <td class="price">Standard $12/mo<br><small>annual; $15 monthly</small></td>
+    </tr>
+    <tr>
+      <td><b>CapCut</b></td>
+      <td>Final assembly, captions, trimming to platform. Free tier is genuinely sufficient. Its own AI restyling is filter-grade — don't rely on it for the animated sections.</td>
+      <td class="price">Free</td>
+    </tr>
+    <tr>
+      <td><b>A phone</b></td>
+      <td>The real footage. Every beat from 13 seconds onward. Shoot vertical, shoot more than you need, and do not stabilise the life out of it.</td>
+      <td class="price">$0</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="total">
+  <div class="row"><span>ElevenLabs Starter</span><span class="v">$6</span></div>
+  <div class="row"><span>Magic Hour Creator (annual billing)</span><span class="v">$10</span></div>
+  <div class="row"><span>CapCut</span><span class="v">$0</span></div>
+  <div class="row big"><span>Monthly cost to produce the series</span><span class="v">$16</span></div>
+  <div class="foot">$192 a year — against a $15,000 sponsorship. The video component is a rounding error on the budget and is likely to be the single most persuasive thing in the renewal conversation. Note that free tiers on both tools are personal-use only; the paid tiers are what carry commercial rights, and this is commercial work.</div>
+</div>
+
+<hr class="rule">
+
+<h2>Specifications</h2>
+
+<div class="specs">
+  <div class="spec"><b>Frame</b><span>1080 × 1920, 9:16. Export at 30fps. Shoot vertical natively — cropping from horizontal loses the subject every time.</span></div>
+  <div class="spec"><b>Safe zones</b><span>Keep everything that matters out of the top 250 px and the bottom 420 px. Platform UI — captions, handle, audio credit, buttons — sits there and will cover your best frame.</span></div>
+  <div class="spec"><b>Captions</b><span>Burned in, always. Most Reels play muted. If the story only works with sound, it doesn't work.</span></div>
+  <div class="spec"><b>Length</b><span>35–45 seconds. Long enough for the turn to land, short enough to hold completion rate — which is the metric the algorithm actually rewards.</span></div>
+  <div class="spec"><b>Character consistency</b><span>Generate one reference image of the animal first, then drive every animated shot from it. Skipping this is the single commonest failure: the dog changes breed mid-sequence.</span></div>
+  <div class="spec"><b>Audio</b><span>One voice across the whole series. Clone it once and keep it — the series should sound like a series.</span></div>
+</div>
+
+<hr class="rule">
+
+<h2>The monthly production run</h2>
+
+<ol class="steps">
+  <li><b>Shoot at the shelter while reporting.</b> Same visit. Vertical, four to six minutes of raw footage, plus thirty seconds of the kennel and one slow push on the animal's face. Costs nothing extra if it happens during the interview.</li>
+  <li><b>Pull the reference image.</b> One clean still of the animal. Everything animated is generated from it.</li>
+  <li><b>Write the six beats before generating anything.</b> The beat sheet is the whole job. Generating first and structuring afterwards is how a $16 workflow turns into a weekend.</li>
+  <li><b>Generate the drawn past.</b> Three or four shots, ten seconds total. Regenerate freely — credits are the cheap part.</li>
+  <li><b>Narrate and assemble.</b> ElevenLabs for voice and bed, CapCut for the cut and captions.</li>
+  <li><b>Post, then log the numbers.</b> Views, completion rate, saves, shares, profile visits, link taps. Log them the same day into the same sheet every month.</li>
+</ol>
+
+<hr class="rule">
+
+<h2>The numbers that decide the renewal</h2>
+
+<p>Print circulation is an estimate you argue about. Web and social numbers are facts you present. When Mars decides whether to renew, and whether to fund the fifty-paper version, they will be looking at the things they can verify — so instrument this from the first issue rather than assembling a case in month eleven.</p>
+
+<ul class="plain">
+  <li><b>Completion rate</b> is the one that matters most and the one most people don't report. A 25,000-view Reel with 30% completion is worth less than an 8,000-view Reel with 70%, and a sponsor who understands social will know that.</li>
+  <li><b>Saves and shares</b> beat likes. A share is a reader doing your distribution for you, which is precisely the argument Leland is making to Mars about community networks.</li>
+  <li><b>Link taps to the jump page</b> connect social to the story and give you a number that is unarguably yours rather than the platform's.</li>
+  <li><b>Adoptions attributed to the page.</b> Ask the shelter to record how each adopter heard about the animal. This is the only metric that measures the thing the programme is actually for, and it is the one that will make Mars proud to be in it.</li>
+</ul>
+
+<div class="callout">
+  <b>Guardrails</b>
+  <p>Get written permission from the shelter for every animal's likeness and from adopters before their homes appear. Label the animated sections as illustration in the caption — not because anyone would be fooled, but because saying so plainly is what lets you use the technique at all. And keep Mars' review confined to Mars' own content: the moment a sponsor gets notes on the rescue reporting, the whole model stops being defensible.</p>
+</div>
+
+</div>
+
+<div class="foot">
+  <b>The Middleburg Page</b> · Leland Schwartz, Publisher · The Plains, Virginia<br>
+  <a href="mailto:editor@themiddleburgpage.com">editor@themiddleburgpage.com</a> · 540 422 1376<br>
+  Social production support: Red Thinking · Rescue partner: Middleburg Humane Foundation
+  <div class="src">
+    Pricing verified July 2026 from each vendor's published pricing page. Tool capabilities change quickly — reconfirm before committing to an annual plan.
+  </div>
+</div>
+
+</div>
+<footer class="site-foot">
+  <div class="in">
+    <div>
+      <h4>The Pet Page</h4>
+      Published by The Middleburg Page<br>
+      Leland Schwartz, Publisher<br>
+      7170 Beverly Lane, The Plains, Virginia 20198<br>
+      <a href="mailto:editor@themiddleburgpage.com">editor@themiddleburgpage.com</a> · 540 422 1376
+    </div>
+    <div>
+      <h4>Partners</h4>
+      <ul>
+        <li>Mars Petcare — national partner</li>
+        <li>Fauquier Times — print</li>
+        <li>The Georgetowner — print</li>
+        <li>Middleburg Humane Foundation</li>
+      </ul>
+    </div>
+    <div>
+      <h4>For newspapers</h4>
+      <ul>
+        <li><a href="partners.html">Partner kit &amp; rates</a></li>
+        <li><a href="composer.html">The Composer</a></li>
+        <li><a href="playbook.html">Video playbook</a></li>
+        <li><a href="about.html">About the partnership</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="legal">
+    <b>Sponsored series.</b> Mars Petcare funds this page and reviews only its own company content.
+    The Middleburg Page retains full editorial control of all rescue reporting.
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Pet Page — A Partner Kit for Community Newspapers</title>
+<meta name="description" content="How your paper can run a monthly pet page with your local shelter, funded by your own community. From The Middleburg Page, in partnership with Mars Petcare.">
+<style>
+:root{
+  --ink:#16150f; --ink-soft:#4f4a3d; --paper:#fbfaf6; --warm:#f4f1e8;
+  --rule:#ddd7c8; --rule-2:#b3aa95; --mars:#0a2a66; --mars-lt:#12489e;
+  --adopt:#9c2b1f; --go:#1f6b45;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--warm);color:var(--ink);font-family:var(--serif);font-size:17px;line-height:1.62}
+.wrap{max-width:50rem;margin:0 auto;background:var(--paper);box-shadow:0 2px 40px rgba(0,0,0,.1)}
+.inner{padding:0 2.6rem}
+
+.hero{background:var(--ink);color:#f6f3ea;padding:3rem 2.6rem 2.6rem}
+.hero .eyebrow{font-family:var(--sans);font-size:.66rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;opacity:.6;margin-bottom:1rem}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:2.9rem;line-height:1.06;letter-spacing:-.02em;margin:0 0 1rem}
+.hero p{font-size:1.12rem;line-height:1.55;opacity:.88;margin:0;max-width:34rem}
+.hero .from{font-family:var(--sans);font-size:.74rem;letter-spacing:.06em;opacity:.55;margin-top:1.8rem;border-top:1px solid rgba(255,255,255,.15);padding-top:1rem}
+
+h2{font-family:var(--serif);font-weight:400;font-size:1.95rem;line-height:1.14;letter-spacing:-.015em;margin:3rem 0 .9rem}
+h3{font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--mars);margin:2.2rem 0 .7rem}
+p{margin:0 0 1.1rem}
+.lead{font-size:1.1rem}
+em.q{font-style:italic;color:var(--ink-soft)}
+
+.rule{border:0;border-top:1px solid var(--rule);margin:2.6rem 0}
+
+/* split table */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--rule-2);border-radius:5px;overflow:hidden;margin:1.4rem 0 1.8rem}
+.split > div{padding:1.3rem 1.4rem}
+.split .a{background:var(--warm);border-right:1px solid var(--rule-2)}
+.split h4{font-family:var(--sans);font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin:0 0 .8rem}
+.split .a h4{color:var(--mars)}
+.split .b h4{color:var(--adopt)}
+.split ul{margin:0;padding-left:1.05rem}
+.split li{margin-bottom:.55rem;font-size:.95rem;line-height:1.5}
+
+/* calculator */
+.calc{background:var(--warm);border:1px solid var(--rule-2);border-radius:6px;padding:1.6rem 1.7rem;margin:1.6rem 0 2rem}
+.calc h4{font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mars);margin:0 0 .3rem}
+.calc .sub{font-size:.86rem;font-style:italic;color:var(--ink-soft);margin:0 0 1.3rem}
+.field{display:grid;grid-template-columns:1fr 6.5rem;align-items:center;gap:.7rem;margin-bottom:.7rem}
+.field label{font-family:var(--sans);font-size:.83rem}
+.field label small{display:block;color:var(--ink-soft);font-size:.72rem;font-style:italic}
+.field input{
+  font-family:var(--sans);font-size:.92rem;font-weight:600;text-align:right;
+  padding:.42rem .6rem;border:1px solid var(--rule-2);border-radius:4px;background:#fff;color:var(--ink);width:100%;
+}
+.field input:focus{outline:2px solid var(--mars-lt);outline-offset:-1px}
+.calcout{border-top:2px solid var(--ink);margin-top:1.2rem;padding-top:1rem}
+.orow{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--sans);font-size:.88rem;padding:.35rem 0}
+.orow.big{font-size:1.05rem;font-weight:700;border-top:1px solid var(--rule-2);margin-top:.5rem;padding-top:.7rem}
+.orow .v{font-variant-numeric:tabular-nums;font-weight:700}
+.orow .v.free{color:var(--go)}
+.orow.big .v{color:var(--go);font-size:1.5rem}
+.orow.neg .v{color:var(--adopt)}
+.calcnote{font-size:.78rem;font-style:italic;color:var(--ink-soft);margin:1rem 0 0;line-height:1.5}
+
+/* spec grid */
+.specs{display:grid;grid-template-columns:repeat(2,1fr);gap:.9rem;margin:1.4rem 0 1.8rem}
+.spec{border:1px solid var(--rule);border-radius:5px;padding:1rem 1.1rem;background:#fff}
+.spec b{display:block;font-family:var(--sans);font-size:.68rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--mars);margin-bottom:.4rem}
+.spec span{font-size:.86rem;line-height:1.5;color:var(--ink-soft)}
+
+/* callout */
+.callout{border-left:3px solid var(--adopt);background:#fff;padding:1.1rem 1.3rem;margin:1.6rem 0;border-radius:0 4px 4px 0}
+.callout b{font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--adopt);display:block;margin-bottom:.4rem}
+.callout p{margin:0;font-size:.95rem;line-height:1.55}
+
+/* steps */
+ol.steps{counter-reset:s;list-style:none;padding:0;margin:1.4rem 0}
+ol.steps li{counter-increment:s;position:relative;padding-left:2.6rem;margin-bottom:1.1rem;font-size:.98rem;line-height:1.55}
+ol.steps li::before{
+  content:counter(s);position:absolute;left:0;top:-.05rem;
+  width:1.75rem;height:1.75rem;border-radius:50%;background:var(--mars);color:#fff;
+  font-family:var(--sans);font-size:.8rem;font-weight:700;display:grid;place-items:center;
+}
+ol.steps b{font-family:var(--sans);font-size:.9rem}
+
+.foot{background:var(--ink);color:#e8e4d5;padding:2.4rem 2.6rem;font-family:var(--sans);font-size:.86rem;line-height:1.7}
+.foot b{color:#fff}
+.foot a{color:#9dc0ff}
+.foot .sig{font-family:var(--serif);font-size:1.05rem;font-style:italic;opacity:.8;margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.15)}
+
+@media (max-width:640px){
+  .inner,.hero,.foot{padding-left:1.3rem;padding-right:1.3rem}
+  .hero h1{font-size:2.1rem}
+  .split,.specs{grid-template-columns:1fr}
+  .split .a{border-right:0;border-bottom:1px solid var(--rule-2)}
+}
+@media print{
+  body{background:#fff}
+  .wrap{box-shadow:none;max-width:none}
+  .calc input{border:0;background:transparent}
+}
+</style>
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<nav class="site-nav">
+<a class="site-brand" href="index.html">The Pet Page <span>· Middleburg</span></a>
+<a class="site-link" href="index.html">Home</a>
+<a class="site-link" href="about.html">About</a>
+<a class="site-link" href="issues/index.html">Issues</a>
+<a class="site-link" href="partners.html" aria-current="page">For papers</a>
+<a class="site-link" href="playbook.html">Video</a>
+<span class="site-sp"></span>
+<a class="site-cta" href="composer.html">Open the Composer →</a>
+</nav>
+<div class="wrap">
+
+<div class="hero">
+  <div class="eyebrow">A partner kit for community newspapers</div>
+  <h1>Your paper. Your shelter. Your readers paying for it.</h1>
+  <p>A monthly full page pairing local rescue stories with pet-care journalism — funded by your own community, with the national content supplied free.</p>
+  <div class="from">From The Middleburg Page · Leland Schwartz, Publisher · in partnership with Mars Petcare and the Middleburg Humane Foundation</div>
+</div>
+
+<div class="inner">
+
+<h2>What this is</h2>
+
+<p class="lead">Every community in America has three things: a local newspaper, a local animal shelter, and people who are irrationally devoted to their pets. Almost nowhere are those three things connected to each other in a way that produces money.</p>
+
+<p>The Middleburg Page runs a full page once a month. One side is a rescue story reported from our local shelter. The other side is a story about pet care and pet nutrition, produced centrally and shared with every participating paper. Along the bottom runs a row of eight reader-submitted pet photographs, and each of those photographs is paid for.</p>
+
+<p>That last part is the part that matters. The page does not depend on a national advertiser renewing. It is funded by the readers whose dogs are on it.</p>
+
+<div class="callout">
+  <b>The qualifying test</b>
+  <p>This works in any market that has a community newspaper, a local animal shelter, and at least one independent pet food or pet supply store. If your town has all three, it works. If it's missing one, it probably doesn't.</p>
+</div>
+
+<hr class="rule">
+
+<h2>What you supply, what we supply</h2>
+
+<div class="split">
+  <div class="a">
+    <h4>We supply — free</h4>
+    <ul>
+      <li>The monthly pet care and nutrition story, professionally written and fact-checked</li>
+      <li>The full page template, built and ready to drop your content into</li>
+      <li>The four output renders: print page, phone, web and 9:16 video</li>
+      <li>The postcard artwork, press-ready, for your local pet stores to hand out</li>
+      <li>The sell sheet for the reader photo slots</li>
+      <li>The editorial disclosure standard, so your board has something to point at</li>
+    </ul>
+  </div>
+  <div class="b">
+    <h4>You supply — local</h4>
+    <ul>
+      <li>One rescue story a month from your local shelter, 300 words</li>
+      <li>A photograph of the animal</li>
+      <li>Eight reader pet photos, sold at your own rate</li>
+      <li>The page in your paper</li>
+      <li>A relationship with your shelter — most already want this</li>
+    </ul>
+  </div>
+</div>
+
+<p>The division is deliberate. The expensive, specialised work — the national content, the design system, the technical build — happens once, centrally, and costs you nothing. The work only you can do, because only you have it, is local: your shelter, your readers, your pages.</p>
+
+<hr class="rule">
+
+<h2>What we pay</h2>
+
+<p>These are the terms. They are fixed, they are the same for every newspaper that joins, and they are not negotiated market by market. You should be able to read this once and know exactly what you are being offered.</p>
+
+<div class="calc">
+  <h4>What you receive</h4>
+  <p class="sub">Supplied centrally, every month, at no cost to your paper.</p>
+  <div class="orow"><span>The monthly Mars story, written and fact-checked</span><span class="v free">No charge</span></div>
+  <div class="orow"><span>The page template and all five output renders</span><span class="v free">No charge</span></div>
+  <div class="orow"><span>Press-ready postcard artwork</span><span class="v free">No charge</span></div>
+  <div class="orow"><span>The reader photo sell sheet and order form</span><span class="v free">No charge</span></div>
+  <div class="orow"><span>The editorial disclosure standard</span><span class="v free">No charge</span></div>
+  <div class="orow big"><span>Syndication fee to The Middleburg Page</span><span class="v">$0 — first year</span></div>
+</div>
+
+<div class="calc">
+  <h4>What you keep</h4>
+  <p class="sub">Reader revenue stays entirely with your paper.</p>
+  <div class="orow"><span>Reader pet photograph slots</span><span class="v">$375 each</span></div>
+  <div class="orow"><span>Slots available per page</span><span class="v">8</span></div>
+  <div class="orow"><span>Gross per issue at full sell-through</span><span class="v">$3,000</span></div>
+  <div class="orow"><span>Recommended share to your local shelter</span><span class="v">25%</span></div>
+  <div class="orow big"><span>Gross over twelve issues</span><span class="v">$36,000</span></div>
+  <p class="calcnote">National sponsorship, where available, funds the central content production you receive free — it is not a payment your paper should expect to receive directly, and the model is built so that it does not need to. At $375 a slot, eight slots a page, reader revenue alone is roughly double the national sponsorship. If the page only works when a national brand is paying, it isn't a business, it's a favour, and it ends when the sponsorship does.</p>
+</div>
+
+<hr class="rule">
+
+<h2>Four outputs, one source</h2>
+
+<p>A newspaper page is a PDF, and a PDF on a phone is unreadable. So the page is not the source — it's one render of it. The story is written once as structured content, and the print page, the phone view, the postcard and the video are all generated from it.</p>
+
+<div class="specs">
+  <div class="spec"><b>Print page</b><span>Live space 9.5 × 10.5 in, 600–1200 DPI, InDesign. Drops into your existing production workflow unchanged.</span></div>
+  <div class="spec"><b>Phone</b><span>Single column, mobile-first. This is where most of your readers will actually read it — treat it as the primary render, not the leftover.</span></div>
+  <div class="spec"><b>Web</b><span>Responsive, two-column above 900 px. Same file as the phone view. This is also the only render that produces hard traffic numbers.</span></div>
+  <div class="spec"><b>Postcard</b><span>6 × 4.25 in with bleed and safe zones, press-ready. For your local pet food store's counter, and for USPS EDDM if you want the reach.</span></div>
+  <div class="spec"><b>Video</b><span>1080 × 1920 for Reels and Shorts, with platform safe zones marked and captions burned in. Animate the part nobody filmed — the animal's life before rescue.</span></div>
+  <div class="spec"><b>Jump page</b><span>When the story runs long in print, it continues on the web at a stable URL. Print the QR code; count the scans.</span></div>
+</div>
+
+<hr class="rule">
+
+<h2>The part that protects you</h2>
+
+<p>A sponsored page carrying reported journalism only works if the wall between them is explicit. Ours is printed on the page itself, in the same size type as everything else:</p>
+
+<div class="callout">
+  <b>Printed disclosure</b>
+  <p>Mars Petcare funds this page and reviews only its own company content. The paper retains full editorial control of all rescue reporting.</p>
+</div>
+
+<p>The sponsor approves its own copy. It sees the rescue reporting when your readers do. This is not a courtesy to the sponsor — it is the thing that lets you run the page at all, and it is what your board will ask about first. Disclosed plainly, this is a model any editor can defend. Left implicit, it is a liability that travels with every copy you print.</p>
+
+<hr class="rule">
+
+<h2>How to start</h2>
+
+<ol class="steps">
+  <li><b>Call your shelter.</b> Ask if they'll commit to one story and one photograph a month. In our experience they say yes before you finish the sentence — coverage is the thing they want most and can least afford to buy.</li>
+  <li><b>Price your slots.</b> $375 is the Middleburg number and it reflects Middleburg. Set yours to what your market bears; the mechanic works at $100 and it works at $500.</li>
+  <li><b>Tell us your launch month.</b> We send the template, the national story and the postcard artwork on a monthly cadence.</li>
+  <li><b>Sell the first eight slots before you print.</b> The page pays for itself in advance or it doesn't run. That discipline is what keeps this from becoming another unfunded good idea.</li>
+  <li><b>Put the QR code on the page and watch the number.</b> Web traffic is the only proof of readership that a national sponsor will accept without argument. Start counting from issue one.</li>
+</ol>
+
+</div>
+
+<div class="foot">
+  <b>The Middleburg Page</b><br>
+  Leland Schwartz, Publisher<br>
+  7170 Beverly Lane, The Plains, Virginia 20198<br>
+  <a href="mailto:editor@themiddleburgpage.com">editor@themiddleburgpage.com</a> · 540 422 1376<br><br>
+  Published in the Fauquier Times and The Georgetowner.<br>
+  Rescue partner: the Middleburg Humane Foundation. National partner: Mars Petcare.
+  <div class="sig">There are hundreds of local papers in hundreds of communities, and every single one has a local animal rescue organization. If we can't deliver that, who can?</div>
+</div>
+
+</div>
+
+
+<footer class="site-foot">
+  <div class="in">
+    <div>
+      <h4>The Pet Page</h4>
+      Published by The Middleburg Page<br>
+      Leland Schwartz, Publisher<br>
+      7170 Beverly Lane, The Plains, Virginia 20198<br>
+      <a href="mailto:editor@themiddleburgpage.com">editor@themiddleburgpage.com</a> · 540 422 1376
+    </div>
+    <div>
+      <h4>Partners</h4>
+      <ul>
+        <li>Mars Petcare — national partner</li>
+        <li>Fauquier Times — print</li>
+        <li>The Georgetowner — print</li>
+        <li>Middleburg Humane Foundation</li>
+      </ul>
+    </div>
+    <div>
+      <h4>For newspapers</h4>
+      <ul>
+        <li><a href="partners.html">Partner kit &amp; rates</a></li>
+        <li><a href="composer.html">The Composer</a></li>
+        <li><a href="playbook.html">Video playbook</a></li>
+        <li><a href="about.html">About the partnership</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="legal">
+    <b>Sponsored series.</b> Mars Petcare funds this page and reviews only its own company content.
+    The Middleburg Page retains full editorial control of all rescue reporting.
+  </div>
+</footer>
+</body>
+</html>

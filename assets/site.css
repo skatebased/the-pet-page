@@ -1,0 +1,115 @@
+/* ================================================================
+   THE PET PAGE — shared site shell
+   Only the nav, footer and home page use this. Each tool page keeps
+   its own stylesheet; this file is additive and namespaced under
+   .site-* so it can never collide with a tool's internal styles.
+   ================================================================ */
+
+:root{
+  --s-ink:#16150f; --s-soft:#4f4a3d; --s-paper:#fbfaf6; --s-warm:#f4f1e8;
+  --s-rule:#ddd7c8; --s-rule2:#b3aa95; --s-mars:#0a2a66; --s-adopt:#9c2b1f; --s-go:#1f6b45;
+  --s-serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+  --s-ui:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+}
+
+/* ---------------- nav ---------------- */
+.site-nav{
+  background:#16150f;color:#f4f1e8;font-family:var(--s-ui);
+  display:flex;align-items:center;gap:.2rem;flex-wrap:wrap;
+  padding:.5rem .9rem;position:relative;z-index:500;
+}
+.site-nav a.site-brand{
+  font-weight:700;font-size:.9rem;letter-spacing:.01em;color:#fff;text-decoration:none;
+  margin-right:.9rem;white-space:nowrap;
+}
+.site-nav a.site-brand span{opacity:.45;font-weight:400}
+.site-nav a.site-link{
+  color:#cfc9b6;text-decoration:none;font-size:.78rem;font-weight:600;
+  padding:.35rem .62rem;border-radius:6px;white-space:nowrap;
+}
+.site-nav a.site-link:hover{background:#2a2719;color:#fff}
+.site-nav a.site-link[aria-current="page"]{background:#f4f1e8;color:#16150f}
+.site-nav .site-sp{flex:1}
+.site-nav .site-cta{
+  background:var(--s-go);color:#fff;text-decoration:none;font-size:.78rem;font-weight:700;
+  padding:.38rem .8rem;border-radius:6px;white-space:nowrap;
+}
+.site-nav .site-cta:hover{background:#268554}
+
+/* ---------------- footer ---------------- */
+.site-foot{
+  background:#16150f;color:#cfc9b6;font-family:var(--s-ui);font-size:.8rem;line-height:1.7;
+  padding:2.2rem 1.5rem;margin-top:0;
+}
+.site-foot .in{max-width:60rem;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2rem}
+.site-foot h4{font-size:.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:#8a8270;margin:0 0 .6rem}
+.site-foot a{color:#9dc0ff;text-decoration:none}
+.site-foot a:hover{text-decoration:underline}
+.site-foot ul{list-style:none;margin:0;padding:0}
+.site-foot li{margin-bottom:.3rem}
+.site-foot .legal{
+  max-width:60rem;margin:1.8rem auto 0;padding-top:1.2rem;
+  border-top:1px solid rgba(255,255,255,.13);font-size:.72rem;color:#8a8270;
+}
+@media (max-width:720px){ .site-foot .in{grid-template-columns:1fr;gap:1.4rem} }
+
+/* ---------------- home page ---------------- */
+body.site-home{
+  margin:0;background:var(--s-warm);color:var(--s-ink);
+  font-family:var(--s-serif);font-size:17px;line-height:1.62;
+}
+.site-wrap{max-width:60rem;margin:0 auto;background:var(--s-paper);
+  box-shadow:0 2px 40px rgba(0,0,0,.09)}
+.site-pad{padding:0 3rem}
+
+.site-hero{
+  background:var(--s-ink);color:#f6f3ea;padding:4rem 3rem 3.2rem;text-align:center;
+}
+.site-hero .eyebrow{font-family:var(--s-ui);font-size:.68rem;font-weight:700;letter-spacing:.22em;
+  text-transform:uppercase;opacity:.55;margin-bottom:1.2rem}
+.site-hero h1{font-family:var(--s-serif);font-weight:400;font-size:4.2rem;line-height:1;
+  letter-spacing:-.025em;margin:0 0 1.1rem}
+.site-hero p{font-size:1.2rem;line-height:1.5;opacity:.86;margin:0 auto;max-width:34rem}
+.site-hero .lock{
+  margin-top:2.4rem;padding-top:1.6rem;border-top:1px solid rgba(255,255,255,.14);
+  font-family:var(--s-ui);font-size:.76rem;letter-spacing:.05em;opacity:.6;
+}
+
+.site-h2{font-family:var(--s-serif);font-weight:400;font-size:2.1rem;line-height:1.14;
+  letter-spacing:-.018em;margin:3.2rem 0 1rem}
+.site-lead{font-size:1.12rem}
+.site-rule{border:0;border-top:1px solid var(--s-rule);margin:2.8rem 0}
+
+.site-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin:1.6rem 0 2rem}
+.site-card{
+  border:1px solid var(--s-rule2);border-radius:7px;padding:1.4rem 1.5rem;background:#fff;
+  text-decoration:none;color:inherit;display:block;transition:.15s;
+}
+.site-card:hover{border-color:var(--s-mars);box-shadow:0 4px 18px rgba(10,42,102,.09);transform:translateY(-1px)}
+.site-card .tag{font-family:var(--s-ui);font-size:.62rem;font-weight:700;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--s-mars);display:block;margin-bottom:.5rem}
+.site-card h3{font-family:var(--s-serif);font-weight:400;font-size:1.42rem;margin:0 0 .45rem;line-height:1.15}
+.site-card p{margin:0;font-size:.94rem;line-height:1.5;color:var(--s-soft)}
+.site-card .go{display:inline-block;margin-top:.8rem;font-family:var(--s-ui);font-size:.78rem;
+  font-weight:700;color:var(--s-mars)}
+@media (max-width:720px){
+  .site-cards{grid-template-columns:1fr}
+  .site-hero{padding:2.6rem 1.4rem 2.2rem}
+  .site-hero h1{font-size:2.6rem}
+  .site-pad{padding:0 1.4rem}
+}
+
+.site-callout{
+  border-left:3px solid var(--s-adopt);background:#fff;padding:1.1rem 1.3rem;
+  margin:1.8rem 0;border-radius:0 4px 4px 0;
+}
+.site-callout b{font-family:var(--s-ui);font-size:.68rem;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--s-adopt);display:block;margin-bottom:.4rem}
+.site-callout p{margin:0;font-size:.96rem;line-height:1.55}
+
+.site-figs{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin:1.8rem 0 2rem;text-align:center}
+.site-fig b{display:block;font-family:var(--s-serif);font-size:2.1rem;line-height:1;color:var(--s-mars)}
+.site-fig span{display:block;font-family:var(--s-ui);font-size:.72rem;color:var(--s-soft);
+  margin-top:.4rem;line-height:1.4}
+@media (max-width:720px){ .site-figs{grid-template-columns:repeat(2,1fr)} }

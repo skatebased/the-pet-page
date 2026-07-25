@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Middleburg Page — Mars Petcare Series, No. 1</title>
+<meta name="description" content="Blind husky Tanner gets rescued. Plus: why Mars is closer than you think. One source, five renders.">
+<style>
+/* ================================================================
+   THE MIDDLEBURG PAGE — ONE SOURCE, FIVE RENDERS
+   Print page (9.5x10.5in) · Phone · Web · Postcard (6x4.25in) · Video (9:16)
+   The content exists once. Every render below is CSS.
+   Ctrl-P prints whichever render is selected.
+   ================================================================ */
+
+:root{
+  --ink:#16150f; --ink-soft:#4a463a; --paper:#fbfaf6; --paper-warm:#f4f1e8;
+  --rule:#d9d3c4; --rule-strong:#b3aa95;
+  --mars:#0a2a66; --mars-bright:#12489e; --adopt:#9c2b1f;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+  --display:"Iowan Old Style",Georgia,"Times New Roman",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#e8e6df;color:var(--ink);font-family:var(--serif);
+     font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased}
+
+/* ---------- CONTROL BAR ---------- */
+.controls{position:sticky;top:0;z-index:100;background:#16150f;color:#f4f1e8;
+  padding:.6rem .9rem;display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;
+  font-family:var(--sans);font-size:.78rem;box-shadow:0 1px 12px rgba(0,0,0,.25)}
+.controls .lab{text-transform:uppercase;letter-spacing:.12em;opacity:.55;
+  margin-right:.35rem;font-size:.66rem;font-weight:600}
+.seg{display:flex;border:1px solid #45412f;border-radius:7px;overflow:hidden}
+.seg button{appearance:none;border:0;background:transparent;color:#cfc9b6;font:inherit;
+  font-weight:600;padding:.45rem .8rem;cursor:pointer;border-right:1px solid #45412f;
+  transition:background .15s,color .15s;white-space:nowrap}
+.seg button:last-child{border-right:0}
+.seg button:hover{background:#26241a;color:#fff}
+.seg button[aria-pressed="true"]{background:#f4f1e8;color:#16150f}
+.controls .spacer{flex:1}
+.controls .hint{opacity:.5;font-size:.7rem;font-style:italic}
+.printbtn{appearance:none;border:1px solid #57523d;background:#26241a;color:#e8e4d5;
+  font:inherit;font-weight:600;padding:.45rem .8rem;border-radius:7px;cursor:pointer;white-space:nowrap}
+.printbtn:hover{background:#332f22;color:#fff}
+
+.stage{display:flex;justify-content:center;align-items:flex-start;padding:2rem 1rem 4rem;min-height:60vh}
+.frame{background:var(--paper);width:100%;max-width:34rem;
+  transition:max-width .3s ease;box-shadow:0 2px 30px rgba(0,0,0,.13);position:relative}
+
+/* ---------- SHARED ARTICLE ---------- */
+.pad{padding:1.6rem 1.5rem 2.5rem}
+.masthead{text-align:center;border-bottom:2px solid var(--ink);padding:1.5rem 1rem .8rem}
+.masthead h1{font-family:var(--display);font-weight:400;font-size:2.45rem;line-height:1;
+  margin:0 0 .35rem;letter-spacing:-.015em}
+.masthead .kicker{font-family:var(--sans);font-size:.66rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--ink-soft)}
+.disclosure{background:var(--paper-warm);border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);padding:.6rem 1.5rem;font-family:var(--sans);
+  font-size:.68rem;line-height:1.5;letter-spacing:.02em;color:var(--ink-soft);text-align:center}
+.disclosure strong{color:var(--ink);letter-spacing:.08em;text-transform:uppercase;font-size:.64rem}
+.series-tag{font-family:var(--sans);font-size:.64rem;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--mars);margin:1.8rem 0 .5rem}
+h2.hed{font-family:var(--display);font-weight:400;font-size:2.05rem;line-height:1.08;
+  letter-spacing:-.015em;margin:0 0 .55rem}
+.byline{font-family:var(--sans);font-size:.74rem;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--ink-soft);margin:0 0 1.1rem}
+.byline .cred{display:block;text-transform:none;letter-spacing:0;font-weight:400;
+  font-style:italic;font-size:.78rem;margin-top:.2rem;opacity:.85}
+p{margin:0 0 1.05rem}
+.lede{font-size:1.12rem;line-height:1.55}
+.lede::first-letter{float:left;font-size:3.5rem;line-height:.82;padding:.06em .09em 0 0;font-family:var(--display)}
+figure{margin:1.5rem 0}
+.photo{width:100%;display:block;aspect-ratio:4/3;border-radius:2px;
+  background:linear-gradient(135deg,#cfc7b4 0%,#b8ae97 45%,#a89d84 100%);
+  display:grid;place-items:center;color:#4a4335;font-family:var(--sans);font-size:.7rem;
+  letter-spacing:.1em;text-transform:uppercase;text-align:center;padding:1rem}
+figcaption{font-family:var(--sans);font-size:.72rem;line-height:1.45;color:var(--ink-soft);
+  margin-top:.5rem;font-style:italic}
+.placeholder{border:1px dashed var(--rule-strong);
+  background:repeating-linear-gradient(45deg,transparent,transparent 9px,rgba(0,0,0,.018) 9px,rgba(0,0,0,.018) 18px);
+  padding:1rem 1.1rem;margin:0 0 1.05rem;border-radius:3px}
+.placeholder .tag{font-family:var(--sans);font-size:.6rem;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--adopt);display:block;margin-bottom:.4rem}
+.placeholder p{margin:0;font-style:italic;color:var(--ink-soft);font-size:.95rem}
+.divider{border:0;border-top:1px solid var(--rule);margin:2.4rem 0}
+.divider-thick{border-top:3px double var(--rule-strong)}
+.mars-col{background:var(--paper-warm);margin:0 -1.5rem;padding:1.8rem 1.5rem}
+.mars-col .series-tag{margin-top:0}
+.cta{border:2px solid var(--adopt);border-radius:4px;padding:1.1rem 1.2rem;margin:1.8rem 0;text-align:center}
+.cta .eyebrow{font-family:var(--sans);font-size:.62rem;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--adopt)}
+.cta h3{font-family:var(--display);font-weight:400;font-size:1.35rem;margin:.35rem 0 .5rem}
+.cta p{font-size:.92rem;margin:0 0 .9rem;color:var(--ink-soft)}
+.cta a{display:inline-block;background:var(--adopt);color:#fff;text-decoration:none;
+  font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.06em;
+  padding:.6rem 1.3rem;border-radius:3px}
+.donors h3{font-family:var(--sans);font-size:.68rem;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-soft);margin:0 0 .3rem;text-align:center}
+.donors .note{font-size:.82rem;font-style:italic;color:var(--ink-soft);text-align:center;
+  margin:0 0 1rem;line-height:1.45}
+.pets{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem}
+.pet{text-align:center}
+.pet .av{aspect-ratio:1;border-radius:3px;background:linear-gradient(150deg,#c6bda8,#a99e86);
+  display:grid;place-items:center;font-size:1.4rem}
+.pet span{display:block;font-family:var(--sans);font-size:.56rem;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-top:.28rem}
+.strip{margin:2rem -1.5rem 0;background:var(--mars);color:#fff;padding:1.15rem 1.5rem;
+  display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.strip .msg{flex:1;min-width:190px}
+.strip .msg b{display:block;font-family:var(--display);font-weight:400;font-size:1.32rem;
+  line-height:1.15;letter-spacing:-.01em}
+.strip .msg small{font-family:var(--sans);font-size:.66rem;letter-spacing:.13em;
+  text-transform:uppercase;opacity:.7}
+.strip .logo{font-family:var(--sans);font-weight:800;font-size:1.5rem;letter-spacing:.03em}
+footer.pagefoot{border-top:1px solid var(--rule);margin-top:2rem;padding-top:1.2rem;
+  font-family:var(--sans);font-size:.7rem;line-height:1.6;color:var(--ink-soft)}
+footer.pagefoot b{color:var(--ink)}
+
+/* alternate faces hidden by default */
+.printpage-face,.postcard-face,.video-face{display:none}
+
+/* the screen masthead + disclosure belong to phone/web only —
+   the other renders carry their own, so hide them there */
+body[data-mode="printpage"] > .stage .masthead,
+body[data-mode="printpage"] > .stage .disclosure,
+body[data-mode="postcard"]  > .stage .masthead,
+body[data-mode="postcard"]  > .stage .disclosure,
+body[data-mode="video"]     > .stage .masthead,
+body[data-mode="video"]     > .stage .disclosure{display:none}
+
+/* ================================================================
+   RENDER: PHONE
+   ================================================================ */
+body[data-mode="phone"] .frame{max-width:390px;border-radius:34px;padding:.5rem;
+  background:#16150f;box-shadow:0 12px 50px rgba(0,0,0,.4)}
+body[data-mode="phone"] .sheet{background:var(--paper);border-radius:26px;overflow:hidden;
+  max-height:78vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+body[data-mode="phone"] .pad{padding:1.2rem 1.15rem 2rem}
+body[data-mode="phone"] .mars-col,
+body[data-mode="phone"] .strip{margin-left:-1.15rem;margin-right:-1.15rem;
+  padding-left:1.15rem;padding-right:1.15rem}
+body[data-mode="phone"] .masthead h1{font-size:1.85rem}
+body[data-mode="phone"] h2.hed{font-size:1.62rem}
+
+/* ================================================================
+   RENDER: WEB
+   ================================================================ */
+body[data-mode="web"] .frame{max-width:66rem}
+body[data-mode="web"] .pad{padding:2.2rem 3rem 3rem}
+body[data-mode="web"] .masthead h1{font-size:3.6rem}
+body[data-mode="web"] h2.hed{font-size:2.5rem}
+body[data-mode="web"] .mars-col,
+body[data-mode="web"] .strip{margin-left:-3rem;margin-right:-3rem;padding-left:3rem;padding-right:3rem}
+body[data-mode="web"] .pets{grid-template-columns:repeat(8,1fr)}
+@media (min-width:900px){
+  body[data-mode="web"] .twocol{column-count:2;column-gap:2.6rem;column-rule:1px solid var(--rule)}
+  body[data-mode="web"] .twocol > *{break-inside:avoid-column}
+}
+
+/* ================================================================
+   RENDER: PRINT PAGE — 9.5in x 10.5in live space
+   The broadsheet page, reproduced from the InDesign draft.
+   ================================================================ */
+body[data-mode="printpage"] .stage{padding-top:2rem;overflow-x:auto}
+body[data-mode="printpage"] .frame{max-width:none;width:auto;background:transparent;box-shadow:none}
+body[data-mode="printpage"] .sheet{
+  width:9.5in;height:10.5in;background:#fff;position:relative;overflow:hidden;
+  box-shadow:0 8px 40px rgba(0,0,0,.25);outline:1px solid var(--rule-strong);
+  transform:scale(var(--pp-scale,.74));transform-origin:top center;
+  margin-bottom:calc(-10.5in * (1 - var(--pp-scale,.74)));
+}
+body[data-mode="printpage"] .pad{padding:0;height:100%}
+body[data-mode="printpage"] .pad > *{display:none}
+body[data-mode="printpage"] .printpage-face{display:flex !important}
+
+.printpage-face{
+  flex-direction:column;height:10.5in;padding:.3in .34in .24in;
+  font-family:var(--serif);color:#000;overflow:hidden;
+}
+.pp-masthead{text-align:center;border-bottom:1.5pt solid #000;padding-bottom:.05in;margin-bottom:.1in;flex:0 0 auto}
+.pp-masthead h1{font-family:var(--display);font-weight:400;font-size:34pt;line-height:.95;
+  margin:0 0 .03in;letter-spacing:-.02em}
+.pp-masthead .dateline{font-family:var(--sans);font-size:7.5pt;color:#333;letter-spacing:.02em}
+.pp-disclosure{font-family:var(--sans);font-size:5.8pt;letter-spacing:.06em;text-transform:uppercase;
+  text-align:center;color:#444;border-bottom:.5pt solid #bbb;padding-bottom:.05in;margin-bottom:.1in;flex:0 0 auto}
+
+/* fixed body height so the strip ad always lands on the baseline */
+.pp-body{display:grid;grid-template-columns:1.92fr 1fr;gap:.2in;
+  flex:1 1 auto;min-height:0;overflow:hidden}
+.pp-left{display:flex;flex-direction:column;min-width:0;overflow:hidden}
+.pp-right{border-left:.5pt solid #999;padding-left:.18in;min-width:0;
+  display:flex;flex-direction:column;overflow:hidden}
+
+.pp-hed{font-family:var(--display);font-weight:700;font-size:19pt;line-height:1.03;
+  margin:0 0 .05in;letter-spacing:-.01em}
+.pp-right .pp-hed{font-size:15.5pt}
+.pp-byline{font-family:var(--sans);font-size:7.5pt;font-weight:700;margin:0 0 .08in;color:#111}
+.pp-byline em{display:block;font-weight:400;font-style:italic;font-size:6.8pt;color:#555;margin-top:.02in}
+
+.pp-topgrid{display:grid;grid-template-columns:1fr 1.06fr;gap:.15in;
+  margin-bottom:.08in;flex:0 0 auto}
+.pp-photo{background:linear-gradient(135deg,#cfc7b4,#a89d84);height:2.45in;
+  display:grid;place-items:center;text-align:center;font-family:var(--sans);font-size:6pt;
+  letter-spacing:.09em;text-transform:uppercase;color:#4a4335;padding:.1in}
+.pp-photocap{font-family:var(--sans);font-size:6.2pt;font-style:italic;color:#444;margin-top:.03in;line-height:1.3}
+.pp-mhf{font-family:var(--sans);font-size:5.8pt;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--adopt);border:.5pt solid var(--adopt);
+  padding:.03in .05in;display:inline-block;margin-bottom:.05in}
+
+.pp-text{font-size:7.9pt;line-height:1.32;text-align:justify;hyphens:auto}
+.pp-text p{margin:0 0 .05in}
+.pp-text .drop::first-letter{float:left;font-size:22pt;line-height:.78;padding:.02em .05em 0 0;
+  font-family:var(--display);font-weight:700}
+.pp-flow{column-count:2;column-gap:.15in;column-rule:.5pt solid #ccc;
+  flex:1 1 auto;min-height:0;overflow:hidden}
+/* right column runs a touch tighter — it carries more copy in less width */
+.pp-right .pp-text{column-count:1;font-size:7.15pt;line-height:1.3;
+  flex:1 1 auto;min-height:0;overflow:hidden}
+.pp-more{font-family:var(--serif);font-weight:700;font-style:italic;font-size:8pt}
+.pp-qr{display:inline-block;width:.19in;height:.19in;vertical-align:-.04in;margin-left:.04in;
+  background:repeating-conic-gradient(#000 0 25%,transparent 0 50%) 0 0/.048in .048in;
+  outline:.5pt solid #000}
+
+.pp-reserved{margin-top:.1in;border:.5pt dashed #c4b9a2;border-radius:2pt;
+  padding:.5in .1in;text-align:center;font-family:var(--sans);font-size:5.8pt;
+  font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#a89a7d}
+.pp-editnote{font-family:var(--serif);font-style:italic;font-size:6.8pt;line-height:1.32;
+  border-top:.5pt solid #999;border-bottom:.5pt solid #999;padding:.045in 0;
+  margin:.1in 0 .08in;flex:0 0 auto}
+.pp-editnote b{font-family:var(--sans);font-style:normal;font-weight:700;font-size:6.2pt;
+  letter-spacing:.1em;text-transform:uppercase}
+
+.pp-pets{display:grid;grid-template-columns:repeat(8,1fr);gap:.06in;
+  margin-bottom:.09in;flex:0 0 auto}
+.pp-pet .av{height:.78in;background:linear-gradient(150deg,#c6bda8,#a99e86);
+  display:grid;place-items:center;font-size:15pt}
+.pp-pet span{display:block;text-align:center;font-family:var(--sans);font-size:5.4pt;
+  font-weight:700;letter-spacing:.06em;color:#333;margin-top:.02in}
+
+/* strip ad — 9.5 wide x 1.25 high per Mars spec */
+.pp-strip{height:1.25in;min-height:1.25in;display:grid;
+  grid-template-columns:1.35fr 1fr 1fr 1fr;gap:.05in;flex:0 0 auto}
+.pp-strip .cell{position:relative;overflow:hidden;display:grid;place-items:center;
+  font-family:var(--sans);font-size:6pt;letter-spacing:.08em;text-transform:uppercase;color:#5a5344}
+.pp-strip .c1{background:var(--mars);color:#fff;place-items:start;padding:.12in .14in;align-content:center}
+.pp-strip .c1 b{font-family:var(--sans);font-weight:800;font-size:11pt;line-height:1.12;
+  letter-spacing:-.005em;text-transform:none}
+.pp-strip .c1 small{display:block;font-size:6pt;letter-spacing:.14em;opacity:.75;margin-top:.04in}
+.pp-strip .c2{background:linear-gradient(135deg,#7d8f5a,#5c6b3f)}
+.pp-strip .c3{background:linear-gradient(135deg,#c9a24a,#a8842f)}
+.pp-strip .c4{background:linear-gradient(135deg,#b8724a,#8f5433)}
+.pp-strip .cell.c2,.pp-strip .cell.c3,.pp-strip .cell.c4{color:rgba(255,255,255,.82)}
+
+.pp-foot{font-family:var(--sans);font-size:5.8pt;color:#666;text-align:center;
+  padding-top:.06in;letter-spacing:.03em}
+
+/* ================================================================
+   RENDER: POSTCARD — 6in x 4.25in
+   ================================================================ */
+body[data-mode="postcard"] .stage{padding-top:3rem}
+body[data-mode="postcard"] .frame{max-width:600px;background:transparent;box-shadow:none}
+body[data-mode="postcard"] .sheet{width:600px;height:432px;background:var(--paper);
+  position:relative;overflow:hidden;box-shadow:0 6px 34px rgba(0,0,0,.22);outline:1px solid var(--rule-strong)}
+body[data-mode="postcard"] .sheet::before{content:"";position:absolute;inset:12px;
+  outline:1px dashed rgba(156,43,31,.55);pointer-events:none;z-index:9}
+body[data-mode="postcard"] .sheet::after{
+  content:"TRIM 6\0000d7 4.25 in  ·  BLEED .125 in  ·  SAFE .25 in";
+  position:absolute;bottom:2px;right:6px;z-index:10;font-family:var(--sans);font-size:8px;
+  letter-spacing:.1em;color:rgba(156,43,31,.75)}
+body[data-mode="postcard"] .pad{padding:0;height:100%}
+body[data-mode="postcard"] .pad > *{display:none}
+body[data-mode="postcard"] .postcard-face{display:grid !important;height:432px;padding:30px 34px;
+  grid-template-columns:1.05fr .95fr;gap:24px;align-items:center}
+.pc-photo{height:100%;border-radius:3px;background:linear-gradient(135deg,#cfc7b4,#a89d84);
+  display:grid;place-items:center;text-align:center;font-family:var(--sans);font-size:.62rem;
+  letter-spacing:.1em;text-transform:uppercase;color:#4a4335;padding:1rem}
+.pc-copy .pc-tag{font-family:var(--sans);font-size:.56rem;font-weight:700;letter-spacing:.17em;
+  text-transform:uppercase;color:var(--mars);margin-bottom:.4rem}
+.pc-copy h2{font-family:var(--display);font-weight:400;font-size:1.55rem;line-height:1.06;
+  margin:0 0 .5rem;letter-spacing:-.015em}
+.pc-copy p{font-size:.8rem;line-height:1.45;margin:0 0 .7rem}
+.pc-qr{width:56px;height:56px;background:repeating-conic-gradient(var(--ink) 0 25%,transparent 0 50%) 0 0/13px 13px;
+  border:3px solid var(--paper);outline:1px solid var(--ink)}
+.pc-foot{display:flex;align-items:center;gap:.7rem;margin-top:.3rem}
+.pc-foot small{font-family:var(--sans);font-size:.58rem;line-height:1.4;letter-spacing:.04em;color:var(--ink-soft)}
+
+/* ================================================================
+   RENDER: VIDEO — 9:16
+   ================================================================ */
+body[data-mode="video"] .frame{max-width:360px;background:transparent;box-shadow:none}
+body[data-mode="video"] .sheet{width:360px;height:640px;position:relative;overflow:hidden;
+  background:linear-gradient(170deg,#1c2b4a,#0a1626 60%,#060d18);color:#fff;
+  box-shadow:0 12px 50px rgba(0,0,0,.45);border-radius:6px}
+body[data-mode="video"] .pad{padding:0;height:100%}
+body[data-mode="video"] .pad > *{display:none}
+body[data-mode="video"] .video-face{display:flex !important;height:640px;flex-direction:column;
+  justify-content:flex-end;padding:0 22px 118px;position:relative}
+body[data-mode="video"] .sheet::before{content:"TOP SAFE ZONE — platform UI";
+  position:absolute;top:0;left:0;right:0;height:88px;
+  background:repeating-linear-gradient(45deg,rgba(255,80,80,.14) 0 8px,transparent 8px 16px);
+  border-bottom:1px dashed rgba(255,120,120,.5);font-family:var(--sans);font-size:8px;
+  letter-spacing:.12em;color:rgba(255,180,180,.9);display:grid;place-items:center;z-index:5}
+body[data-mode="video"] .sheet::after{content:"BOTTOM SAFE ZONE — caption, handle, audio, buttons";
+  position:absolute;bottom:0;left:0;right:0;height:112px;
+  background:repeating-linear-gradient(45deg,rgba(255,80,80,.14) 0 8px,transparent 8px 16px);
+  border-top:1px dashed rgba(255,120,120,.5);font-family:var(--sans);font-size:8px;
+  letter-spacing:.1em;color:rgba(255,180,180,.9);display:grid;place-items:center;text-align:center;z-index:5}
+.vf-scene{font-family:var(--sans);font-size:.56rem;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:#7fb0ff;margin-bottom:.5rem}
+.vf-caption{font-family:var(--display);font-size:1.5rem;line-height:1.16;font-weight:400;
+  margin:0 0 .7rem;text-shadow:0 2px 14px rgba(0,0,0,.6)}
+.vf-sub{font-family:var(--sans);font-size:.74rem;line-height:1.5;opacity:.82;margin:0 0 .9rem}
+.vf-meta{font-family:var(--sans);font-size:.6rem;letter-spacing:.07em;opacity:.6;
+  border-top:1px solid rgba(255,255,255,.18);padding-top:.6rem}
+
+/* ---------- spec card ---------- */
+.specs{max-width:66rem;margin:0 auto;padding:0 1rem 4rem;font-family:var(--sans)}
+.specs .card{background:#fbfaf6;border:1px solid var(--rule);border-radius:6px;padding:1.1rem 1.3rem}
+.specs h4{margin:0 0 .5rem;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--mars)}
+.specs dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.3rem .9rem;font-size:.78rem}
+.specs dt{font-weight:700;color:var(--ink)}
+.specs dd{margin:0;color:var(--ink-soft)}
+
+/* ================================================================
+   ACTUAL PRINTING — prints whichever render is selected.
+   Page size is injected by JS into #pagerule.
+   ================================================================ */
+@media print{
+  html,body{background:#fff !important;margin:0;padding:0}
+  .controls,.specs{display:none !important}
+  .stage{padding:0 !important;margin:0 !important;display:block !important}
+  .frame{max-width:none !important;width:auto !important;box-shadow:none !important;
+    background:#fff !important;padding:0 !important;border-radius:0 !important}
+  .sheet{box-shadow:none !important;border-radius:0 !important;outline:0 !important;
+    overflow:hidden !important;max-height:none !important;transform:none !important;margin:0 !important}
+  .sheet::before,.sheet::after{display:none !important}
+
+  /* --- print page --- */
+  body[data-mode="printpage"] .sheet{width:9.5in !important;height:10.5in !important;background:#fff !important}
+  body[data-mode="printpage"] .pp-strip .c1,
+  body[data-mode="printpage"] .pp-strip .c2,
+  body[data-mode="printpage"] .pp-strip .c3,
+  body[data-mode="printpage"] .pp-strip .c4,
+  body[data-mode="printpage"] .pp-photo,
+  body[data-mode="printpage"] .pp-pet .av{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+  /* --- postcard --- */
+  body[data-mode="postcard"] .sheet{width:6in !important;height:4.25in !important}
+  body[data-mode="postcard"] .postcard-face{height:4.25in !important;padding:.3in .34in !important;gap:.24in !important}
+  body[data-mode="postcard"] .pc-photo{background:#ddd7c8 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:7pt}
+  body[data-mode="postcard"] .pc-copy h2{font-size:17pt}
+  body[data-mode="postcard"] .pc-copy p{font-size:8.5pt}
+  body[data-mode="postcard"] .pc-qr{width:.58in;height:.58in;background:repeating-conic-gradient(#16150f 0 25%,transparent 0 50%) 0 0/.14in .14in;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body[data-mode="postcard"] .pc-foot small{font-size:6pt}
+
+  /* --- phone / web fall back to letter, article flows normally --- */
+  body[data-mode="phone"] .sheet,
+  body[data-mode="web"] .sheet{width:auto !important;height:auto !important}
+}
+</style>
+<style id="pagerule">@page{size:9.5in 10.5in;margin:0}</style>
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-mode="printpage">
+<nav class="site-nav">
+<a class="site-brand" href="../index.html">The Pet Page <span>· Middleburg</span></a>
+<a class="site-link" href="../index.html">Home</a>
+<a class="site-link" href="../about.html">About</a>
+<a class="site-link" href="../issues/index.html">Issues</a>
+<a class="site-link" href="../partners.html">For papers</a>
+<a class="site-link" href="../playbook.html">Video</a>
+<span class="site-sp"></span>
+<a class="site-cta" href="../composer.html">Open the Composer →</a>
+</nav>
+
+<div class="controls">
+  <span class="lab">Render</span>
+  <div class="seg" role="group" aria-label="Choose render">
+    <button data-set="printpage" aria-pressed="true">Print page</button>
+    <button data-set="phone"     aria-pressed="false">Phone</button>
+    <button data-set="web"       aria-pressed="false">Web</button>
+    <button data-set="postcard"  aria-pressed="false">Postcard</button>
+    <button data-set="video"     aria-pressed="false">Video</button>
+  </div>
+  <span class="spacer"></span>
+  <span class="hint">One source · five outputs · nothing retyped</span>
+  <button class="printbtn" onclick="window.print()">Print this render →</button>
+</div>
+
+<div class="stage">
+  <div class="frame">
+    <div class="sheet">
+
+      <header class="masthead">
+        <h1>The Middleburg Page</h1>
+        <div class="kicker">In partnership with the Middleburg Humane Foundation</div>
+      </header>
+
+      <div class="disclosure">
+        <strong>Sponsored series</strong> · Mars Petcare funds this page and reviews only its own
+        company content. The Middleburg Page retains full editorial control of all rescue reporting.
+      </div>
+
+      <div class="pad">
+
+        <!-- ============ SCREEN ARTICLE (phone + web) ============ -->
+        <div class="series-tag">Mars Petcare Series · No. 1 of 12</div>
+        <h2 class="hed">Blind husky gets rescued, goes home to a husky and five cats</h2>
+        <p class="byline">By Dana Priest
+          <span class="cred">Pulitzer Prize winner, board member, Piedmont Journalism Foundation</span>
+        </p>
+
+        <figure>
+          <div class="photo">Tanner, photographed at the<br>Middleburg Humane Foundation</div>
+          <figcaption>Tanner on his first afternoon out of the kennel. He is blind in both eyes and, his foster says, has never once walked into a wall he didn't then treat as a friend.</figcaption>
+        </figure>
+
+        <p class="lede">The thing about a blind dog is that he does not know he is a blind dog. He knows the shape of a room, the sound of a bowl, the particular tread of the person who is coming to get him.</p>
+
+        <p>Tanner learned all three in the eleven weeks he spent at the Middleburg Humane Foundation, and then he learned a new set, in a new house, with a sighted husky to follow and five cats to negotiate.</p>
+
+        <p>He arrived on a Tuesday in a crate that was slightly too small, from a county two hours south, with a note attached that gave only his approximate age and the word &ldquo;gentle.&rdquo; The note was correct on both counts.</p>
+
+        <p>What the note did not say, because nobody knew it yet, was how he would handle a house. Blind dogs map rooms the way the rest of us map a dark hallway at night &mdash; by memory, by touch, and by an accumulating confidence that the furniture has not moved since yesterday. Move a chair on a blind dog and you have not injured him; you have insulted him.</p>
+
+        <p>The foster placement came first, because the Foundation does not send an animal with a disability straight into a permanent home. Eleven weeks is a long time in a kennel. It is long enough for a dog to learn the route from his door to the yard, and long enough for the people who walk him twice a day to begin, quietly and against their training, to hope.</p>
+
+        <p>The adopters already had a husky. This turned out to matter more than anyone predicted. A sighted dog of the same breed moves at a pace a blind one can follow by sound alone, and within a fortnight Tanner had stopped navigating by wall and started navigating by his brother.</p>
+
+        <p>The cats, for their part, worked it out in under a week &mdash; which is roughly six days longer than they would like it recorded.</p>
+
+        <p>Fourteen animals are still at the Foundation as this page goes to press. Their fees are covered during Mars Global Adoption Weekend.</p>
+
+        <div class="cta">
+          <div class="eyebrow">Middleburg Humane Foundation</div>
+          <h3>Fourteen animals are waiting today</h3>
+          <p>Adoption fees on Mars Global Adoption Weekend are covered by Mars Petcare and partner organisations.</p>
+          <a href="#adopt">See who's here →</a>
+        </div>
+
+        <hr class="divider divider-thick">
+
+        <div class="mars-col">
+          <div class="series-tag">The company behind the series</div>
+          <h2 class="hed">"Mars Is Closer Than You Think"</h2>
+          <p class="byline">By Leland Schwartz<span class="cred">Editor, The Middleburg Page</span></p>
+          <div class="twocol">
+            <p>When we heard that the candy and pet food company — which makes Milky Ways and Mars bars for us, IAMS and Pedigree for our dogs and Temptations for our cats — wanted to make everyone aware of how local it was, we thought: what better way than through the local press?</p>
+            <p>And besides, not only is Mars HQ in McLean, but Jacquie Mars lives out here.</p>
+            <p>So we asked the company — yes, with a little help from our friends — if it would run a year-long test to see if us local news editors could share their message wide enough throughout Hunt Country to be a serious complement to their own social media efforts.</p>
+            <p>Can local news organizations help drive national brands and recapture a piece of what kept community newspapers alive for decades? That is the question. If this is the first you've heard of the Mars <em>"Closer Than You Think"</em> campaign, then we're onto something.</p>
+            <p>What we're thinking is to bring you two sets of stories over the year juxtaposed to Mars' own messages. The first about rescues: how they work and how you can help, through our colleagues at the Middleburg Humane Foundation. The second describing how Mars is a thought leader in responsible pet ownership and animal adoption, as well as how it makes its petfood and the science behind it.</p>
+            <p>In addition to being published in the Times, the stories on these pages will go up on the Georgetowner's 'In Country' section, part of our efforts to build a news, events and advertising bridge between Hunt Country and DC.</p>
+          </div>
+        </div>
+
+        <hr class="divider">
+
+        <div class="donors">
+          <h3>These dogs chipped in</h3>
+          <p class="note">Each of these dogs contributed $375 to help cover adoption costs and the cost of distributing this page, supplementing support from Mars. <b>Have your dogs help our dogs.</b></p>
+          <div class="pets">
+            <div class="pet"><div class="av">🐕</div><span>Pepper</span></div>
+            <div class="pet"><div class="av">🐶</div><span>Patch</span></div>
+            <div class="pet"><div class="av">🦮</div><span>Luke</span></div>
+            <div class="pet"><div class="av">🐕‍🦺</div><span>Piper</span></div>
+            <div class="pet"><div class="av">🐩</div><span>Scout</span></div>
+            <div class="pet"><div class="av">🐕</div><span>Bandit</span></div>
+            <div class="pet"><div class="av">🐶</div><span>Ripley</span></div>
+            <div class="pet"><div class="av">🦴</div><span>Rocket</span></div>
+          </div>
+        </div>
+
+        <div class="strip">
+          <div class="msg"><b>Mars Is Closer Than You Think</b><small>A better world for pets</small></div>
+          <div class="logo">MARS</div>
+        </div>
+
+        <footer class="pagefoot">
+          <b>The Middleburg Page</b> · Leland Schwartz, Publisher · 7170 Beverly Lane, The Plains, Virginia 20198<br>
+          editor@themiddleburgpage.com · 540 422 1376 · Printed in the Fauquier Times and The Georgetowner
+        </footer>
+
+        <!-- ============ PRINT PAGE FACE — 9.5 x 10.5 in ============ -->
+        <div class="printpage-face">
+          <div class="pp-masthead">
+            <h1>The Middleburg Page</h1>
+            <div class="dateline">September 4, 2026 &nbsp;··&nbsp; Reach out to us at Editor@TheMiddleburgPage.com</div>
+          </div>
+
+          <div class="pp-disclosure">
+            Sponsored series · Mars Petcare funds this page and reviews only its own company content ·
+            The Middleburg Page retains full editorial control of all rescue reporting
+          </div>
+
+          <div class="pp-body">
+            <!-- LEFT: rescue story -->
+            <div class="pp-left">
+              <div class="pp-topgrid">
+                <div>
+                  <h2 class="pp-hed">Blind Husky gets rescued;<br>Goes home to Husky, 5 cats</h2>
+                  <p class="pp-byline">By Dana Priest<em>Pulitzer Prize winner · Piedmont Journalism Foundation board</em></p>
+                  <div class="pp-mhf">Middleburg Humane Foundation</div>
+                  <div class="pp-text">
+                    <p class="drop">The thing about a blind dog is that he does not know he is a blind dog. He knows the shape of a room, the sound of a bowl, the particular tread of the person coming to get him.</p>
+                  </div>
+                </div>
+                <div>
+                  <div class="pp-photo">Tanner<br>Middleburg Humane Foundation</div>
+                  <div class="pp-photocap">My name is "Tanner". Take me home!</div>
+                </div>
+              </div>
+
+              <div class="pp-text pp-flow">
+                <p>Tanner learned all three in the eleven weeks he spent at the Middleburg Humane Foundation, and then he learned a new set, in a new house, with a sighted husky to follow and five cats to negotiate.</p>
+                <p><i>[Dana Priest's reported story — 300 words — drops into this space. Everything around it is final.]</i></p>
+                <p>He arrived on a Tuesday in a crate that was slightly too small, from a county two hours south, with a note attached that said only his approximate age and the word "gentle." The note was correct on both counts.</p>
+                <p>What the note did not say, because nobody knew it yet, was how he would handle a house. Blind dogs map rooms the way the rest of us map a dark hallway at night, by memory and by touch and by an accumulating confidence that the furniture has not moved since yesterday.</p>
+                <p>The cats, for their part, worked it out in under a week — which is roughly six days longer than they would like it recorded.</p>
+                <p>The foster placement came first, because the Foundation does not send an animal with a disability straight into a permanent home. Eleven weeks is a long time in a kennel &mdash; long enough for a dog to learn the route from his door to the yard, and long enough for the people who walk him twice a day to begin, quietly and against their training, to hope.</p>
+                <p class="pp-more">Continues online &mdash; the full story, and the fourteen animals still waiting <span class="pp-qr"></span></p>
+              </div>
+            </div>
+
+            <!-- RIGHT: Mars column -->
+            <div class="pp-right">
+              <h2 class="pp-hed">"Mars Is Closer Than<br>You Think" Ad Campaign<br>Launched Here</h2>
+              <p class="pp-byline">By Leland Schwartz<em>Editor, The Middleburg Page</em></p>
+              <div class="pp-text">
+                <p>When we heard that the candy and pet food company — which makes Milky Ways and Mars bars for us, IAMS and Pedigree for our dogs and Temptations for our cats — wanted to make everyone aware of how local it was, we thought 'what better way than through the local press?'</p>
+                <p>And besides, not only is Mars HQ in McLean, but Jacquie Mars lives out here.</p>
+                <p>So we asked the company — yes, with a little help from our friends — if it would run a year-long test to see if us local news editors could share their message wide enough throughout Hunt Country to be a serious complement to their own social media efforts.</p>
+                <p>Can local news organizations help drive national brands and recapture a piece of what kept community newspapers alive for decades? That is the question. If this is the first you've heard of the Mars <b><i>"Closer Than You Think"</i></b> campaign, then we're onto something.</p>
+                <p>What we're thinking is to bring you two sets of stories over the year juxtaposed to Mars' own messages. The first about rescues; how they work and how you can help, through our colleagues at the Middleburg Humane Foundation. The second describing how Mars is a thought leader in responsible pet ownership and animal adoption as well as how it makes its petfood and the science behind it.</p>
+                <p>This first story about Tanner was written by Washington Post Pulitzer Prize winner Dana Priest, who is on the board of the Piedmont Journalism Foundation, publisher of the Fauquier Times. (If we do a good job, maybe Mars will include the series in the pet food bags!) The stories on these pages will also go up on the Georgetowner's 'In Country' section.</p>
+                <p class="pp-more">Read more here <span class="pp-qr"></span></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="pp-editnote">
+            <b>Editor's note:</b> These dogs each chipped in $375 to help cover adoption costs and the costs of
+            distributing this page, supplementing support from Mars. Have your dogs help our dogs!
+          </div>
+
+          <div class="pp-pets">
+            <div class="pp-pet"><div class="av">🐕</div><span>'PEPPER'</span></div>
+            <div class="pp-pet"><div class="av">🐶</div><span>'PATCH'</span></div>
+            <div class="pp-pet"><div class="av">🦮</div><span>'LUKE'</span></div>
+            <div class="pp-pet"><div class="av">🐕‍🦺</div><span>'PIPER'</span></div>
+            <div class="pp-pet"><div class="av">🐩</div><span>'SCOUT'</span></div>
+            <div class="pp-pet"><div class="av">🐕</div><span>'BANDIT'</span></div>
+            <div class="pp-pet"><div class="av">🐶</div><span>'RIPLEY'</span></div>
+            <div class="pp-pet"><div class="av">🦴</div><span>'ROCKET'</span></div>
+          </div>
+
+          <div class="pp-strip">
+            <div class="cell c1"><div><b>Mars Invests in American Made Products and Communities</b><small>Mars Is Closer Than You Think</small></div></div>
+            <div class="cell c2">Sourcing · American agriculture</div>
+            <div class="cell c3">Manufacturing · 38 US factories</div>
+            <div class="cell c4">Pet nutrition · IAMS · Pedigree</div>
+          </div>
+
+          <div class="pp-foot">
+            The Middleburg Page · Leland Schwartz, Publisher · 7170 Beverly Lane, The Plains, Virginia 20198 · 540 422 1376 ·
+            Live space 9.5 × 10.5 in · Strip ad 9.5 × 1.25 in · 600–1200 DPI
+          </div>
+        </div>
+
+        <!-- ============ POSTCARD FACE ============ -->
+        <div class="postcard-face">
+          <div class="pc-photo">Tanner<br>Middleburg Humane Foundation</div>
+          <div class="pc-copy">
+            <div class="pc-tag">The Middleburg Page · No. 1</div>
+            <h2>The blind husky who found a house full of cats</h2>
+            <p>Tanner spent eleven weeks waiting. Read how he got home — and meet the fourteen animals still waiting today.</p>
+            <div class="pc-foot">
+              <div class="pc-qr" aria-label="QR code to the story"></div>
+              <small><b>themiddleburgpage.com/tanner</b><br>Middleburg Humane Foundation<br>Supported by Mars Petcare</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============ VIDEO FACE ============ -->
+        <div class="video-face">
+          <div class="vf-scene">Scene 4 of 6 · drawn past → real present</div>
+          <p class="vf-caption">Eleven weeks in a kennel. Then a door opened.</p>
+          <p class="vf-sub">Animated sequence covers the stray months nobody filmed. Live footage takes over the moment he's carried out.</p>
+          <div class="vf-meta">1080 × 1920 · burned-in captions · @themiddleburgpage</div>
+        </div>
+
+      </div><!-- /pad -->
+    </div><!-- /sheet -->
+  </div><!-- /frame -->
+</div>
+
+<div class="specs">
+  <div class="card">
+    <h4>Output specifications</h4>
+    <dl>
+      <dt>Print page</dt><dd>9.5 × 10.5 in live space, 600–1200 DPI. Masthead, rescue story left, Mars column right, editor's note, eight donor pets, Mars strip ad at 9.5 × 1.25 in per Mars' spec. Print this render for a press-ready page.</dd>
+      <dt>Phone</dt><dd>Single column, 390 px reference. This is the render most readers actually see — the default, not an afterthought.</dd>
+      <dt>Web</dt><dd>Responsive to 66 rem, two-column above 900 px. Same markup. The only render that produces hard traffic numbers.</dd>
+      <dt>Postcard</dt><dd>6 × 4.25 in trim, 0.125 in bleed, 0.25 in safe zone, CMYK at export. USPS First-Class and EDDM-lite compatible — hand-outs for Tilley's and partner pet food stores.</dd>
+      <dt>Video</dt><dd>1080 × 1920 (9:16) with platform safe zones marked. Captions burned in; most Reels play muted.</dd>
+      <dt>The point</dt><dd>Dana's copy arrives once and lands in one slot. Every render above updates together. Nobody retypes anything, and nothing drifts out of sync between the paper, the phone, the postcard and the Reel.</dd>
+    </dl>
+  </div>
+</div>
+
+<script>
+(function(){
+  var MODES = ['printpage','phone','web','postcard','video'];
+  var PAGE = {
+    printpage:'@page{size:9.5in 10.5in;margin:0}',
+    postcard :'@page{size:6in 4.25in;margin:0}',
+    phone    :'@page{size:letter;margin:.6in}',
+    web      :'@page{size:letter;margin:.6in}',
+    video    :'@page{size:letter;margin:.6in}'
+  };
+  var buttons = document.querySelectorAll('.seg button');
+  var rule = document.getElementById('pagerule');
+
+  function fitPrintPage(){
+    if(document.body.getAttribute('data-mode') !== 'printpage') return;
+    // 9.5in at 96dpi = 912px; leave gutters
+    var avail = Math.min(window.innerWidth - 48, 1100);
+    var s = Math.max(.35, Math.min(.95, avail / 912));
+    document.documentElement.style.setProperty('--pp-scale', s.toFixed(3));
+  }
+
+  function set(mode){
+    document.body.setAttribute('data-mode', mode);
+    rule.textContent = PAGE[mode] || PAGE.web;
+    buttons.forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.set === mode)); });
+    fitPrintPage();
+    try{ history.replaceState(null,'','#'+mode); }catch(e){}
+  }
+
+  buttons.forEach(function(b){ b.addEventListener('click', function(){ set(b.dataset.set); }); });
+
+  var hash = (location.hash||'').replace('#','');
+  set(MODES.indexOf(hash) > -1 ? hash : 'printpage');
+
+  window.addEventListener('resize', fitPrintPage);
+
+  document.addEventListener('keydown', function(e){
+    var i = parseInt(e.key,10);
+    if(i >= 1 && i <= 5 && !/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)) set(MODES[i-1]);
+  });
+})();
+</script>
+<footer class="site-foot">
+  <div class="in">
+    <div>
+      <h4>The Pet Page</h4>
+      Published by The Middleburg Page<br>
+      Leland Schwartz, Publisher<br>
+      7170 Beverly Lane, The Plains, Virginia 20198<br>
+      <a href="mailto:editor@themiddleburgpage.com">editor@themiddleburgpage.com</a> · 540 422 1376
+    </div>
+    <div>
+      <h4>Partners</h4>
+      <ul>
+        <li>Mars Petcare — national partner</li>
+        <li>Fauquier Times — print</li>
+        <li>The Georgetowner — print</li>
+        <li>Middleburg Humane Foundation</li>
+      </ul>
+    </div>
+    <div>
+      <h4>For newspapers</h4>
+      <ul>
+        <li><a href="../partners.html">Partner kit &amp; rates</a></li>
+        <li><a href="../composer.html">The Composer</a></li>
+        <li><a href="../playbook.html">Video playbook</a></li>
+        <li><a href="../about.html">About the partnership</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="legal">
+    <b>Sponsored series.</b> Mars Petcare funds this page and reviews only its own company content.
+    The Middleburg Page retains full editorial control of all rescue reporting.
+  </div>
+</footer>
+</body>
+</html>
