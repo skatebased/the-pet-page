@@ -173,45 +173,49 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--mars);outline-of
   display:flex;flex-direction:column;overflow:hidden;
   transform:scale(var(--scale,.72));transform-origin:top center;
 }
-.pp-mast{text-align:center;border-bottom:1.5pt solid #000;padding-bottom:.05in;margin-bottom:.1in;flex:0 0 auto}
-.pp-mast h1{font-family:var(--displayFace),Georgia,serif;font-weight:400;font-size:34pt;
-  line-height:.95;margin:0 0 .03in;letter-spacing:-.02em;font-variant-numeric:lining-nums}
+.pp-mast{text-align:center;padding-bottom:.03in;margin-bottom:.1in;flex:0 0 auto}
+.pp-mast h1{font-family:var(--displayFace),Georgia,serif;font-weight:300;font-size:34pt;
+  line-height:.95;margin:0 0 .04in;letter-spacing:-.01em;font-variant-numeric:lining-nums;
+  text-decoration:underline;text-decoration-thickness:.6pt;text-underline-offset:.1em;
+  text-decoration-skip-ink:auto}
 .pp-mast .dl{font-family:var(--ui);font-size:7.5pt;color:#333}
 .pp-disc{font-family:var(--ui);font-size:5.8pt;letter-spacing:.06em;text-transform:uppercase;
   text-align:center;color:#444;border-bottom:.5pt solid #bbb;padding-bottom:.05in;margin-bottom:.1in;flex:0 0 auto}
-.pp-body{display:grid;grid-template-columns:1.92fr 1fr;gap:.2in;flex:1 1 auto;min-height:0;overflow:hidden}
+.pp-body{display:grid;grid-template-columns:1.92fr 1fr;gap:.26in;flex:1 1 auto;min-height:0;overflow:hidden}
 .pp-l{display:flex;flex-direction:column;min-width:0;overflow:hidden}
-.pp-r{border-left:.5pt solid #999;padding-left:.18in;min-width:0;display:flex;flex-direction:column;overflow:hidden}
-.pp-top{display:grid;grid-template-columns:1fr 1.06fr;gap:.15in;margin-bottom:.08in;flex:0 0 auto}
-.pp-photo{background:#cfc7b4 center/cover no-repeat;height:2.45in;display:grid;place-items:center;
+.pp-r{min-width:0;display:flex;flex-direction:column;overflow:hidden}
+.pp-top{display:grid;grid-template-columns:1fr 1.15fr;gap:.18in;margin-bottom:.08in;flex:0 0 auto}
+.pp-photo{background:#cfc7b4 center/cover no-repeat;height:3.05in;display:grid;place-items:center;
   text-align:center;font-family:var(--ui);font-size:6pt;letter-spacing:.09em;text-transform:uppercase;
   color:#4a4335;padding:.1in}
-.pp-cap{font-family:var(--ui);font-size:6.2pt;font-style:italic;color:#444;margin-top:.03in;line-height:1.3}
+.pp-cap{font-family:var(--ui);font-size:6.2pt;font-style:italic;color:#444;margin-top:.04in;line-height:1.3;text-align:center}
 .pp-by{font-family:var(--ui);font-size:7.5pt;font-weight:700;margin:0 0 .07in;color:#111}
 .pp-by em{display:block;font-weight:400;font-style:italic;font-size:6.8pt;color:#555;margin-top:.02in}
-.pp-flow{column-count:var(--cols);column-gap:var(--gutter);column-rule:.5pt solid #ccc;
+.pp-flow{column-count:var(--cols);column-gap:var(--gutter);
   flex:1 1 auto;min-height:0;overflow:hidden}
 .pp-r .copy{font-size:calc(var(--bodySize) - .75pt);line-height:1.3;flex:1 1 auto;min-height:0;overflow:hidden}
-.pp-r .disp{font-size:calc(var(--headSize) * .82)}
+.pp-r .disp{font-size:calc(var(--headSize) * .92)}
 .pp-l .disp{font-size:var(--headSize)}
 .pp-note{font-family:var(--textFace),Georgia,serif;font-style:italic;font-size:6.8pt;line-height:1.32;
-  border-top:.5pt solid #999;border-bottom:.5pt solid #999;padding:.045in 0;margin:.1in 0 .08in;flex:0 0 auto}
+  border-top:.5pt solid #999;padding:.045in 0 .02in;margin:.1in 0 .08in;flex:0 0 auto}
 .pp-note b{font-family:var(--ui);font-style:normal;font-weight:700;font-size:6.2pt;letter-spacing:.1em;text-transform:uppercase}
 .pp-pets{display:grid;grid-template-columns:repeat(8,1fr);gap:.06in;margin-bottom:.09in;flex:0 0 auto}
-.pp-pet .av{height:.78in;background:#c6bda8 center/cover no-repeat;display:grid;place-items:center;font-size:15pt}
+.pp-pet .av{height:.92in;background:#c6bda8 center/cover no-repeat;display:grid;place-items:center;font-size:15pt}
 .pp-pet span{display:block;text-align:center;font-family:var(--ui);font-size:5.4pt;font-weight:700;
   letter-spacing:.06em;color:#333;margin-top:.02in}
 .pp-strip{height:var(--stripH);min-height:var(--stripH);display:grid;
   grid-template-columns:1.35fr 1fr 1fr 1fr;gap:.05in;flex:0 0 auto}
 .pp-strip .c{display:grid;place-items:center;font-family:var(--ui);font-size:6pt;
   letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.85);overflow:hidden}
-.pp-strip .c1{background:var(--mars);place-items:start;align-content:center;padding:.12in .14in;color:#fff}
+.pp-strip .c1{background:linear-gradient(120deg,#42511f 0%,#22300f 100%);place-items:start;align-content:center;padding:.12in .14in;color:#fff}
 .pp-strip .c1 b{font-family:var(--ui);font-weight:800;font-size:11pt;line-height:1.12;text-transform:none}
 .pp-strip .c1 small{display:block;font-size:6pt;letter-spacing:.14em;opacity:.75;margin-top:.04in}
-.pp-strip .c2{background:#6b7a4c}.pp-strip .c3{background:#b8933f}.pp-strip .c4{background:#a4643f}
+.pp-strip .c2,.pp-strip .c3,.pp-strip .c4{background:linear-gradient(135deg,#ddd6c6,#bcb29b);color:#84796a}
 .pp-foot{font-family:var(--ui);font-size:5.8pt;color:#666;text-align:center;padding-top:.06in;flex:0 0 auto}
-.pp-res{margin-top:.1in;border:.5pt dashed #c4b9a2;padding:.4in .1in;text-align:center;
-  font-family:var(--ui);font-size:5.8pt;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#a89a7d}
+.pp-more{margin:.05in 0 0}
+.pp-qr{display:inline-block;width:.3in;height:.3in;margin-left:.06in;vertical-align:-.1in;
+  background:repeating-conic-gradient(#16150f 0 25%,transparent 0 50%) 0 0/.075in .075in;
+  outline:.5pt solid #16150f}
 
 /* ---------- shared edition furniture (web + phone) ---------- */
 .w-note{font-family:var(--textFace),Georgia,serif;font-style:italic;font-size:.85rem;line-height:1.45;
@@ -512,7 +516,7 @@ The cats, for their part, worked it out in under a week, which is roughly six da
         <label class="f"><span>Left</span><input type="number" id="mL" value=".34" step=".02"></label>
       </div>
       <div class="row3">
-        <label class="f"><span>Story cols</span><input type="number" id="cols" value="2" min="1" max="6"></label>
+        <label class="f"><span>Story cols</span><input type="number" id="cols" value="1" min="1" max="6"></label>
         <label class="f"><span>Gutter (in)</span><input type="number" id="gutter" value=".15" step=".01"></label>
         <label class="f"><span>Strip (in)</span><input type="number" id="stripH" value="1.25" step=".05"></label>
       </div>
@@ -581,7 +585,6 @@ The cats, for their part, worked it out in under a week, which is roughly six da
         <h1 id="o_paper">The Middleburg Page</h1>
         <div class="dl"><span id="o_date"></span> &nbsp;··&nbsp; <span id="o_contact"></span></div>
       </div>
-      <div class="pp-disc">Sponsored series · Mars Petcare funds this page and reviews only its own company content · <span id="o_paper2"></span> retains full editorial control of all rescue reporting</div>
       <div class="pp-body">
         <div class="pp-l">
           <div class="pp-top">
@@ -993,7 +996,7 @@ function marsStory(shelter, withMore){
     + '<p>So we asked the company if it would run a year-long test to see if us local news editors could share their message wide enough to be a serious complement to their own social media efforts.</p>'
     + '<p>Can local news organizations help drive national brands and recapture a piece of what kept community newspapers alive for decades? That is the question. If this is the first you&rsquo;ve heard of the Mars <b><i>&ldquo;Closer Than You Think&rdquo;</i></b> campaign, then we&rsquo;re onto something.</p>'
     + '<p>What we&rsquo;re thinking is to bring you two sets of stories over the year juxtaposed to Mars&rsquo; own messages. The first about rescues; how they work and how you can help, through our colleagues at the ' + (shelter || 'local shelter') + '. The second describing how Mars is a thought leader in responsible pet ownership and animal adoption as well as how it makes its petfood and the science behind it.</p>'
-    + (withMore ? '<p class="pp-more"><b><i>Read more here</i></b></p>' : '');
+    + (withMore ? '<p class="pp-more"><b><i>Read more here.</i></b><span class="pp-qr"></span></p>' : '');
 }
 
 function paras(text){
@@ -1098,7 +1101,7 @@ function render(){
   const dc = on('dropcap') ? ' class="dcap"' : '';
   setHTML('o_lead', '<p' + dc + '>' + noWidow(lead) + '</p>');
   setHTML('o_flow', rest.map(p => '<p>' + noWidow(p) + '</p>').join('') +
-    '<div class="pp-res">Continues online — ' + (v('url') || '') + '</div>');
+    '<p class="pp-more"><b><i>Read more here.</i></b><span class="pp-qr"></span></p>');
 
   const full = P.map((p, i) => '<p' + (i === 0 && on('dropcap') ? dc : '') + '>' + noWidow(p) + '</p>').join('');
   setHTML('o_body2', full);
@@ -1124,8 +1127,9 @@ function render(){
   setHTML('o_pets2', petRow);
   setHTML('o_pets3', petRow);
 
-  setText('o_foot', v('paper') + ' · Live space ' + W + ' × ' + H + ' in · Strip ad ' + W + ' × ' +
-    (parseFloat(v('stripH')) || 1.25) + ' in · ' + names.length + ' reader slots at $' + (v('slotPrice') || 0));
+  setText('o_foot', 'Sponsored series · Mars Petcare funds this page and reviews only its own company content · ' +
+    v('paper') + ' retains full editorial control of all rescue reporting · Live space ' + W + ' × ' + H +
+    ' in · ' + names.length + ' reader slots at $' + (v('slotPrice') || 0));
   setText('o_foot2', v('paper') + ' · ' + names.length + ' reader slots at $' + (v('slotPrice') || 0) +
     ' · Rescue reporting with ' + (v('shelter') || 'the local shelter'));
 
@@ -1299,7 +1303,7 @@ document.querySelectorAll('#tabs button').forEach(b => b.addEventListener('click
 
 /* ---- print spec presets ---- */
 const PRESETS = {
-  middleburg:{pgW:9.5,pgH:10.5,mT:.3,mR:.34,mB:.24,mL:.34,cols:2,gutter:.15,stripH:1.25},
+  middleburg:{pgW:9.5,pgH:10.5,mT:.3,mR:.34,mB:.24,mL:.34,cols:1,gutter:.15,stripH:1.25},
   broadsheet:{pgW:11,pgH:21,mT:.4,mR:.4,mB:.35,mL:.4,cols:3,gutter:.16,stripH:1.5},
   tabloid:{pgW:10,pgH:12.5,mT:.35,mR:.35,mB:.3,mL:.35,cols:2,gutter:.15,stripH:1.25},
   letter:{pgW:8.5,pgH:11,mT:.5,mR:.5,mB:.5,mL:.5,cols:2,gutter:.14,stripH:1}
