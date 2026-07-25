@@ -119,6 +119,7 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--mars);outline-of
   font-optical-sizing:auto;
   font-variant-ligatures:common-ligatures contextual;
   font-feature-settings:"kern" 1,"liga" 1,"clig" 1,"calt" 1;
+  font-synthesis:none;               /* never fake a bold or an italic */
   text-rendering:optimizeLegibility;
 }
 .face{display:none}
@@ -140,6 +141,7 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--mars);outline-of
 .copy p.dcap::first-letter{
   float:left;font-size:calc(var(--bodySize) * 2.9);line-height:.78;
   padding:.02em .05em 0 0;font-family:var(--displayFace),Georgia,serif;font-weight:700;
+  margin-left:var(--dcapShift,0em);  /* measured left-bearing compensation — ink flush, not the advance box */
 }
 
 /* display type — lining figures, tight tracking, balanced breaks */
@@ -155,6 +157,12 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--mars);outline-of
    kerned glyph its own line-break opportunity and split words mid-syllable. */
 .disp .k{display:inline;white-space:pre-wrap}
 .disp.hang{text-indent:-.06em}          /* optical hang for a leading quote */
+
+/* cap-height trimming — the display box is measured cap to baseline,
+   the way a compositor measures it, not by the font's loose line box */
+@supports (text-box: trim-both cap alphabetic){
+  .disp,.pp-mast h1{text-box:trim-both cap alphabetic}
+}
 
 /* ================================================================
    PRINT PAGE
@@ -205,6 +213,31 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--mars);outline-of
 .pp-res{margin-top:.1in;border:.5pt dashed #c4b9a2;padding:.4in .1in;text-align:center;
   font-family:var(--ui);font-size:5.8pt;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#a89a7d}
 
+/* ---------- shared edition furniture (web + phone) ---------- */
+.w-note{font-family:var(--textFace),Georgia,serif;font-style:italic;font-size:.85rem;line-height:1.45;
+  border-top:1px solid #999;border-bottom:1px solid #999;padding:.5rem 0;margin:1.4rem 0 1rem}
+.w-note b{font-family:var(--ui);font-style:normal;font-weight:700;font-size:.64rem;
+  letter-spacing:.1em;text-transform:uppercase}
+.w-pets{display:grid;grid-template-columns:repeat(8,1fr);gap:.5rem;margin:0 0 1rem}
+.w-pets .av{aspect-ratio:1;height:auto;background:#c6bda8 center/cover no-repeat;
+  display:grid;place-items:center;font-size:1.3rem}
+.w-pets span{display:block;text-align:center;font-family:var(--ui);font-size:.55rem;
+  font-weight:700;letter-spacing:.06em;color:#333;margin-top:.15rem}
+.w-strip{display:grid;grid-template-columns:1.35fr 1fr 1fr 1fr;gap:.4rem;min-height:5.6rem}
+.w-strip .c{display:grid;place-items:center;font-family:var(--ui);font-size:.6rem;
+  letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.85);
+  padding:.5rem;text-align:center}
+.w-strip .c1{background:var(--mars);place-items:start;align-content:center;text-align:left;
+  padding:.8rem .9rem;color:#fff}
+.w-strip .c1 b{font-weight:800;font-size:1rem;line-height:1.15;text-transform:none;display:block}
+.w-strip .c1 small{display:block;font-size:.58rem;letter-spacing:.14em;opacity:.75;margin-top:.3rem}
+.w-strip .c2{background:#6b7a4c}.w-strip .c3{background:#b8933f}.w-strip .c4{background:#a4643f}
+.w-by{font-family:var(--ui);font-size:.78rem;font-weight:700;margin:.2rem 0 .8rem;color:#111}
+.w-by em{display:block;font-weight:400;font-style:italic;font-size:.72rem;color:#555;margin-top:.1rem}
+.w-cap{font-family:var(--ui);font-size:.72rem;font-style:italic;color:#555;margin-top:.3rem}
+.w-disc{font-family:var(--ui);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;
+  text-align:center;color:#555;border-bottom:1px solid #ddd;padding-bottom:.55rem;margin-bottom:1.3rem}
+
 /* ---------- PHONE ---------- */
 #phone .pg{width:390px;border-radius:30px;padding:.45rem;background:#16150f;box-shadow:0 14px 50px rgba(0,0,0,.4)}
 #phone .inner{background:#fff;border-radius:24px;overflow-y:auto;max-height:74vh;padding:1.2rem 1.15rem 2rem}
@@ -212,15 +245,41 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--mars);outline-of
 #phone .copy{font-size:1.02rem;line-height:1.62;text-align:left;hyphens:none;column-count:1}
 #phone .copy p{margin:0 0 .85rem}
 #phone .photo{width:100%;aspect-ratio:4/3;background:#cfc7b4 center/cover no-repeat;border-radius:3px;margin:1rem 0 .4rem}
+#phone .ph-sec{font-family:var(--ui);font-size:.6rem;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--mars);border-top:2px solid var(--ink);
+  padding-top:.9rem;margin:1.6rem 0 .5rem}
+#phone .ph-mhed{font-size:1.28rem;font-weight:400}
+#phone .w-pets{grid-template-columns:repeat(4,1fr)}
+#phone .w-strip{grid-template-columns:1fr 1fr;min-height:0}
+#phone .w-note{font-size:.8rem}
 
-/* ---------- WEB ---------- */
-#web .pg{width:min(64rem,100%);background:#fff;padding:2.2rem 3rem 3rem}
-#web .disp{font-size:2.5rem}
-#web .copy{font-size:1.1rem;line-height:1.62;text-align:left;hyphens:none}
+/* ---------- WEB — the printed page, set for a screen ---------- */
+#web .pg{width:min(64rem,100%);background:#fff;padding:2.6rem 3.2rem 3rem}
+#web .w-mast{text-align:center;border-bottom:2px solid #000;padding-bottom:.5rem;margin-bottom:.6rem}
+#web .w-mast h1{font-family:var(--displayFace),Georgia,serif;font-weight:400;font-size:3rem;
+  line-height:.95;margin:0 0 .3rem;font-variant-numeric:lining-nums}
+#web .w-mast .dl{font-family:var(--ui);font-size:.72rem;color:#333;letter-spacing:.04em}
+#web .w-body{display:grid;grid-template-columns:1.92fr 1fr;gap:2.2rem}
+#web .w-r{border-left:1px solid #ccc;padding-left:1.8rem}
+#web .w-r .disp{font-size:1.45rem}
+#web .w-r .copy{font-size:.92rem;line-height:1.52}
+#web .disp{font-size:2.3rem}
+#web .copy{font-size:1.05rem;line-height:1.6;text-align:left;hyphens:none}
 #web .copy p{margin:0 0 1rem}
-#web .photo{width:100%;aspect-ratio:16/9;background:#cfc7b4 center/cover no-repeat;margin:1.2rem 0 .5rem}
+#web .w-top{display:grid;grid-template-columns:1fr 1.06fr;gap:1.6rem;margin-bottom:.6rem}
+#web .photo{width:100%;aspect-ratio:4/3;background:#cfc7b4 center/cover no-repeat}
 #web .cols{column-count:2;column-gap:2.4rem;column-rule:1px solid var(--rule)}
-@media (max-width:900px){#web .cols{column-count:1}}
+#web .w-foot{font-family:var(--ui);font-size:.62rem;color:#666;text-align:center;padding-top:.7rem}
+@media (max-width:900px){
+  #web .pg{padding:1.4rem 1.2rem 2rem}
+  #web .w-mast h1{font-size:2rem}
+  #web .disp{font-size:1.7rem}
+  #web .w-body,#web .w-top{grid-template-columns:1fr}
+  #web .w-r{border-left:0;padding-left:0;border-top:2px solid var(--ink);padding-top:1rem;margin-top:.4rem}
+  #web .cols{column-count:1}
+  #web .w-pets{grid-template-columns:repeat(4,1fr)}
+  #web .w-strip{grid-template-columns:1fr 1fr;min-height:0}
+}
 
 /* ---------- POSTCARD ---------- */
 #postcard .pg{width:600px;height:432px;position:relative;padding:30px 34px;
@@ -483,11 +542,13 @@ The cats, for their part, worked it out in under a week, which is roughly six da
       <label class="f"><span>Optical kerning strength <em>— display type only</em></span>
         <div class="slider"><input type="range" id="kern" min="0" max="2" step=".1" value="1"><output id="kernOut">1.0×</output></div>
       </label>
-      <p class="hint">The font's own kern pairs are always on. This adds optical correction to the pairs browsers habitually set too loose at display sizes — Ta, Wa, Vo, Ye, LT, P. and their kin.</p>
+      <p class="hint">The face's own kern table is always on. Above it runs a true optical pass measured from the rendered glyphs: every display pair is rasterised, the gap between the facing ink profiles is compared with the face's own stem rhythm, and the difference is applied as a per-pair correction. It works on any face — including your licensed one — and never touches body copy.</p>
 
       <label class="chk"><input type="checkbox" id="justify" checked> Justify body copy</label>
       <label class="chk"><input type="checkbox" id="hyphen" checked> Hyphenate</label>
       <label class="chk"><input type="checkbox" id="oldstyle" checked> Old-style figures in text</label>
+      <label class="chk"><input type="checkbox" id="otrack" checked> Size-graded tracking — tighter as type grows</label>
+      <label class="chk"><input type="checkbox" id="smart" checked> Copy-edit pass — quotes, dashes, widows</label>
       <label class="chk"><input type="checkbox" id="hang" checked> Hang opening quotes optically</label>
       <label class="chk"><input type="checkbox" id="dropcap" checked> Drop cap on the opening paragraph</label>
     </div>
@@ -539,13 +600,7 @@ The cats, for their part, worked it out in under a week, which is roughly six da
         <div class="pp-r">
           <h2 class="disp hang">&ldquo;Mars Is Closer Than You Think&rdquo; Ad Campaign Launched Here</h2>
           <p class="pp-by">By Leland Schwartz<em>Editor, The Middleburg Page</em></p>
-          <div class="copy">
-            <p>When we heard that the candy and pet food company — which makes Milky Ways and Mars bars for us, IAMS and Pedigree for our dogs and Temptations for our cats — wanted to make everyone aware of how local it was, we thought &lsquo;what better way than through the local press?&rsquo;</p>
-            <p>So we asked the company if it would run a year-long test to see if us local news editors could share their message wide enough to be a serious complement to their own social media efforts.</p>
-            <p>Can local news organizations help drive national brands and recapture a piece of what kept community newspapers alive for decades? That is the question. If this is the first you&rsquo;ve heard of the Mars <b><i>&ldquo;Closer Than You Think&rdquo;</i></b> campaign, then we&rsquo;re onto something.</p>
-            <p>What we&rsquo;re thinking is to bring you two sets of stories over the year juxtaposed to Mars&rsquo; own messages. The first about rescues; how they work and how you can help, through our colleagues at the <span id="o_shelter2"></span>. The second describing how Mars is a thought leader in responsible pet ownership and animal adoption as well as how it makes its petfood and the science behind it.</p>
-            <p class="pp-more"><b><i>Read more here</i></b></p>
-          </div>
+          <div class="copy" id="o_mars1"></div>
         </div>
       </div>
       <div class="pp-note"><b>Editor's note:</b> <span id="o_ednote"></span></div>
@@ -567,16 +622,59 @@ The cats, for their part, worked it out in under a week, which is roughly six da
       <div class="photo" id="o_photo2"></div>
       <div style="font-family:var(--ui);font-size:.7rem;font-style:italic;color:var(--soft);margin-bottom:1rem" id="o_caption2"></div>
       <div class="copy" id="o_body2"></div>
+
+      <div class="ph-sec">Also on the printed page</div>
+      <h3 class="disp ph-mhed">&ldquo;Mars Is Closer Than You Think&rdquo; Ad Campaign Launched Here</h3>
+      <p class="w-by">By Leland Schwartz<em>Editor, The Middleburg Page</em></p>
+      <div class="copy" id="o_mars3"></div>
+      <div class="w-note"><b>Editor's note:</b> <span id="o_ednote2"></span></div>
+      <div class="ph-sec">Reader-funded pet slots</div>
+      <div class="w-pets" id="o_pets3"></div>
+      <div class="w-strip">
+        <div class="c c1"><div><b>Mars Invests in American Made Products and Communities</b><small>Mars Is Closer Than You Think</small></div></div>
+        <div class="c c2">Sourcing · American agriculture</div>
+        <div class="c c3">Manufacturing · 38 US factories</div>
+        <div class="c c4">Pet nutrition · IAMS · Pedigree</div>
+      </div>
     </div></div></div>
 
-    <!-- WEB -->
+    <!-- WEB — the printed page, set for a screen -->
     <div class="face" id="web"><div class="pg">
-      <div style="font-family:var(--ui);font-size:.64rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--mars);margin-bottom:.6rem">Mars Petcare Series · <span id="o_issue4"></span></div>
-      <h2 class="disp" id="o_hed3" style="font-weight:400"></h2>
-      <p style="font-family:var(--ui);font-size:.76rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);margin:.4rem 0 1rem"><span id="o_byline3"></span></p>
-      <div class="photo" id="o_photo3"></div>
-      <div style="font-family:var(--ui);font-size:.74rem;font-style:italic;color:var(--soft);margin-bottom:1.4rem" id="o_caption3"></div>
-      <div class="copy cols" id="o_body3"></div>
+      <div class="w-mast">
+        <h1 id="o_paper4"></h1>
+        <div class="dl">Mars Petcare Series · <span id="o_issue4"></span> &nbsp;··&nbsp; <span id="o_date2"></span></div>
+      </div>
+      <div class="w-disc">Sponsored series · Mars Petcare funds this page and reviews only its own company content · <span id="o_paper5"></span> retains full editorial control of all rescue reporting</div>
+      <div class="w-body">
+        <div>
+          <div class="w-top">
+            <div>
+              <h2 class="disp" id="o_hed3" style="font-weight:400"></h2>
+              <p class="w-by"><span id="o_byline3"></span><em id="o_credit2"></em></p>
+              <div class="copy" id="o_wlead"></div>
+            </div>
+            <div>
+              <div class="photo" id="o_photo3"></div>
+              <div class="w-cap" id="o_caption3"></div>
+            </div>
+          </div>
+          <div class="copy cols" id="o_wflow"></div>
+        </div>
+        <div class="w-r">
+          <h2 class="disp hang">&ldquo;Mars Is Closer Than You Think&rdquo; Ad Campaign Launched Here</h2>
+          <p class="w-by">By Leland Schwartz<em>Editor, The Middleburg Page</em></p>
+          <div class="copy" id="o_mars2"></div>
+        </div>
+      </div>
+      <div class="w-note"><b>Editor's note:</b> <span id="o_ednote3"></span></div>
+      <div class="w-pets" id="o_pets2"></div>
+      <div class="w-strip">
+        <div class="c c1"><div><b>Mars Invests in American Made Products and Communities</b><small>Mars Is Closer Than You Think</small></div></div>
+        <div class="c c2">Sourcing · American agriculture</div>
+        <div class="c c3">Manufacturing · 38 US factories</div>
+        <div class="c c4">Pet nutrition · IAMS · Pedigree</div>
+      </div>
+      <div class="w-foot" id="o_foot2"></div>
     </div></div>
 
     <!-- POSTCARD -->
@@ -653,14 +751,150 @@ const $ = id => document.getElementById(id);
 const root = document.documentElement;
 
 /* ============================================================
-   OPTICAL KERNING PASS
-   The font's own kern table is always active via font-kerning.
-   This corrects the pairs that browsers habitually leave loose
-   at display sizes. Values are in em, applied as letter-spacing
-   on the left glyph of each pair, scaled by the strength slider.
+   OPTICAL KERNING — measured, not guessed.
+   Every glyph of the display face is rasterised once on a canvas.
+   For each adjacent pair the engine reads the visual gap between
+   the facing ink profiles (dilated vertically so diagonals
+   attract), compares it with the face's own straight-stem rhythm
+   (nn · no · on · oo), and applies the difference as letter-
+   spacing on the left glyph, scaled by the strength slider.
+   Because it measures the glyphs the browser actually renders,
+   it is correct for ANY face — including a paper's licensed one —
+   and it re-runs when the webfonts finish loading.
    Applied ONLY to display type — never to body copy, where the
    font's metric kerning is correct and interference causes harm.
+   The static table below is the fallback when canvas measurement
+   is unavailable.
    ============================================================ */
+const OpticalKern = (function(){
+  const S = 128;                                  /* raster em, px */
+  const W = Math.round(S * 2.6), H = Math.round(S * 1.7);
+  const PADL = Math.round(S * .75), BASE = Math.round(S * 1.2);
+  const DIL = Math.round(S * .06);                /* vertical dilation — lets diagonals see each other */
+  const SOFT = S * .035;                          /* soft-min temperature */
+  const LIG = {fi:1, fl:1, ff:1};                 /* never split a ligature with a span */
+  let ctx = null;
+  const faces = new Map(), pairs = new Map();
+
+  function ready(){
+    if(ctx !== null) return ctx !== false;
+    try{
+      const c = document.createElement('canvas');
+      c.width = W; c.height = H;
+      ctx = c.getContext('2d', {willReadFrequently:true}) || false;
+    }catch(e){ ctx = false; }
+    return ctx !== false;
+  }
+
+  function face(fk){
+    let f = faces.get(fk);
+    if(!f){ f = {glyphs:new Map(), ref:null}; faces.set(fk, f); }
+    return f;
+  }
+
+  /* ink profile of one glyph: per-row leftmost / rightmost pixel */
+  function raster(fk, ch){
+    const f = face(fk);
+    if(f.glyphs.has(ch)) return f.glyphs.get(ch);
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    ctx.font = fk; ctx.textBaseline = 'alphabetic'; ctx.fillStyle = '#000';
+    ctx.fillText(ch, PADL, BASE);
+    const adv = ctx.measureText(ch).width;
+    const d = ctx.getImageData(0, 0, W, H).data;
+    const L = new Float32Array(H).fill(Infinity);
+    const R = new Float32Array(H).fill(-Infinity);
+    let ink = false;
+    for(let y = 0; y < H; y++){
+      const row = y * W;
+      for(let x = 0; x < W; x++){
+        if(d[(row + x) * 4 + 3] > 40){
+          if(x < L[y]) L[y] = x;
+          if(x > R[y]) R[y] = x;
+          ink = true;
+        }
+      }
+    }
+    let g = null;
+    if(ink){
+      const Ld = new Float32Array(H).fill(Infinity);
+      const Rd = new Float32Array(H).fill(-Infinity);
+      for(let y = 0; y < H; y++){
+        for(let k = -DIL; k <= DIL; k++){
+          const yy = y + k;
+          if(yy < 0 || yy >= H) continue;
+          if(L[yy] < Ld[y]) Ld[y] = L[yy];
+          if(R[yy] > Rd[y]) Rd[y] = R[yy];
+        }
+      }
+      g = {adv: adv, L: Ld, R: Rd};
+    }
+    f.glyphs.set(ch, g);
+    return g;
+  }
+
+  /* perceived distance between the facing profiles of a pair,
+     set at the exact pen advance the browser will use */
+  function gap(fk, a, b){
+    const A = raster(fk, a), B = raster(fk, b);
+    if(!A || !B) return null;
+    ctx.font = fk;
+    const pen = ctx.measureText(a + b).width - ctx.measureText(b).width;
+    let acc = 0, expacc = 0, n = 0;
+    for(let y = 0; y < H; y++){
+      if(A.R[y] === -Infinity || B.L[y] === Infinity) continue;
+      const g = pen + B.L[y] - A.R[y];
+      acc += g; expacc += Math.exp(-g / SOFT); n++;
+    }
+    if(!n) return null;
+    const softmin = -SOFT * Math.log(expacc / n);
+    return .65 * softmin + .35 * (acc / n);
+  }
+
+  /* the face's own rhythm — what a correct gap looks like in this font */
+  function refGap(fk){
+    const f = face(fk);
+    if(f.ref !== null) return f.ref;
+    let s = 0, c = 0;
+    [['n','n'],['n','o'],['o','n'],['o','o']].forEach(p => {
+      const g = gap(fk, p[0], p[1]);
+      if(g !== null){ s += g; c++; }
+    });
+    f.ref = c ? s / c : NaN;
+    return f.ref;
+  }
+
+  function pairEm(fk, a, b){
+    if(!ready()) return null;                     /* caller falls back to the table */
+    if(/\s/.test(a) || /\s/.test(b) || LIG[a + b]) return 0;
+    const key = fk + '|' + a + b;
+    if(pairs.has(key)) return pairs.get(key);
+    const D = gap(fk, a, b), T = refGap(fk);
+    let em = 0;
+    if(D !== null && isFinite(T)){
+      /* tighten boldly, open timidly — a loose pair is a flaw,
+         a snug one is usually the face's own judgement */
+      const raw = (T - D) / S;
+      em = raw < 0 ? Math.max(-.09, raw * .8) : Math.min(.012, raw * .35);
+      if(Math.abs(em) < .006) em = 0;
+    }
+    pairs.set(key, em);
+    return em;
+  }
+
+  /* measured left side bearing, for optical drop-cap alignment */
+  function lsbEm(fk, ch){
+    if(!ready()) return 0;
+    ctx.font = fk; ctx.textBaseline = 'alphabetic';
+    const m = ctx.measureText(ch);
+    if(m.actualBoundingBoxLeft === undefined) return 0;
+    return Math.max(-.15, Math.min(.02, m.actualBoundingBoxLeft / S));
+  }
+
+  return { pairEm: pairEm, lsbEm: lsbEm, reset: function(){ faces.clear(); pairs.clear(); } };
+})();
+
+/* fallback pair table — used only when canvas measurement is unavailable */
 const KERN_PAIRS = {
   'Ta':-.055,'Te':-.045,'To':-.045,'Tr':-.038,'Tu':-.038,'Tw':-.035,'Ty':-.038,'Ts':-.04,
   'Ya':-.05,'Ye':-.042,'Yo':-.045,'Yu':-.035,'Ys':-.04,
@@ -680,10 +914,15 @@ const KERN_PAIRS = {
 function applyKerning(el, strength){
   const src = el.dataset.raw !== undefined ? el.dataset.raw : (el.dataset.raw = el.textContent);
   if(strength <= 0){ el.textContent = src; return; }
+  const cs = getComputedStyle(el);
+  const fk = cs.fontStyle + ' ' + cs.fontWeight + ' 128px ' + cs.fontFamily;
   const frag = document.createDocumentFragment();
   for(let i = 0; i < src.length; i++){
-    const pair = src.substr(i, 2);
-    const adj  = KERN_PAIRS[pair];
+    let adj = 0;
+    if(i + 1 < src.length){
+      const m = OpticalKern.pairEm(fk, src[i], src[i + 1]);
+      adj = m === null ? (KERN_PAIRS[src.substr(i, 2)] || 0) : m;
+    }
     if(adj){
       const s = document.createElement('span');
       s.className = 'k';
@@ -699,9 +938,63 @@ function applyKerning(el, strength){
 }
 
 /* ============================================================
+   THE COPY-EDIT PASS
+   Real editing, applied at render time — the writer's input is
+   never touched. Curly quotes, en dashes in ranges, thin-spaced
+   em dashes, true ellipses, non-breaking abbreviations, and a
+   widow-proofed last line per paragraph.
+   ============================================================ */
+function smartText(s){
+  if(!s) return '';
+  return s
+    .replace(/\.\.\./g, '\u2026')
+    .replace(/(\d)\s*--?\s*(\d)/g, '$1\u2013$2')
+    .replace(/(^|[^-])---?([^-]|$)/g, '$1\u2014$2')
+    .replace(/\s+\u2014\s+/g, '\u2009\u2014\u2009')
+    .replace(/(^|[\s([{\u2014\u2013\u2018\u201C])"/gm, '$1\u201C')
+    .replace(/"/g, '\u201D')
+    .replace(/(^|[\s([{\u2014\u2013\u201C])'/gm, '$1\u2018')
+    .replace(/'/g, '\u2019')
+    .replace(/\b(No|Mr|Mrs|Ms|Dr|St)\.\s/g, '$1.\u00A0')
+    .replace(/[ \t]{2,}/g, ' ');
+}
+
+/* keep the last word of a long paragraph attached to its neighbour */
+function noWidow(p){
+  return p.length > 80 ? p.replace(/ ([^\s]{1,12})$/, '\u00A0$1') : p;
+}
+
+/* size-graded tracking — the optical curve: tighter as type grows,
+   a touch open at agate sizes. em = -0.021 + 0.058·e^(−pt/11) */
+function trackEm(pt){
+  return -0.021 + 0.058 * Math.exp(-pt / 11);
+}
+
+/* measured drop cap — pull the cap's INK flush to the margin,
+   not the advance box the browser aligns by default */
+function opticalDropCap(){
+  const fam = getComputedStyle(root).getPropertyValue('--displayFace') || 'Georgia';
+  document.querySelectorAll('.copy p.dcap').forEach(p => {
+    const ch = (p.textContent || '').trimStart().charAt(0);
+    if(!ch){ p.style.removeProperty('--dcapShift'); return; }
+    p.style.setProperty('--dcapShift',
+      OpticalKern.lsbEm('700 128px ' + fam + ',Georgia,serif', ch).toFixed(4) + 'em');
+  });
+}
+
+/* ============================================================
    CONTENT PLUMBING
    ============================================================ */
 let photoURL = '';
+
+/* the Mars half of the page — one source, three renders */
+function marsStory(shelter, withMore){
+  return '<p>When we heard that the candy and pet food company — which makes Milky Ways and Mars bars for us, IAMS and Pedigree for our dogs and Temptations for our cats — wanted to make everyone aware of how local it was, we thought &lsquo;what better way than through the local press?&rsquo;</p>'
+    + '<p>So we asked the company if it would run a year-long test to see if us local news editors could share their message wide enough to be a serious complement to their own social media efforts.</p>'
+    + '<p>Can local news organizations help drive national brands and recapture a piece of what kept community newspapers alive for decades? That is the question. If this is the first you&rsquo;ve heard of the Mars <b><i>&ldquo;Closer Than You Think&rdquo;</i></b> campaign, then we&rsquo;re onto something.</p>'
+    + '<p>What we&rsquo;re thinking is to bring you two sets of stories over the year juxtaposed to Mars&rsquo; own messages. The first about rescues; how they work and how you can help, through our colleagues at the ' + (shelter || 'local shelter') + '. The second describing how Mars is a thought leader in responsible pet ownership and animal adoption as well as how it makes its petfood and the science behind it.</p>'
+    + (withMore ? '<p class="pp-more"><b><i>Read more here</i></b></p>' : '');
+}
 
 function paras(text){
   return text.split(/\n\s*\n/).map(s => s.trim()).filter(Boolean);
@@ -753,35 +1046,64 @@ function render(){
     d.classList.toggle('hang', on('hang') && /^["“‘']/.test(d.dataset.raw || d.textContent));
   });
 
+  /* size-graded tracking — per element, from its rendered size */
+  const otrack = on('otrack');
+  document.querySelectorAll('.disp, .pp-mast h1').forEach(d => {
+    if(otrack){
+      const pt = parseFloat(getComputedStyle(d).fontSize) * .75;
+      d.style.letterSpacing = trackEm(pt).toFixed(4) + 'em';
+    } else d.style.letterSpacing = '';
+  });
+  document.querySelectorAll('.copy').forEach(c => {
+    if(otrack){
+      const pt = parseFloat(getComputedStyle(c).fontSize) * .75;
+      c.style.letterSpacing = Math.max(0, Math.min(.01, trackEm(pt))).toFixed(4) + 'em';
+    } else c.style.letterSpacing = '';
+  });
+
   /* ---- content ---- */
-  const P = paras(v('body'));
+  const ed = on('smart') ? smartText : (s => s);
+  const P = paras(v('body')).map(ed);
   const lead = P[0] || '';
   const rest = P.slice(1);
 
   setText('o_paper',  v('paper'));
   setText('o_paper2', v('paper'));
   setText('o_paper3', v('paper'));
+  setText('o_paper4', v('paper'));
+  setText('o_paper5', v('paper'));
   setText('o_date',   v('date'));
+  setText('o_date2',  v('date'));
   setText('o_contact',v('contact'));
   setText('o_shelter2', v('shelter'));
   setText('o_shelter3', v('shelter'));
   setText('o_url',    v('url'));
   ['o_issue3','o_issue4','o_issue5'].forEach(i => setText(i, 'No. ' + v('issue')));
 
-  ['o_hed','o_hed2','o_hed3','o_hed4'].forEach(i => { const e = $(i); if(e){ delete e.dataset.raw; e.textContent = v('hed'); } });
+  const hed = ed(v('hed'));
+  ['o_hed','o_hed2','o_hed3','o_hed4'].forEach(i => { const e = $(i); if(e){ delete e.dataset.raw; e.textContent = hed; } });
   ['o_byline','o_byline2','o_byline3'].forEach(i => setText(i, v('byline')));
   setText('o_credit', v('credit'));
-  ['o_caption','o_caption2','o_caption3'].forEach(i => setText(i, v('caption')));
-  setText('o_ednote', v('ednote'));
+  setText('o_credit2', v('credit'));
+  ['o_caption','o_caption2','o_caption3'].forEach(i => setText(i, ed(v('caption'))));
+  const edn = ed(v('ednote'));
+  setText('o_ednote', edn);
+  setText('o_ednote2', edn);
+  setText('o_ednote3', edn);
+  const mars = marsStory(v('shelter'), false);
+  setHTML('o_mars1', marsStory(v('shelter'), true));
+  setHTML('o_mars2', mars);
+  setHTML('o_mars3', mars);
 
   const dc = on('dropcap') ? ' class="dcap"' : '';
-  setHTML('o_lead', '<p' + dc + '>' + lead + '</p>');
-  setHTML('o_flow', rest.map(p => '<p>' + p + '</p>').join('') +
+  setHTML('o_lead', '<p' + dc + '>' + noWidow(lead) + '</p>');
+  setHTML('o_flow', rest.map(p => '<p>' + noWidow(p) + '</p>').join('') +
     '<div class="pp-res">Continues online — ' + (v('url') || '') + '</div>');
 
-  const full = P.map((p, i) => '<p' + (i === 0 && on('dropcap') ? dc : '') + '>' + p + '</p>').join('');
+  const full = P.map((p, i) => '<p' + (i === 0 && on('dropcap') ? dc : '') + '>' + noWidow(p) + '</p>').join('');
   setHTML('o_body2', full);
-  setHTML('o_body3', full);
+  setHTML('o_wlead', '<p' + dc + '>' + noWidow(lead) + '</p>');
+  setHTML('o_wflow', rest.map(p => '<p>' + noWidow(p) + '</p>').join(''));
 
   setText('o_pcp', (lead.slice(0, 150).replace(/\s+\S*$/, '')) + '…');
 
@@ -795,12 +1117,17 @@ function render(){
 
   /* reader pets */
   const names = v('pets').split(',').map(s => s.trim()).filter(Boolean);
-  $('o_pets').innerHTML = names.map(n =>
+  const petRow = names.map(n =>
     '<div class="pp-pet"><div class="av">\u{1F415}</div><span>‘' + n.toUpperCase() + '’</span></div>'
   ).join('');
+  $('o_pets').innerHTML = petRow;
+  setHTML('o_pets2', petRow);
+  setHTML('o_pets3', petRow);
 
   setText('o_foot', v('paper') + ' · Live space ' + W + ' × ' + H + ' in · Strip ad ' + W + ' × ' +
     (parseFloat(v('stripH')) || 1.25) + ' in · ' + names.length + ' reader slots at $' + (v('slotPrice') || 0));
+  setText('o_foot2', v('paper') + ' · ' + names.length + ' reader slots at $' + (v('slotPrice') || 0) +
+    ' · Rescue reporting with ' + (v('shelter') || 'the local shelter'));
 
   setText('o_vscene', v('vscene'));
   setText('o_vcap',   v('vcap'));
@@ -810,6 +1137,7 @@ function render(){
 
   /* kerning last — after all display text is final */
   document.querySelectorAll('.disp, .vc, .pp-mast h1').forEach(el => applyKerning(el, strength));
+  opticalDropCap();
 
   fit();
 }
@@ -1007,7 +1335,7 @@ function readPhoto(f){
 const FIELDS = ['paper','date','issue','contact','shelter','url','hed','byline','credit','body',
   'caption','pets','slotPrice','ednote','pgW','pgH','mT','mR','mB','mL','cols','gutter','stripH',
   'textFace','customFace','bodySize','leading','headSize','kern','vstyle','vscene','vcap','vhandle'];
-const CHECKS = ['justify','hyphen','oldstyle','hang','dropcap'];
+const CHECKS = ['justify','hyphen','oldstyle','hang','dropcap','otrack','smart'];
 
 $('saveBtn').addEventListener('click', () => {
   const pkg = { _format:'pet-page-package', _version:1, photo:photoURL, fields:{}, checks:{} };
@@ -1051,6 +1379,11 @@ FIELDS.concat(CHECKS).forEach(f => {
 window.addEventListener('resize', fit);
 
 render();
+
+/* the webfonts arrive after first paint — re-measure on the real outlines */
+if(document.fonts && document.fonts.ready){
+  document.fonts.ready.then(() => { OpticalKern.reset(); render(); });
+}
 })();
 </script>
 <footer class="site-foot">
