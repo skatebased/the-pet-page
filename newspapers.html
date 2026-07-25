@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Newspapers near Mars — The Pet Page</title>
+<meta name="description" content="Community newspapers within reach of Mars, Incorporated US sites — the prospecting map for the Pet Page syndication.">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  .n-wrap{max-width:62rem;margin:0 auto;background:var(--s-paper);box-shadow:0 2px 40px rgba(0,0,0,.09)}
+  .n-pad{padding:0 2.6rem 3.5rem}
+  .n-hero{background:var(--s-ink);color:#f6f3ea;padding:3rem 2.6rem 2.4rem}
+  .n-hero .eyebrow{font-family:var(--s-ui);font-size:.66rem;font-weight:700;letter-spacing:.2em;
+    text-transform:uppercase;opacity:.55;margin-bottom:.9rem}
+  .n-hero h1{font-family:var(--s-serif);font-weight:400;font-size:2.9rem;line-height:1.05;
+    letter-spacing:-.022em;margin:0 0 .9rem}
+  .n-hero p{font-size:1.08rem;line-height:1.55;opacity:.85;margin:0;max-width:36rem}
+  .n-figs{display:flex;gap:2.2rem;margin-top:1.8rem;padding-top:1.4rem;border-top:1px solid rgba(255,255,255,.14)}
+  .n-figs b{font-family:var(--s-serif);font-size:1.9rem;display:block;line-height:1}
+  .n-figs span{font-family:var(--s-ui);font-size:.68rem;opacity:.6}
+
+  .filters{display:flex;gap:.4rem;flex-wrap:wrap;margin:1.8rem 0 .4rem;font-family:var(--s-ui)}
+  .filters button{appearance:none;border:1px solid var(--s-rule2);background:#fff;border-radius:20px;
+    font:inherit;font-size:.74rem;font-weight:600;padding:.32rem .8rem;cursor:pointer;color:var(--s-soft)}
+  .filters button:hover{border-color:var(--s-mars);color:var(--s-mars)}
+  .filters button[aria-pressed="true"]{background:var(--s-mars);border-color:var(--s-mars);color:#fff}
+
+  .tier h2{font-family:var(--s-serif);font-weight:400;font-size:1.9rem;letter-spacing:-.015em;
+    margin:2.6rem 0 .4rem}
+  .tier h2 .count{font-family:var(--s-ui);font-size:.72rem;font-weight:700;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--s-soft);margin-left:.6rem;vertical-align:.35em}
+  .tier .blurb{font-size:.98rem;color:var(--s-soft);margin:0 0 1.2rem;max-width:44rem}
+
+  .np-list{display:grid;gap:.7rem}
+  .np{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--s-rule2);
+    border-radius:6px;overflow:hidden;background:#fff}
+  .np.hide{display:none}
+  .np-site{padding:1rem 1.2rem;background:var(--s-warm);border-right:1px solid var(--s-rule)}
+  .np-site b{font-family:var(--s-serif);font-size:1.12rem;display:block}
+  .np-site span{font-family:var(--s-ui);font-size:.68rem;font-weight:600;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--s-mars);display:block;margin:.15rem 0 .45rem}
+  .np-site p{margin:0;font-size:.85rem;line-height:1.5;color:var(--s-soft)}
+  .np-paper{padding:1rem 1.2rem}
+  .np-paper b{font-family:var(--s-serif);font-size:1.12rem;display:block}
+  .np-paper.verify b{font-style:italic;color:#b26b00;font-weight:400}
+  .np-meta{font-family:var(--s-ui);font-size:.72rem;color:var(--s-soft);display:block;margin:.15rem 0 .3rem}
+  .np-web{font-family:var(--s-ui);font-size:.74rem;color:var(--s-mars);text-decoration:none;
+    display:inline-block;margin-bottom:.35rem}
+  .np-web:hover{text-decoration:underline}
+  .badge{display:inline-block;font-family:var(--s-ui);font-size:.6rem;font-weight:700;
+    letter-spacing:.09em;text-transform:uppercase;padding:.18rem .55rem;border-radius:20px;margin:.1rem 0 .3rem}
+  .badge.ind{background:#e3f0e8;color:var(--s-go)}
+  .badge.ch{background:#f2f2f2;color:var(--s-soft)}
+  .badge.run{background:var(--s-go);color:#fff}
+  .np-notes{margin:.3rem 0 0;font-size:.8rem;line-height:1.5;color:var(--s-soft);font-style:italic}
+
+  .dnc{margin-top:3rem}
+  .dnc h2{font-family:var(--s-serif);font-weight:400;font-size:1.9rem;letter-spacing:-.015em;margin:0 0 .4rem;color:var(--s-adopt)}
+  .dnc .blurb{font-size:.98rem;color:var(--s-soft);margin:0 0 1.2rem;max-width:44rem}
+  .dnc table{width:100%;border-collapse:collapse;font-size:.85rem}
+  .dnc th{background:var(--s-adopt);color:#fff;font-family:var(--s-ui);font-size:.62rem;font-weight:700;
+    letter-spacing:.11em;text-transform:uppercase;padding:.55rem .7rem;text-align:left}
+  .dnc td{padding:.6rem .7rem;border-bottom:1px solid var(--s-rule);vertical-align:top;
+    line-height:1.45;background:#fdf6f5}
+  .dnc-type{font-family:var(--s-ui);font-size:.7rem;color:var(--s-soft)}
+
+  .method{margin-top:2.6rem;font-size:.85rem;color:var(--s-soft);font-style:italic;line-height:1.55;
+    border-top:1px solid var(--s-rule);padding-top:1.2rem}
+
+  @media (max-width:760px){
+    .n-pad,.n-hero{padding-left:1.3rem;padding-right:1.3rem}
+    .n-hero h1{font-size:2rem}
+    .np{grid-template-columns:1fr}
+    .np-site{border-right:0;border-bottom:1px solid var(--s-rule)}
+    .n-figs{gap:1.2rem;flex-wrap:wrap}
+  }
+</style>
+</head>
+<body class="site-home">
+<nav class="site-nav">
+<a class="site-brand" href="index.html">The Pet Page <span>· Middleburg</span></a>
+<a class="site-link" href="index.html">Home</a>
+<a class="site-link" href="about.html">About</a>
+<a class="site-link" href="issues/index.html">Issues</a>
+<a class="site-link" href="newspapers.html" aria-current="page">Newspapers</a>
+<a class="site-link" href="partners.html">For papers</a>
+<a class="site-link" href="playbook.html">Video</a>
+<span class="site-sp"></span>
+<a class="site-cta" href="composer.html">Open the Composer →</a>
+</nav>
+
+<div class="n-wrap">
+  <header class="n-hero">
+    <div class="eyebrow">The prospecting map</div>
+    <h1>Newspapers near Mars</h1>
+    <p>Mars operates 38 factories across the United States, plus laboratories, veterinary businesses and offices. Nearly every one sits in a community with a local newspaper, a local animal shelter and a local pet food store — which is the whole qualifying test. These are the markets, and the papers.</p>
+    <div class="n-figs">
+      <div><b>41</b><span>markets mapped</span></div>
+      <div><b>2</b><span>already running the page</span></div>
+      <div><b>16</b><span>independent or nonprofit owned</span></div>
+      <div><b>10</b><span>do-not-contact sites</span></div>
+    </div>
+  </header>
+
+  <div class="n-pad">
+
+    <div class="filters" id="filters">
+      <button data-f="all" aria-pressed="true">All</button>
+      <button data-f="t1" aria-pressed="false">Tier 1 — home turf</button>
+      <button data-f="t2" aria-pressed="false">Tier 2 — sweet spot</button>
+      <button data-f="t3" aria-pressed="false">Tier 3 — metro</button>
+      <button data-f="ind" aria-pressed="false">Independent papers only</button>
+    </div>
+
+    
+<section class="tier">
+  <h2>Tier 1 — Home turf <span class="count">10 markets</span></h2>
+  <p class="blurb">Virginia, Mars global HQ in McLean, and Mars Petcare’s US HQ in Franklin, Tennessee. The warmest markets in the country for this page — two of them are Mars’s own hometowns.</p>
+  <div class="np-list">
+<div class="np" data-tier="1" data-state="VA" data-indep="Nonprofit">
+  <div class="np-site">
+    <b>Middleburg / The Plains, VA</b>
+    <span>Home base</span>
+    <p>The Middleburg Page — the pilot. Jacquie Mars lives locally.</p>
+  </div>
+  <div class="np-paper">
+    <b>Fauquier Times</b><span class="np-meta">Piedmont Journalism Foundation (nonprofit) · Weekly</span>
+    <a class="np-web" href="https://www.fauquier.com" rel="noopener">www.fauquier.com</a>
+    <span class="badge run">Running the page</span>
+    <p class="np-notes">Pilot site. Page also runs in The Georgetowner.</p>
+  </div>
+</div>
+<div class="np" data-tier="1" data-state="VA" data-indep="Independent">
+  <div class="np-site">
+    <b>Middleburg / The Plains, VA</b>
+    <span>Home base</span>
+    <p>Second outlet for the pilot page — DC audience.</p>
+  </div>
+  <div class="np-paper">
+    <b>The Georgetowner</b><span class="np-meta">Independent · Twice monthly</span>
+    <a class="np-web" href="https://georgetowner.com" rel="noopener">georgetowner.com</a>
+    <span class="badge run">Running the page</span>
+    <p class="np-notes">Already carrying the page.</p>
+  </div>
+</div>
+<div class="np" data-tier="1" data-state="VA" data-indep="Independent">
+  <div class="np-site">
+    <b>McLean, VA</b>
+    <span>GLOBAL HEADQUARTERS</span>
+    <p>Mars, Incorporated global HQ since 1984. The single most valuable market in the list.</p>
+  </div>
+  <div class="np-paper">
+    <b>McLean Connection</b><span class="np-meta">Connection Newspapers · Weekly</span>
+    <a class="np-web" href="https://www.connectionnewspapers.com" rel="noopener">www.connectionnewspapers.com</a>
+    <span class="badge ind">Independent</span>
+    <p class="np-notes">Mars HQ is in this paper&#x27;s coverage area. Highest symbolic value — &#x27;Mars is closer than you think&#x27; printed in Mars&#x27; own hometown paper.</p>
+  </div>
+</div>
+<div class="np" data-tier="1" data-state="VA" data-indep="Independent">
+  <div class="np-site">
+    <b>McLean, VA</b>
+    <span>GLOBAL HEADQUARTERS</span>
+    <p>Same market — sister editions cover Vienna, Oakton, Great Falls.</p>
+  </div>
+  <div class="np-paper">
+    <b>Great Falls Connection / Vienna-Oakton Connection</b><span class="np-meta">Connection Newspapers · Weekly</span>
+    <a class="np-web" href="https://www.greatfallsconnection.com" rel="noopener">www.greatfallsconnection.com</a>
+    <span class="badge ind">Independent</span>
+    <p class="np-notes">Same publisher as McLean Connection — one conversation covers several editions.</p>
+  </div>
+</div>
+<div class="np" data-tier="1" data-state="VA" data-indep="Independent">
+  <div class="np-site">
+    <b>McLean / Arlington, VA</b>
+    <span>GLOBAL HEADQUARTERS</span>
+    <p>Alternative NoVa outlet covering Arlington and Fairfax County.</p>
+  </div>
+  <div class="np-paper">
+    <b>Sun Gazette</b><span class="np-meta">Independent · Weekly</span>
+    <a class="np-web" href="https://sungazette.news" rel="noopener">sungazette.news</a>
+    <span class="badge ind">Independent</span>
+    <p class="np-notes">Backup / additional NoVa reach.</p>
+  </div>
+</div>
+<div class="np" data-tier="1" data-state="VA" data-indep="Independent">
+  <div class="np-site">
+    <b>Loudoun County, VA</b>
+    <span>Adjacent home market</span>
+    <p>Immediately adjacent to Middleburg — natural first expansion, same Hunt Country network.</p>
+  </div>
+  <div class="np-paper">
+    <b>Loudoun Times-Mirror</b><span class="np-meta">Independent · Weekly</span>
+    <a class="np-web" href="https://www.loudountimes.com" rel="noopener">www.loudountimes.com</a>
+    <span class="badge ind">Independent</span>
+    <p class="np-notes">One of Virginia&#x27;s oldest papers. Middleburg sits in Loudoun County.</p>
+  </div>
+</div>
+<div class="np" data-tier="1" data-state="VA" data-indep="Independent">
+  <div class="np-site">
+    <b>Loudoun County, VA</b>
+    <span>Adjacent home market</span>
+    <p>Second Loudoun outlet — digital-first, strong local following.</p>
+  </div>
+  <div class="np-paper">
+    <b>Loudoun Now</b><span class="np-meta">Independent · Weekly</span>
+    <a class="np-web" href="https://www.loudounnow.com" rel="noopener">www.loudounnow.com</a>
+    <span class="badge ind">Independent</span>
+    <p class="np-notes">Independent and locally owned.</p>
+  </div>
+</div>
+<div class="np" data-tier="1" data-state="VA" data-indep="Independent">
+  <div class="np-site">
+    <b>Purcellville, VA</b>
+    <span>Adjacent home market</span>
+    <p>Western Loudoun weekly, small and independent.</p>
+  </div>
+  <div class="np-paper">
+    <b>Purcellville Gazette</b><span class="np-meta">Independent · Weekly</span>
+    
+    <span class="badge ind">Independent</span>
+    <p class="np-notes">Very small — good proof that the model works at the smallest scale.</p>
+  </div>
+</div>
+<div class="np" data-tier="1" data-state="TN" data-indep="Independent">
+  <div class="np-site">
+    <b>Franklin, TN</b>
+    <span>Mars Petcare US HQ · ~~800 staff</span>
+    <p>North American Petcare headquarters. Pet-friendly campus with dog park and doggie daycare.</p>
+  </div>
+  <div class="np-paper">
+    <b>Williamson Herald</b><span class="np-meta">Independent · Weekly</span>
+    <a class="np-web" href="https://www.williamsonherald.com" rel="noopener">www.williamsonherald.com</a>
+    <span class="badge ind">Independent</span>
+    <p class="np-notes">STRATEGIC: Mars Petcare&#x27;s own US HQ town. If any market should say yes, it&#x27;s this one — and Ben Anders and Lindsay Kordik likely work here.</p>
+  </div>
+</div>
+<div class="np" data-tier="1" data-state="TN" data-indep="Independent">
+  <div class="np-site">
+    <b>Thompson&#x27;s Station, TN</b>
+    <span>Global Innovation Center (R&amp;D) · ~140+ staff</span>
+    <p>$110M R&amp;D campus incl. Pet Feeding Center housing up to 180 dogs and 120 cats. Global centre of excellence for Pedigree, Whiskas, Royal Canin, Iams.</p>
+  </div>
+  <div class="np-paper">
+    <b>Williamson Herald</b><span class="np-meta">Independent · Weekly</span>
+    <a class="np-web" href="https://www.williamsonherald.com" rel="noopener">www.williamsonherald.com</a>
+    <span class="badge ind">Independent</span>
+    <p class="np-notes">Same paper as Franklin. This site is also the best source of &#x27;how Mars makes pet food&#x27; story material anywhere in the country.</p>
+  </div>
+</div>
+  </div>
+</section>
+<section class="tier">
+  <h2>Tier 2 — The sweet spot <span class="count">24 markets</span></h2>
+  <p class="blurb">Small towns where a Mars plant is a major employer and a community paper still publishes. These most closely resemble the Middleburg situation: small paper, big local Mars presence, a decision-maker you can reach in one phone call.</p>
+  <div class="np-list">
+<div class="np" data-tier="2" data-state="NE" data-indep="Independent">
+  <div class="np-site">
+    <b>Aurora, NE</b>
+    <span>Manufacturing plant · ~~150 staff</span>
+    <p>Dry pet food, ~200,000 tons/yr. Opened 1984 as an Iams plant. Iams, Pedigree.</p>
+  </div>
+  <div class="np-paper">
+    <b>Aurora News-Register</b><span class="np-meta">Independent · Weekly</span>
+    <a class="np-web" href="https://www.auroranewsregister.com" rel="noopener">www.auroranewsregister.com</a>
+    <span class="badge ind">Independent</span>
+    <p class="np-notes">BEST-FIT PROFILE: small town, independent weekly, major local employer. Closest analogue to the Middleburg situation.</p>
+  </div>
+</div>
+<div class="np" data-tier="2" data-state="SD" data-indep="Independent">
+  <div class="np-site">
+    <b>North Sioux City, SD</b>
+    <span>Manufacturing plant (Royal Canin)</span>
+    <p>Royal Canin. $185M expansion doubled the plant; +149 full-time jobs.</p>
+  </div>
+  <div class="np-paper">
+    <b>Dakota Dunes/North Sioux City Times &amp; Southern Union County Leader-Courier</b><span class="np-meta">Independent · Weekly</span>
+    <a class="np-web" href="https://www.leadercourier-times.com" rel="noopener">www.leadercourier-times.com</a>
+    <span class="badge ind">Independent</span>
+    <p class="np-notes">Small independent weekly, recent big Mars investment in town — strong local news hook.</p>
+  </div>
+</div>
+<div class="np" data-tier="2" data-state="OH" data-indep="Chain">
+  <div class="np-site">
+    <b>Lewisburg, OH</b>
+    <span>Manufacturing plant (Royal Canin) · ~270+ staff</span>
+    <p>Largest Royal Canin dry pet food factory in the world. $450M, opened 2025, 270 new jobs.</p>
+  </div>
+  <div class="np-paper">
+    <b>The Register-Herald (Eaton)</b><span class="np-meta">AIM Media Midwest · Weekly</span>
+    <a class="np-web" href="https://www.registerherald.com" rel="noopener">www.registerherald.com</a>
+    <span class="badge ch">Chain-owned</span>
+    <p class="np-notes">Newest and biggest Mars pet food plant on earth, in a Preble County town of ~1,800. Enormous story-to-town ratio.</p>
+  </div>
+</div>
+<div class="np" data-tier="2" data-state="KY" data-indep="Chain">
+  <div class="np-site">
+    <b>Auburn, KY</b>
+    <span>Manufacturing plant (Champion Petfoods)</span>
+    <p>&#x27;DogStar Kitchen&#x27; — 371,000 sq ft on 85 acres. Orijen and Acana kibble, freeze-dried, treats.</p>
+  </div>
+  <div class="np-paper">
+    <b>News-Democrat &amp; Leader (Russellville)</b><span class="np-meta">Paxton Media Group · Weekly</span>
+    <a class="np-web" href="https://www.newsdemocratleader.com" rel="noopener">www.newsdemocratleader.com</a>
+    <span class="badge ch">Chain-owned</span>
+    <p class="np-notes">Logan County weekly. Champion joined Mars in Feb 2023.</p>
+  </div>
+</div>
+<div class="np" data-tier="2" data-state="WI" data-indep="Chain">
+  <div class="np-site">
+    <b>Tomah, WI</b>
+    <span>Manufacturing plant</span>
+    <p>Mars Petcare plant at 411 Martin Ave. Product mix not publicly disclosed.</p>
+  </div>
+  <div class="np-paper">
+    <b>Tomah Journal</b><span class="np-meta">Lee Enterprises · Weekly</span>
+    <a class="np-web" href="https://lacrossetribune.com/tomah" rel="noopener">lacrossetribune.com/tomah</a>
+    <span class="badge ch">Chain-owned</span>
+    <p class="np-notes">Lowest-profile Mars site found — almost no press coverage, which also means an untold story.</p>
+  </div>
+</div>
+<div class="np" data-tier="2" data-state="IL" data-indep="Chain">
+  <div class="np-site">
+    <b>Mattoon, IL</b>
+    <span>Manufacturing plant · ~~200 staff</span>
+    <p>Largest dry food + treats producer in the North American network. Pedigree, Dentastix, Iams, Cesar. 40+ years in town.</p>
+  </div>
+  <div class="np-paper">
+    <b>Journal Gazette &amp; Times-Courier</b><span class="np-meta">Lee Enterprises · Daily</span>
+    <a class="np-web" href="https://jg-tc.com" rel="noopener">jg-tc.com</a>
+    <span class="badge ch">Chain-owned</span>
+    <p class="np-notes">Covers Mattoon and Charleston, Coles County. Long Mars history in the community — 40th anniversary was covered by Mars itself.</p>
+  </div>
+</div>
+<div class="np" data-tier="2" data-state="NE" data-indep="Chain">
+  <div class="np-site">
+    <b>Fremont, NE</b>
+    <span>Manufacturing plant (Royal Canin)</span>
+    <p>Royal Canin. Came to Mars in the 2014 P&amp;G / Iams transaction.</p>
+  </div>
+  <div class="np-paper">
+    <b>Fremont Tribune</b><span class="np-meta">Lee Enterprises · Daily</span>
+    <a class="np-web" href="https://fremonttribune.com" rel="noopener">fremonttribune.com</a>
+    <span class="badge ch">Chain-owned</span>
+    <p class="np-notes">Dodge County. Pairs naturally with Aurora NE — one state, two Mars plants, one press association.</p>
+  </div>
+</div>
+<div class="np" data-tier="2" data-state="TX" data-indep="Independent">
+  <div class="np-site">
+    <b>Temple, TX</b>
+    <span>Manufacturing plant</span>
+    <p>109,000 sq ft at 3401 Eberhard Rd, operating since 1987. Pedigree, Iams, Cesar, Sheba, Whiskas, Nutro, Greenies, Eukanuba.</p>
+  </div>
+  <div class="np-paper">
+    <b>Temple Daily Telegram</b><span class="np-meta">Independent (family-owned) · Daily</span>
+    <a class="np-web" href="https://www.tdtnews.com" rel="noopener">www.tdtnews.com</a>
+    <span class="badge ind">Independent</span>
+    <p class="np-notes">Independent family-owned daily — decision-maker is reachable, no corporate ad-policy gatekeeping.</p>
+  </div>
+</div>
+<div class="np" data-tier="2" data-state="TN" data-indep="Chain">
+  <div class="np-site">
+    <b>Lebanon, TN</b>
+    <span>Manufacturing plant (Royal Canin)</span>
+    <p>Royal Canin and Eukanuba, cat and dog. $200M expansion doubled capacity, +90 jobs.</p>
+  </div>
+  <div class="np-paper">
+    <b>The Wilson Post</b><span class="np-meta">Main Street Media of Tennessee · Weekly</span>
+    <a class="np-web" href="https://www.wilsonpost.com" rel="noopener">www.wilsonpost.com</a>
+    <span class="badge ch">Chain-owned</span>
+    <p class="np-notes">Third Tennessee Mars site — TN alone supports a state-level cluster pitch to the Tennessee Press Association.</p>
+  </div>
+</div>
+<div class="np" data-tier="2" data-state="PA" data-indep="Chain">
+  <div class="np-site">
+    <b>Elizabethtown, PA</b>
+    <span>Manufacturing plant</span>
+    <p>Mars Wrigley chocolate — Dove bulk chocolate, M&amp;M&#x27;s, Snickers, Twix.</p>
+  </div>
+  <div class="np-paper">
+    <b>The Elizabethtown Advocate</b><span class="np-meta">LNP Media Group · Weekly</span>
+    <a class="np-web" href="https://www.etownadvocate.com" rel="noopener">www.etownadvocate.com</a>
+    <span class="badge ch">Chain-owned</span>
+    <p class="np-notes">Genuine small-town weekly in Lancaster County.</p>
+  </div>
+</div>
+<div class="np" data-tier="2" data-state="IL" data-indep="Chain">
+  <div class="np-site">
+    <b>Yorkville, IL</b>
+    <span>Manufacturing plant (Wrigley) · ~~375 staff</span>
+    <p>Skittles, Life Savers, Doublemint, Juicy Fruit. $50M / 145k sq ft Skittles line added 2016.</p>
+  </div>
+  <div class="np-paper">
+    <b>Kendall County Record</b><span class="np-meta">Shaw Media · Weekly</span>
+    <a class="np-web" href="https://www.shawlocal.com/kendall-county-now" rel="noopener">www.shawlocal.com/kendall-county-now</a>
+    <span class="badge ch">Chain-owned</span>
+    <p class="np-notes">Published continuously since 1864. Shaw Media owns several nearby weeklies — one yes could open a cluster.</p>
+  </div>
+</div>
+<div class="np" data-tier="2" data-state="GA" data-indep="Independent">
+  <div class="np-site">
+    <b>Flowery Branch, GA</b>
+    <span>Manufacturing plant (gum) · ~~800 staff</span>
+    <p>Juicy Fruit, Extra, 5 Gum, Excel, Orbit.</p>
+  </div>
+  <div class="np-paper">
+    <b>Gainesville Times</b><span class="np-meta">Metro Market Media · Daily</span>
+    <a class="np-web" href="https://www.gainesvilletimes.com" rel="noopener">www.gainesvilletimes.com</a>
+    <span class="badge ind">Independent</span>
+    <p class="np-notes">Hall County. Large Mars workforce relative to town size.</p>
+  </div>
+</div>
+<div class="np" data-tier="2" data-state="GA" data-indep="TO VERIFY">
+  <div class="np-site">
+    <b>Albany, GA</b>
+    <span>Manufacturing plant · ~~280 staff</span>
+    <p>Sole global producer of COMBOS.</p>
+  </div>
+  <div class="np-paper">
+    <b>Albany Herald</b><span class="np-meta"> · Daily</span>
+    <a class="np-web" href="https://www.albanyherald.com" rel="noopener">www.albanyherald.com</a>
+    
+    <p class="np-notes">Site downsized in 2023 when peanut roasting moved to Waco — check current sentiment before pitching.</p>
+  </div>
+</div>
+<div class="np" data-tier="2" data-state="MS" data-indep="Chain">
+  <div class="np-site">
+    <b>Greenville, MS</b>
+    <span>Manufacturing plant · ~180+ staff</span>
+    <p>LARGEST MARS FOOD FACTORY IN THE WORLD. Ben&#x27;s Original rice, Seeds of Change. 250k+ sq ft on 80 acres, 100k tonnes rice/yr, since 1978.</p>
+  </div>
+  <div class="np-paper">
+    <b>Delta Democrat-Times</b><span class="np-meta">Emmerich Newspapers · Daily</span>
+    <a class="np-web" href="https://www.ddtonline.com" rel="noopener">www.ddtonline.com</a>
+    <span class="badge ch">Chain-owned</span>
+    <p class="np-notes">Not a pet food site, but a flagship Mars community. Good candidate if the series ever widens past Petcare.</p>
+  </div>
+</div>
+<div class="np" data-tier="2" data-state="TN" data-indep="TO VERIFY">
+  <div class="np-site">
+    <b>Cleveland, TN</b>
+    <span>Manufacturing plant</span>
+    <p>Exclusive global home of Peanut Butter M&amp;M&#x27;S. Also Milk Chocolate &amp; Peanut M&amp;M&#x27;S, Twix. $142M expansion, 79 jobs.</p>
+  </div>
+  <div class="np-paper">
+    <b>Cleveland Daily Banner</b><span class="np-meta"> · Daily</span>
+    <a class="np-web" href="https://www.clevelandbanner.com" rel="noopener">www.clevelandbanner.com</a>
+    
+    <p class="np-notes">Bradley County.</p>
+  </div>
+</div>
+<div class="np" data-tier="2" data-state="NV" data-indep="Chain">
+  <div class="np-site">
+    <b>Carson City, NV</b>
+    <span>Manufacturing plant</span>
+    <p>Nature&#x27;s Bakery bars — the brand&#x27;s original home.</p>
+  </div>
+  <div class="np-paper">
+    <b>Nevada Appeal</b><span class="np-meta">Swift Communications / Ogden · Daily</span>
+    <a class="np-web" href="https://www.nevadaappeal.com" rel="noopener">www.nevadaappeal.com</a>
+    <span class="badge ch">Chain-owned</span>
+    <p class="np-notes">State capital but small-market feel.</p>
+  </div>
+</div>
+<div class="np" data-tier="2" data-state="CO" data-indep="Chain">
+  <div class="np-site">
+    <b>Loveland, CO</b>
+    <span>R&amp;D lab — Antech North America hub</span>
+    <p>$15.5M veterinary diagnostics R&amp;D hub (former Heska site). In-house diagnostics, Allercept allergy business.</p>
+  </div>
+  <div class="np-paper">
+    <b>Loveland Reporter-Herald</b><span class="np-meta">MediaNews Group · Daily</span>
+    <a class="np-web" href="https://www.reporterherald.com" rel="noopener">www.reporterherald.com</a>
+    <span class="badge ch">Chain-owned</span>
+    <p class="np-notes">Veterinary science angle — different story material from the food plants, good for variety in the series.</p>
+  </div>
+</div>
+<div class="np" data-tier="2" data-state="CA" data-indep="Chain">
+  <div class="np-site">
+    <b>Victorville, CA</b>
+    <span>Manufacturing plant</span>
+    <p>Nutro dry pet food, 30-acre site. NOTE: current operating status unconfirmed — verify before pitching.</p>
+  </div>
+  <div class="np-paper">
+    <b>Victorville Daily Press</b><span class="np-meta">Gannett · Daily</span>
+    <a class="np-web" href="https://www.vvdailypress.com" rel="noopener">www.vvdailypress.com</a>
+    <span class="badge ch">Chain-owned</span>
+    <p class="np-notes">VERIFY THE PLANT IS STILL RUNNING before any outreach.</p>
+  </div>
+</div>
+<div class="np" data-tier="2" data-state="WA" data-indep="Independent">
+  <div class="np-site">
+    <b>Vancouver, WA</b>
+    <span>Banfield Pet Hospital HQ</span>
+    <p>Headquarters of Banfield — 1,000+ veterinary clinics, mostly inside PetSmart. Mars-owned since 2007.</p>
+  </div>
+  <div class="np-paper">
+    <b>The Columbian</b><span class="np-meta">Independent (family-owned) · Daily</span>
+    <a class="np-web" href="https://www.columbian.com" rel="noopener">www.columbian.com</a>
+    <span class="badge ind">Independent</span>
+    <p class="np-notes">Independent family-owned daily. Banfield gives a strong veterinary-expertise story angle.</p>
+  </div>
+</div>
+<div class="np" data-tier="2" data-state="AR" data-indep="Chain">
+  <div class="np-site">
+    <b>Fort Smith, AR</b>
+    <span>Manufacturing plant · ~~630 staff</span>
+    <p>Wet / tray-format pet food. Sheba, Cesar, Iams, Nutro, Pedigree, Whiskas, Acana, Orijen. One of the largest Mars Petcare US sites.</p>
+  </div>
+  <div class="np-paper">
+    <b>Southwest Times Record</b><span class="np-meta">Gannett · Daily</span>
+    <a class="np-web" href="https://www.swtimes.com" rel="noopener">www.swtimes.com</a>
+    <span class="badge ch">Chain-owned</span>
+    <p class="np-notes">Big workforce. Gannett ownership means ad decisions may sit outside the newsroom.</p>
+  </div>
+</div>
+<div class="np" data-tier="2" data-state="KS" data-indep="Chain">
+  <div class="np-site">
+    <b>Topeka, KS</b>
+    <span>Manufacturing plant</span>
+    <p>Snickers, Milky Way, 3 Musketeers. Opened 2014; $175M / 100+ job expansion 2022.</p>
+  </div>
+  <div class="np-paper">
+    <b>Topeka Capital-Journal</b><span class="np-meta">Gannett · Daily</span>
+    <a class="np-web" href="https://www.cjonline.com" rel="noopener">www.cjonline.com</a>
+    <span class="badge ch">Chain-owned</span>
+    
+  </div>
+</div>
+<div class="np" data-tier="2" data-state="TX" data-indep="Chain">
+  <div class="np-site">
+    <b>Waco, TX</b>
+    <span>Manufacturing plant + distribution · ~600+ staff</span>
+    <p>Snickers, Starburst, Skittles. Peanut roasting consolidated here from Albany GA in 2023. Since 1976.</p>
+  </div>
+  <div class="np-paper">
+    <b>Waco Tribune-Herald</b><span class="np-meta">Lee Enterprises · Daily</span>
+    <a class="np-web" href="https://wacotrib.com" rel="noopener">wacotrib.com</a>
+    <span class="badge ch">Chain-owned</span>
+    <p class="np-notes">Pairs with Temple TX — two Mars sites ~35 miles apart, one Texas Press Association pitch.</p>
+  </div>
+</div>
+<div class="np" data-tier="2" data-state="MO" data-indep="TO VERIFY">
+  <div class="np-site">
+    <b>Kansas City, MO</b>
+    <span>Manufacturing plant (treats) · ~260+ staff</span>
+    <p>Greenies, Greenies Pill Pockets, dog supplements, Royal Canin Pill Assist. $82M expansion, +95 jobs.</p>
+  </div>
+  <div class="np-paper verify">
+    <b>Paper to be identified</b><span class="np-meta"></span>
+    
+    
+    <p class="np-notes">Metro market — find a neighbourhood or suburban weekly rather than the Kansas City Star.</p>
+  </div>
+</div>
+<div class="np" data-tier="2" data-state="MO" data-indep="TO VERIFY">
+  <div class="np-site">
+    <b>St. Charles, MO</b>
+    <span>Royal Canin USA HQ office</span>
+    <p>Royal Canin USA headquarters, 4 City Place Drive.</p>
+  </div>
+  <div class="np-paper verify">
+    <b>Paper to be identified</b><span class="np-meta"></span>
+    
+    
+    <p class="np-notes">Royal Canin&#x27;s US corporate home — worth a dedicated look for a suburban weekly.</p>
+  </div>
+</div>
+  </div>
+</section>
+<section class="tier">
+  <h2>Tier 3 — Metro markets <span class="count">7 markets</span></h2>
+  <p class="blurb">Cities where no true community paper serves the Mars site. Weaker fit for the model — pitch only after finding a neighbourhood or suburban weekly.</p>
+  <div class="np-list">
+<div class="np" data-tier="3" data-state="TN" data-indep="TO VERIFY">
+  <div class="np-site">
+    <b>Chattanooga, TN</b>
+    <span>Manufacturing plant (gum &amp; mints) · ~400+ staff</span>
+    <p>Sole global maker of certain Life Savers and Altoids varieties. 35,000+ tonnes of mints a year. Since 1973.</p>
+  </div>
+  <div class="np-paper">
+    <b>Chattanooga Times Free Press</b><span class="np-meta"> · Daily</span>
+    <a class="np-web" href="https://www.timesfreepress.com" rel="noopener">www.timesfreepress.com</a>
+    
+    <p class="np-notes">Metro daily — the community-paper pitch fits poorly. Consider a suburban weekly instead.</p>
+  </div>
+</div>
+<div class="np" data-tier="3" data-state="NV" data-indep="TO VERIFY">
+  <div class="np-site">
+    <b>Henderson, NV</b>
+    <span>Manufacturing plant + visitor centre</span>
+    <p>Ethel M Chocolates — sole global production site, with a public factory tour and cactus garden.</p>
+  </div>
+  <div class="np-paper">
+    <b>Boulder City Review / Las Vegas Review-Journal</b><span class="np-meta"> · Weekly / Daily</span>
+    
+    
+    <p class="np-notes">The visitor centre is an unusually good story asset if a local weekly can be found.</p>
+  </div>
+</div>
+<div class="np" data-tier="3" data-state="UT" data-indep="TO VERIFY">
+  <div class="np-site">
+    <b>Salt Lake City, UT</b>
+    <span>Manufacturing plant · ~230+ staff</span>
+    <p>Nature&#x27;s Bakery — $240M, 339,000 sq ft, ~1 billion bars/yr. Opened July 2025.</p>
+  </div>
+  <div class="np-paper verify">
+    <b>Paper to be identified</b><span class="np-meta"></span>
+    
+    
+    <p class="np-notes">Metro market.</p>
+  </div>
+</div>
+<div class="np" data-tier="3" data-state="IL" data-indep="TO VERIFY">
+  <div class="np-site">
+    <b>Burr Ridge, IL</b>
+    <span>Manufacturing plant (ice cream)</span>
+    <p>Makes all Mars ice cream sold in the US — Snickers, Dove, Twix, M&amp;M&#x27;s, Milky Way, KIND frozen.</p>
+  </div>
+  <div class="np-paper verify">
+    <b>Paper to be identified</b><span class="np-meta"></span>
+    
+    
+    <p class="np-notes">Chicago suburb — several strong independent weeklies in the area, worth a look.</p>
+  </div>
+</div>
+<div class="np" data-tier="3" data-state="NJ" data-indep="Independent">
+  <div class="np-site">
+    <b>Hackettstown, NJ</b>
+    <span>Manufacturing plant + R&amp;D Innovation Studio · ~~1,000 staff</span>
+    <p>M&amp;M&#x27;S made on High St. since 1958. Also Snickers, Twix, Milky Way, Skittles, Starburst, Extra, Altoids. $70M+ investment from 2023.</p>
+  </div>
+  <div class="np-paper">
+    <b>TAPinto Hackettstown</b><span class="np-meta">TAPinto (franchise) · Digital daily</span>
+    <a class="np-web" href="https://www.tapinto.net/towns/hackettstown" rel="noopener">www.tapinto.net/towns/hackettstown</a>
+    <span class="badge ind">Independent</span>
+    <p class="np-notes">Print weekly coverage has thinned — TAPinto is digital-only, so the printed-page model needs adapting here. Huge Mars heritage though: M&amp;M&#x27;s have been made in this town for 68 years.</p>
+  </div>
+</div>
+<div class="np" data-tier="3" data-state="FL" data-indep="TO VERIFY">
+  <div class="np-site">
+    <b>Tampa, FL</b>
+    <span>BluePearl veterinary HQ</span>
+    <p>BluePearl Specialty &amp; Emergency Pet Hospital headquarters; network spans 29 states.</p>
+  </div>
+  <div class="np-paper verify">
+    <b>Paper to be identified</b><span class="np-meta"></span>
+    
+    
+    <p class="np-notes">Metro market, but emergency-vet stories are strong rescue-adjacent material.</p>
+  </div>
+</div>
+<div class="np" data-tier="3" data-state="IL" data-indep="TO VERIFY">
+  <div class="np-site">
+    <b>Chicago, IL</b>
+    <span>Mars Snacking GLOBAL HQ + R&amp;D + Mars Food NA HQ · ~4,000+ staff</span>
+    <p>Goose Island campus: global HQ, $42M R&amp;D hub (300 associates), Mars Food North America HQ. New Fulton Market office, 602 new jobs.</p>
+  </div>
+  <div class="np-paper verify">
+    <b>Paper to be identified</b><span class="np-meta"></span>
+    
+    
+    <p class="np-notes">Major Mars centre but a hard community-paper market. Note the corporate contacts likely sit here.</p>
+  </div>
+</div>
+  </div>
+</section>
+
+    <section class="dnc">
+      <h2>Do not contact</h2>
+      <p class="blurb">These towns appear on stale &ldquo;Mars plant&rdquo; lists, but Mars has closed, is closing, or sold the site. Pitching &ldquo;Mars is closer than you think&rdquo; in a town Mars has just left would be actively damaging — to the paper, and to the campaign.</p>
+      <table>
+        <tr><th>Former site</th><th>Status</th><th>Why it matters</th></tr>
+        <tr><td><b>Rolla, MO</b><br><span class="dnc-type">Royal Canin plant</span></td><td>CLOSED — production ended 18 Apr 2025, decommissioned 31 Dec 2025; 105 jobs lost.</td><td>Do not pitch. Mars left town — the story would be negative.</td></tr>
+<tr><td><b>Henderson, NC</b><br><span class="dnc-type">Mars Petcare plant</span></td><td>CLOSING — production ceased mid-June 2026, site closes July 2026; ~150 employees.</td><td>Do not pitch. Closing right now.</td></tr>
+<tr><td><b>Hazelwood, MO</b><br><span class="dnc-type">Nature&#x27;s Bakery plant</span></td><td>CLOSING — layoffs Sept 2026 and Feb 2027, full closure Sept 2027; 345 jobs eliminated.</td><td>Do not pitch.</td></tr>
+<tr><td><b>Chicago (Galewood), IL</b><br><span class="dnc-type">Mars Wrigley chocolate plant</span></td><td>CLOSED 2024 — historic 1929 plant, 280 jobs eliminated, site being redeveloped.</td><td>Do not pitch.</td></tr>
+<tr><td><b>Newark, NJ</b><br><span class="dnc-type">Mars Wrigley US market hub office</span></td><td>CLOSING — 307 positions eliminated, hub sunsets Dec 2027; functions moving to Chicago.</td><td>Do not pitch.</td></tr>
+<tr><td><b>Clinton, OK</b><br><span class="dnc-type">Former Mars Petcare plant</span></td><td>DIVESTED Dec 2018 to Red Collar Pet Foods.</td><td>NOT a Mars site. Appears on stale lists — do not pitch as Mars.</td></tr>
+<tr><td><b>Miami, OK</b><br><span class="dnc-type">Former Mars Petcare plant</span></td><td>DIVESTED Dec 2018 to Red Collar Pet Foods.</td><td>NOT a Mars site.</td></tr>
+<tr><td><b>Orangeburg, SC</b><br><span class="dnc-type">Former Mars Petcare plant</span></td><td>DIVESTED Dec 2018 to Red Collar Pet Foods.</td><td>NOT a Mars site.</td></tr>
+<tr><td><b>Washington Court House, OH</b><br><span class="dnc-type">Former Mars Petcare plant</span></td><td>DIVESTED Dec 2018 to Red Collar Pet Foods.</td><td>NOT a Mars site.</td></tr>
+<tr><td><b>San Bernardino, CA</b><br><span class="dnc-type">Former Mars Petcare plant</span></td><td>DIVESTED Dec 2018 to Red Collar Pet Foods.</td><td>NOT a Mars site.</td></tr>
+      </table>
+    </section>
+
+    <div class="method">
+      Compiled July 2026 from Mars press releases, state economic-development announcements and local news coverage.
+      Where a paper is marked &ldquo;to be identified,&rdquo; the market qualifies but the specific outlet has not yet been confirmed — those are deliberate gaps, not oversights. Editor names and direct contacts should be confirmed from each paper&rsquo;s own masthead before outreach: a wrong name in a cold email costs the meeting.
+      Newspapers interested in running the page should start with the <a href="partners.html" style="color:var(--s-mars);font-weight:600">partner kit</a>.
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  var buttons = document.querySelectorAll('#filters button');
+  function apply(f){
+    buttons.forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.f === f)); });
+    document.querySelectorAll('.np').forEach(function(card){
+      var show = f === 'all'
+        || (f === 't1' && card.dataset.tier === '1')
+        || (f === 't2' && card.dataset.tier === '2')
+        || (f === 't3' && card.dataset.tier === '3')
+        || (f === 'ind' && (card.dataset.indep === 'Independent' || card.dataset.indep === 'Nonprofit'));
+      card.classList.toggle('hide', !show);
+    });
+    document.querySelectorAll('.tier').forEach(function(sec){
+      var any = sec.querySelectorAll('.np:not(.hide)').length > 0;
+      sec.style.display = any ? '' : 'none';
+    });
+  }
+  buttons.forEach(function(b){ b.addEventListener('click', function(){ apply(b.dataset.f); }); });
+})();
+</script>
+<footer class="site-foot">
+  <div class="in">
+    <div>
+      <h4>The Pet Page</h4>
+      Published by The Middleburg Page<br>
+      Leland Schwartz, Publisher<br>
+      7170 Beverly Lane, The Plains, Virginia 20198<br>
+      <a href="mailto:editor@themiddleburgpage.com">editor@themiddleburgpage.com</a> · 540 422 1376
+    </div>
+    <div>
+      <h4>Partners</h4>
+      <ul>
+        <li>Mars Petcare — national partner</li>
+        <li>Fauquier Times — print</li>
+        <li>The Georgetowner — print</li>
+        <li>Middleburg Humane Foundation</li>
+      </ul>
+    </div>
+    <div>
+      <h4>For newspapers</h4>
+      <ul>
+        <li><a href="partners.html">Partner kit &amp; rates</a></li>
+        <li><a href="composer.html">The Composer</a></li>
+        <li><a href="playbook.html">Video playbook</a></li>
+        <li><a href="about.html">About the partnership</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="legal">
+    <b>Sponsored series.</b> Mars Petcare funds this page and reviews only its own company content.
+    The Middleburg Page retains full editorial control of all rescue reporting.
+  </div>
+</footer>
+</body>
+</html>

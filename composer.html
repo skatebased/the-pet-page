@@ -351,6 +351,7 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--mars);outline-of
 <a class="site-link" href="index.html">Home</a>
 <a class="site-link" href="about.html">About</a>
 <a class="site-link" href="issues/index.html">Issues</a>
+<a class="site-link" href="newspapers.html">Newspapers</a>
 <a class="site-link" href="partners.html">For papers</a>
 <a class="site-link" href="playbook.html">Video</a>
 <span class="site-sp"></span>
@@ -495,6 +496,12 @@ The cats, for their part, worked it out in under a week, which is roughly six da
   <details class="group">
     <summary>Video beat</summary>
     <div class="gbody">
+      <label class="f"><span>Animation style <em>— for the drawn panels</em></span>
+        <select id="vstyle">
+          <option value="anime" selected>Anime — cinematic, Ghibli-adjacent warmth</option>
+          <option value="storybook">Children's storybook — soft ink and wash</option>
+          <option value="comic">Comic book — bold line, halftone</option>
+        </select></label>
       <label class="f"><span>Scene label</span><input type="text" id="vscene" value="Scene 4 of 6 · drawn past → real present"></label>
       <label class="f"><span>On-screen caption</span>
         <input type="text" id="vcap" value="Eleven weeks in a kennel. Then a door opened."></label>
@@ -609,7 +616,7 @@ The cats, for their part, worked it out in under a week, which is roughly six da
           <div class="sb-ref">
             <b>Character reference.</b> Generate one clean still from this photograph first, then drive every drawn panel from it. Skip that step and the animal changes breed between shots — it is the commonest failure in the whole workflow.
           </div>
-          <div class="sb-legend"><span class="d">Drawn — the past</span><span class="r">Real — the present</span></div>
+          <div class="sb-legend"><span class="d">Anime — the past</span><span class="r">Real — the present</span></div>
           <div class="sb-ref" style="margin-top:.6rem">
             <b>Why split it.</b> Nobody filmed this animal before the rescue. Animation fills a real gap in the record rather than decorating footage that is already true — and because the two registers look different, nothing drawn can be mistaken for documentary.
           </div>
@@ -863,10 +870,16 @@ function buildStoryboard(paras, v){
     if(i === 5) cap = 'Fourteen animals are still waiting at ' + shelter + '. ' + url;
     const short = shorten(cap, 120);
 
+    const styles = {
+      anime:     'Anime style — cinematic, hand-painted backgrounds, soft natural light, Studio Ghibli-adjacent warmth, expressive eyes, gentle motion. 9:16 vertical.',
+      storybook: 'Children\'s storybook illustration — warm muted palette, soft ink outline, watercolour wash. 9:16 vertical.',
+      comic:     'Comic book style — bold ink line, flat colour, halftone shading. 9:16 vertical.'
+    };
+    const styleLine = styles[v('vstyle')] || styles.anime;
     const prompt = b.mode === 'drawn'
-      ? 'ILLUSTRATED · panel ' + (i+1) + ' — ' + b.label + '\n' +
-        'Children\'s-book illustration, warm muted palette, soft ink outline, 9:16 vertical.\n' +
-        'Subject: ' + animal + ', matching the character reference image exactly.\n' +
+      ? 'ANIMATED · panel ' + (i+1) + ' — ' + b.label + '\n' +
+        styleLine + '\n' +
+        'Subject: ' + animal + ', matching the character reference image exactly across every panel.\n' +
         'Scene: ' + shorten(cap, 140) + '\n' +
         'No text, no watermark, no lettering in frame.'
       : 'LIVE FOOTAGE · panel ' + (i+1) + ' — ' + b.label + '\n' +
@@ -993,7 +1006,7 @@ function readPhoto(f){
 /* ---- save / load the story package ---- */
 const FIELDS = ['paper','date','issue','contact','shelter','url','hed','byline','credit','body',
   'caption','pets','slotPrice','ednote','pgW','pgH','mT','mR','mB','mL','cols','gutter','stripH',
-  'textFace','customFace','bodySize','leading','headSize','kern','vscene','vcap','vhandle'];
+  'textFace','customFace','bodySize','leading','headSize','kern','vstyle','vscene','vcap','vhandle'];
 const CHECKS = ['justify','hyphen','oldstyle','hang','dropcap'];
 
 $('saveBtn').addEventListener('click', () => {
