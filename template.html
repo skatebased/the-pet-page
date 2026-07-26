@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The page template — The Pet Page</title>
+<meta name="description" content="What the Pet Page looks like on paper: your rescue story on the left, the photograph in the center, the story we send on the right, and the Mars strip across the bottom.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+:root{
+  --ink:#16150f; --soft:#4f4a3d; --paper:#fbfaf6; --warm:#f4f1e8;
+  --rule:#ddd7c8; --rule2:#b3aa95; --mars:#0a2a66; --go:#1f6b45;
+  --ui:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --textFace:'Newsreader'; --displayFace:'Newsreader';
+  --bodySize:7.9pt; --leading:1.32; --headSize:19pt;
+}
+.t-wrap{max-width:62rem;margin:0 auto;background:var(--paper);box-shadow:0 2px 40px rgba(0,0,0,.09)}
+.t-pad{padding:0 2.6rem 3.5rem}
+.t-hero{background:var(--ink);color:#f6f3ea;padding:3rem 2.6rem 2.4rem}
+.t-hero .eyebrow{font-family:var(--ui);font-size:.66rem;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;opacity:.55;margin-bottom:.9rem}
+.t-hero h1{font-family:var(--textFace),Georgia,serif;font-weight:400;font-size:2.9rem;line-height:1.05;
+  letter-spacing:-.022em;margin:0 0 .9rem}
+.t-hero p{font-size:1.08rem;line-height:1.55;opacity:.85;margin:0;max-width:38rem}
+
+.t-lead{font-size:1.05rem;line-height:1.6;max-width:44rem;margin:2.2rem 0 1.6rem}
+.t-lead b{color:var(--mars)}
+
+/* ---------- the example sheet ---------- */
+.stagebox{position:relative;margin:1.6rem 0 .8rem}
+.sheetwrap{position:relative}
+.sheet{
+  background:#fff;box-shadow:0 8px 44px rgba(0,0,0,.22);position:relative;overflow:hidden;
+  font-family:var(--textFace),Georgia,serif;color:#000;
+  font-kerning:normal;font-optical-sizing:auto;
+  font-variant-ligatures:common-ligatures contextual;
+  font-feature-settings:"kern" 1,"liga" 1,"clig" 1,"calt" 1;
+  font-synthesis:none;text-rendering:optimizeLegibility;
+}
+.pg{width:9.5in;box-sizing:border-box;padding:.3in .34in .24in;display:flex;flex-direction:column;
+  transform-origin:top left}
+.copy{font-size:var(--bodySize);line-height:var(--leading);text-align:justify;
+  hyphens:auto;-webkit-hyphens:auto;hyphenate-limit-chars:6 3 3;text-wrap:pretty;
+  hanging-punctuation:first last;orphans:2;widows:2;
+  font-variant-numeric:oldstyle-nums proportional-nums}
+.copy p{margin:0 0 .05in}
+.copy p.dcap::first-letter{float:left;font-size:calc(var(--bodySize) * 2.9);line-height:.78;
+  padding:.02em .05em 0 0;font-family:var(--displayFace),Georgia,serif;font-weight:700}
+.disp{font-family:var(--displayFace),Georgia,serif;font-weight:700;line-height:1.03;
+  letter-spacing:-.012em;text-wrap:balance;font-variant-numeric:lining-nums;margin:0 0 .05in}
+@supports (text-box: trim-both cap alphabetic){
+  .disp,.pp-mast h1{text-box:trim-both cap alphabetic}
+}
+.pp-mast{text-align:center;padding-bottom:.03in;margin-bottom:.1in}
+.pp-mast h1{font-family:var(--displayFace),Georgia,serif;font-weight:300;font-size:34pt;
+  line-height:.95;margin:0 0 .04in;letter-spacing:-.01em;font-variant-numeric:lining-nums;
+  text-decoration:underline;text-decoration-thickness:.6pt;text-underline-offset:.1em;
+  text-decoration-skip-ink:auto}
+.pp-mast .dl{font-family:var(--ui);font-size:7.5pt;color:#333}
+.pp-body{display:grid;grid-template-columns:1.92fr 1fr;gap:.26in}
+.pp-l{display:flex;flex-direction:column;min-width:0}
+.pp-r{min-width:0;display:flex;flex-direction:column}
+.pp-top{display:grid;grid-template-columns:1fr 1.15fr;gap:.18in;margin-bottom:.08in}
+.pp-photo{background:#cfc7b4 center/cover no-repeat;height:3.05in;display:grid;place-items:center;
+  text-align:center;font-family:var(--ui);font-size:6pt;letter-spacing:.09em;text-transform:uppercase;
+  color:#4a4335;padding:.1in}
+.pp-cap{font-family:var(--ui);font-size:6.2pt;font-style:italic;color:#444;margin-top:.04in;
+  line-height:1.3;text-align:center}
+.pp-by{font-family:var(--ui);font-size:7.5pt;font-weight:700;margin:0 0 .07in;color:#111}
+.pp-by em{display:block;font-weight:400;font-style:italic;font-size:6.8pt;color:#555;margin-top:.02in}
+.pp-r .copy{font-size:calc(var(--bodySize) - .75pt);line-height:1.3}
+.pp-r .disp{font-size:calc(var(--headSize) * .92)}
+.pp-l .disp{font-size:var(--headSize)}
+.pp-more{margin:.05in 0 0}
+.pp-qr{display:inline-block;width:.3in;height:.3in;margin-left:.06in;vertical-align:-.1in;
+  background:repeating-conic-gradient(#16150f 0 25%,transparent 0 50%) 0 0/.075in .075in;
+  outline:.5pt solid #16150f}
+.pp-note{font-family:var(--textFace),Georgia,serif;font-style:italic;font-size:6.8pt;line-height:1.32;
+  border-top:.5pt solid #999;padding:.045in 0 .02in;margin:.1in 0 .08in}
+.pp-note b{font-family:var(--ui);font-style:normal;font-weight:700;font-size:6.2pt;
+  letter-spacing:.1em;text-transform:uppercase}
+.pp-pets{display:grid;grid-template-columns:repeat(8,1fr);gap:.06in;margin-bottom:.09in}
+.pp-pet .av{height:.92in;background:#c6bda8 center/cover no-repeat;display:grid;place-items:center;font-size:15pt}
+.pp-pet span{display:block;text-align:center;font-family:var(--ui);font-size:5.4pt;font-weight:700;
+  letter-spacing:.06em;color:#333;margin-top:.02in}
+.pp-strip{height:1.25in;min-height:1.25in;display:grid;grid-template-columns:1.35fr 1fr 1fr 1fr;gap:.05in}
+.pp-strip .c{display:grid;place-items:center;font-family:var(--ui);font-size:6pt;
+  letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.85);overflow:hidden}
+.pp-strip .c1{background:linear-gradient(120deg,#42511f 0%,#22300f 100%);place-items:start;
+  align-content:center;padding:.12in .14in;color:#fff}
+.pp-strip .c1 b{font-family:var(--ui);font-weight:800;font-size:11pt;line-height:1.12;text-transform:none}
+.pp-strip .c1 small{display:block;font-size:6pt;letter-spacing:.14em;opacity:.75;margin-top:.04in}
+.pp-strip .c2,.pp-strip .c3,.pp-strip .c4{background:linear-gradient(135deg,#ddd6c6,#bcb29b);color:#84796a}
+.pp-foot{font-family:var(--ui);font-size:5.8pt;color:#666;text-align:center;padding-top:.06in}
+
+/* ---------- callout chips ---------- */
+.chip{position:absolute;z-index:4;width:1.55rem;height:1.55rem;border-radius:50%;
+  background:#007AFF;color:#fff;display:grid;place-items:center;
+  font:700 .8rem var(--ui);border:2px solid #fff;box-shadow:0 3px 12px rgba(0,0,0,.3);cursor:default}
+.keylist{margin:1.4rem 0 0;padding:0;list-style:none;display:grid;gap:.55rem;max-width:46rem}
+.keylist li{display:flex;gap:.7rem;align-items:baseline;font-size:.95rem;line-height:1.5}
+.keylist .n{flex:none;width:1.35rem;height:1.35rem;border-radius:50%;background:#007AFF;color:#fff;
+  display:grid;place-items:center;font:700 .72rem var(--ui);transform:translateY(.2rem)}
+.keylist b{font-family:var(--ui);font-size:.86rem}
+.keylist span{color:var(--soft)}
+
+.t-how{margin-top:2.6rem;border-top:1px solid var(--rule);padding-top:1.6rem;
+  font-size:.98rem;color:var(--soft);max-width:44rem;line-height:1.6}
+.t-how b{color:var(--ink)}
+
+@media (max-width:760px){
+  .t-pad,.t-hero{padding-left:1.3rem;padding-right:1.3rem}
+  .t-hero h1{font-size:2rem}
+}
+</style>
+</head>
+<body class="site-home">
+<nav class="site-nav">
+<a class="site-brand" href="index.html">The Pet Page <span>· Middleburg</span></a>
+<a class="site-link" href="index.html">Home</a>
+<a class="site-link" href="about.html">About</a>
+<a class="site-link" href="issues/index.html">Issues</a>
+<a class="site-link" href="newspapers.html">Newspapers</a>
+<a class="site-link" href="partners.html">For papers</a>
+<a class="site-link" href="template.html" aria-current="page">The template</a>
+<a class="site-link" href="playbook.html">Video</a>
+<span class="site-sp"></span>
+<a class="site-cta" href="partners.html">Partner kit →</a>
+</nav>
+
+<div class="t-wrap">
+  <header class="t-hero">
+    <div class="eyebrow">For partner papers</div>
+    <h1>The page template</h1>
+    <p>There is no software to learn and nothing to install. Every month we send you one finished story and the advertisement. You add your rescue story and the photograph, and the page is done.</p>
+  </header>
+
+  <div class="t-pad">
+
+    <p class="t-lead">Here is the whole arrangement: <b>your rescue story goes on the left</b>, <b>the photograph in the center</b>, and <b>the story we send you on the right</b> — or lay it out however you want; it is your page. Two things are fixed: <b>the story we send</b>, and <b>the Mars advertisement across the bottom</b>. Everything else is yours to move.</p>
+
+    <div class="stagebox">
+      <div class="sheetwrap" id="sheetwrap">
+        <div class="sheet"><div class="pg" id="pg">
+          <div class="pp-mast">
+            <h1>The Middleburg Page</h1>
+            <div class="dl">September 4, 2026 &nbsp;··&nbsp; Reach out to us at Editor@TheMiddleburgPage.com</div>
+          </div>
+          <div class="pp-body">
+            <div class="pp-l">
+              <div class="pp-top">
+                <div>
+                  <h2 class="disp">Blind husky gets rescued; goes home to husky, 5 cats</h2>
+                  <p class="pp-by">By Dana Priest<em>Piedmont Journalism Foundation</em></p>
+                  <div class="copy">
+                    <p class="dcap">The thing about a blind dog is that he does not know he is a blind dog. He knows the shape of a room, the sound of a bowl, the particular tread of the person who is coming to get him.</p>
+                  </div>
+                </div>
+                <div>
+                  <div class="pp-photo">Photograph</div>
+                  <div class="pp-cap">My name is &ldquo;Tanner&rdquo;. Take me home!</div>
+                </div>
+              </div>
+              <div class="copy">
+                <p>Tanner learned all three in the eleven weeks he spent at the Middleburg Humane Foundation, and then he learned a new set, in a new house, with a sighted husky to follow and five cats to negotiate.</p>
+                <p>He arrived on a Tuesday in a crate that was slightly too small, from a county two hours south, with a note attached that gave only his approximate age and the word &ldquo;gentle.&rdquo; The note was correct on both counts.</p>
+                <p>What the note did not say, because nobody knew it yet, was how he would handle a house. Blind dogs map rooms the way the rest of us map a dark hallway at night&thinsp;&mdash;&thinsp;by memory, by touch, and by an accumulating confidence that the furniture has not&nbsp;moved since yesterday.</p>
+                <p>The cats, for their part, worked it out in under a week, which is roughly six days longer than they would like it&nbsp;recorded.</p>
+                <p class="pp-more"><b><i>Read more here.</i></b><span class="pp-qr"></span></p>
+              </div>
+            </div>
+            <div class="pp-r">
+              <h2 class="disp">&ldquo;Mars Is Closer Than You Think&rdquo; Ad Campaign Launched Here</h2>
+              <p class="pp-by">By Leland Schwartz<em>Editor, The Middleburg Page</em></p>
+              <div class="copy">
+                <p>When we heard that the candy and pet food company&thinsp;&mdash;&thinsp;which makes Milky Ways and Mars bars for us, IAMS and Pedigree for our dogs and Temptations for our cats&thinsp;&mdash;&thinsp;wanted to make everyone aware of how local it was, we thought &lsquo;what better way than through the local press?&rsquo;</p>
+                <p>So we asked the company if it would run a year-long test to see if us local news editors could share their message wide enough to be a serious complement to their own social media efforts.</p>
+                <p>Can local news organizations help drive national brands and recapture a piece of what kept community newspapers alive for decades? That is the question. If this is the first you&rsquo;ve heard of the Mars <b><i>&ldquo;Closer Than You Think&rdquo;</i></b> campaign, then we&rsquo;re onto something.</p>
+                <p>What we&rsquo;re thinking is to bring you two sets of stories over the year juxtaposed to Mars&rsquo; own messages. The first about rescues; how they work and how you can help, through our colleagues at the Middleburg Humane Foundation. The second describing how Mars is a thought leader in responsible pet ownership and animal adoption as well as how it makes its petfood and the science behind it.</p>
+                <p class="pp-more"><b><i>Read more here.</i></b><span class="pp-qr"></span></p>
+              </div>
+            </div>
+          </div>
+          <div class="pp-note"><b>Editor's note:</b> These dogs each chipped in $375 to help cover adoption costs and the costs of distributing this page, supplementing support from Mars. Have your dogs help our dogs!</div>
+          <div class="pp-pets">
+            <div class="pp-pet"><div class="av">&#x1F415;</div><span>&lsquo;PEPPER&rsquo;</span></div>
+            <div class="pp-pet"><div class="av">&#x1F415;</div><span>&lsquo;PATCH&rsquo;</span></div>
+            <div class="pp-pet"><div class="av">&#x1F415;</div><span>&lsquo;LUKE&rsquo;</span></div>
+            <div class="pp-pet"><div class="av">&#x1F415;</div><span>&lsquo;PIPER&rsquo;</span></div>
+            <div class="pp-pet"><div class="av">&#x1F415;</div><span>&lsquo;SCOUT&rsquo;</span></div>
+            <div class="pp-pet"><div class="av">&#x1F415;</div><span>&lsquo;BANDIT&rsquo;</span></div>
+            <div class="pp-pet"><div class="av">&#x1F415;</div><span>&lsquo;RIPLEY&rsquo;</span></div>
+            <div class="pp-pet"><div class="av">&#x1F415;</div><span>&lsquo;ROCKET&rsquo;</span></div>
+          </div>
+          <div class="pp-strip">
+            <div class="c c1"><div><b>Mars Invests in American Made Products and Communities</b><small>Mars Is Closer Than You Think</small></div></div>
+            <div class="c c2">Sourcing · American agriculture</div>
+            <div class="c c3">Manufacturing · 38 US factories</div>
+            <div class="c c4">Pet nutrition · IAMS · Pedigree</div>
+          </div>
+          <div class="pp-foot">Sponsored series · Mars Petcare funds this page and reviews only its own company content · The Middleburg Page retains full editorial control of all rescue reporting · Live space 9.5 × 10.5 in · 8 reader slots at $375</div>
+        </div></div>
+        <span class="chip" style="left:1.2%;top:21%">1</span>
+        <span class="chip" style="left:46%;top:28%">2</span>
+        <span class="chip" style="left:96.5%;top:16%">3</span>
+        <span class="chip" style="left:1.2%;top:76%">4</span>
+        <span class="chip" style="left:1.2%;top:90%">5</span>
+      </div>
+    </div>
+
+    <ul class="keylist">
+      <li><span class="n">1</span><span><b>Your rescue story.</b> <span>Reported from your local shelter, under your byline, with your editorial control — we never see it before your readers do.</span></span></li>
+      <li><span class="n">2</span><span><b>Your photograph.</b> <span>The animal, as big as you can run it. The caption is the adoption ask.</span></span></li>
+      <li><span class="n">3</span><span><b>The story we send.</b> <span>Arrives finished each month, ready to place. This one is fixed — it is what Mars is buying.</span></span></li>
+      <li><span class="n">4</span><span><b>The reader pet row.</b> <span>Eight photographs, each paid for by the family whose pet appears. This is what makes the page self-funding.</span></span></li>
+      <li><span class="n">5</span><span><b>The Mars strip.</b> <span>The advertisement across the bottom. Also fixed — supplied with the story, sized to your page.</span></span></li>
+    </ul>
+
+    <div class="t-how">
+      <p><b>How it works, in one paragraph.</b> Each month we email you the right-hand story and the strip advertisement. You add your rescue story and photograph — in this arrangement, or any layout your paper prefers — sell the eight reader slots, and print at your own trim. Send us the story and the photograph back, and we return a finished vertical video for your social accounts. The rates and the full arrangement are in the <a href="partners.html" style="color:var(--mars);font-weight:600">partner kit</a>.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  function fit(){
+    var pg = document.getElementById('pg'), wrap = document.getElementById('sheetwrap');
+    var W = 9.5 * 96;
+    var s = Math.min(1, wrap.clientWidth / W);
+    pg.style.transform = 'scale(' + s.toFixed(4) + ')';
+    wrap.style.height = (pg.offsetHeight * s) + 'px';
+  }
+  window.addEventListener('resize', fit);
+  window.addEventListener('load', fit);
+  fit();
+})();
+</script>
+<footer class="site-foot">
+  <div class="in">
+    <div>
+      <h4>The Pet Page</h4>
+      Published by The Middleburg Page<br>
+      Leland Schwartz, Publisher<br>
+      7170 Beverly Lane, The Plains, Virginia 20198<br>
+      <a href="mailto:editor@themiddleburgpage.com">editor@themiddleburgpage.com</a> · 540 422 1376
+    </div>
+    <div>
+      <h4>Partners</h4>
+      <ul>
+        <li>Mars Petcare — national partner</li>
+        <li>Fauquier Times — print</li>
+        <li>The Georgetowner — print</li>
+        <li>Middleburg Humane Foundation</li>
+      </ul>
+    </div>
+    <div>
+      <h4>For newspapers</h4>
+      <ul>
+        <li><a href="partners.html">Partner kit &amp; rates</a></li>
+        <li><a href="template.html">The page template</a></li>
+        <li><a href="playbook.html">Video playbook</a></li>
+        <li><a href="about.html">About the partnership</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="legal">
+    <b>Sponsored series.</b> Mars Petcare funds this page and reviews only its own company content.
+    The Middleburg Page retains full editorial control of all rescue reporting.
+  </div>
+</footer>
+</body>
+</html>

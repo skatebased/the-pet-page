@@ -33,39 +33,18 @@ index.html              Home
 about.html              The partnership prospectus — partners, Mars science, editorial standards
 issues/index.html       Issue archive
 issues/001-tanner.html  Issue 1, all five renders (press 1–5 or use the tabs)
-composer.html           The Composer — the intake and auto-composition engine
+template.html           The page template — the example layout, annotated
 partners.html           Partner kit and fixed rates for other newspapers
 playbook.html           Video production playbook
 data/targets.json       Newspaper prospecting list near Mars US sites
 assets/press/           Press-ready PDF proofs and the Word prospectus
 ```
 
-## The Composer
+## The template
 
-`composer.html` is the working system. A partner newspaper:
+`template.html` is the whole partner-facing system now — no software, just the page itself, annotated. Every month The Middleburg Page sends the right-hand story and the strip advertisement; the partner paper adds its rescue story and photograph, in the template arrangement or any layout it prefers. Two elements are fixed: the story we send, and the Mars strip across the bottom. Papers email their story and photograph back and receive the finished vertical video for their social accounts.
 
-1. Pastes its rescue story and byline
-2. Drops in the animal's photograph
-3. Names the eight reader-funded pet slots
-4. **Sets its own print specification** — page size, margins, column count, gutter, strip height — if it differs from the default
-5. Gets all five renders composed live, and prints its page at its own trim
-
-Story packages save and load as JSON, which is the interchange format between a partner paper and the syndicator.
-
-### Typography
-
-The Composer enables the professional typesetting controls a browser actually supports, most of which are off by default on the web:
-
-- `font-optical-sizing` — Newsreader and Source Serif 4 carry an optical-size axis, so 8pt body and 34pt masthead render from differently *drawn* designs rather than one design scaled. The single biggest quality win.
-- `font-kerning` — the font's own GPOS kern table
-- A true **optical kerning pass** on display type, measured from the rendered glyphs at runtime: every pair of the display face is rasterised on a canvas, the visual gap between the facing ink profiles is compared with the face's own straight-stem rhythm (nn · no · on · oo), and the difference is applied as a per-pair correction — tightening boldly, opening timidly. Because it measures what the browser actually renders, it is correct for any face, including a paper's own licensed one. Strength is adjustable and it never touches body copy, where metric kerning is already correct.
-- A **copy-edit pass** at render time — curly quotes, en dashes in numeric ranges, thin-spaced em dashes, true ellipses, non-breaking abbreviations, and widow-proofed paragraph endings. The writer's input is never altered; only the render is.
-- **Cap-height trimming** (`text-box: trim-both cap alphabetic`) so display type is measured cap to baseline the way a compositor measures it, **optically aligned drop caps** whose ink — not their advance box — sits flush to the margin, and a **size-graded tracking curve**: tighter as type grows, a touch open at agate sizes.
-- Paragraph-level line breaking (`text-wrap: pretty`), balanced headlines, hyphenation limits (`6 3 3`), hanging punctuation, old-style figures in text and lining figures in display, ligatures and contextual alternates, widow and orphan control.
-
-A paper using its own licensed face types the family name into the typography panel.
-
-**What a browser still cannot do:** Adobe's multi-line paragraph composer (which kills rivers in justified columns) and strict baseline-grid locking. For that last step of press quality the two routes are **PrinceXML** as a drop-in rendering upgrade, or an **InDesign bridge** driving a template from the JSON package via tagged-XML import.
+The example on the page is set with the print CSS the sample issue uses — optical sizes, real kerning, justified newspaper measure — so what an editor sees is what the pressroom gets.
 
 ## Editorial standard
 
